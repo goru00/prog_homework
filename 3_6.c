@@ -5,7 +5,7 @@ int main()
     int count = 0, x, y;
     printf("Введите число: "); scanf("%d", &x);
     system("clear");
-    while (y != 0)
+    while (x != 0)
     {
         y = x % 10;
         if (y == 7) {
