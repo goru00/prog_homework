@@ -10,9 +10,9 @@ main()
     if (n == 1.0) e = e + 1.0;
     while (i != 0)
     {
-        while (n != 0)
+        while (n != 1)
         {
-            fctr = fctr * n;
+            fctr = fctr * (n - 1.0);
             n = n - 1.0;
         }
         e = e + (1.0/fctr);
