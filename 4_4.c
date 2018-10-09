@@ -5,7 +5,7 @@ int main()
 	int a;
 	printf("Введите высоту пирамиды: ");
 	scanf("%d", &a);
-	for (int str = 1; str <= (a * 2) - 1; str++)
+	for (int str = 1; str <= (a * 2) - 1; str++) // входим в цикл
 	{
 		if (str <= a) {
 			for (int x = 1; x <=str; x++)
