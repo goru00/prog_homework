@@ -9,6 +9,7 @@ int main()
     num_quest = rand();
     for (i = 3; i > 0; i--)
     {
+    	printf("%d\n", num_quest % 100);
         printf("Введите число: ");
         scanf("%d", &num);
         if (num == (num_quest % 100)) {
