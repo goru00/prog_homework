@@ -5,13 +5,14 @@ main()
     int n, counter = 0;
     printf("Введите число: ");  scanf("%d", &n);
     system("clear");
-    printf("Колличество чисел в числе %d равно: %d\n", n, number(n, counter));
+    printf("Колличество чисел в числе %d равно: %d\n", n, number(n));
 
     return 0;
 }
 
-int number(int num, int k)
+int number(int num)
 {
+    int k = 0;
     while (num != 0)
     {
         if (num % 10 >= 0) {
