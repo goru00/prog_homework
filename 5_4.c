@@ -15,7 +15,6 @@ void fibonachi(Fi)
 			Fipos = Finum; 
 			Finum = Finew;
 		}
-		return 0;
     }
 }
 
