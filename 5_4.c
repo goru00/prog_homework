@@ -1,21 +1,4 @@
 #include<stdio.h>
-
-main()
-{
-    int n;
-    printf("Введите целое число N: ");  scanf("%d", &n);
-    while (n <= 1)
-	{
-		printf("Введите число N: ");
-		scanf("%d", &n);
-		if (n > 1)
-		break;
-	}
-    system("clear");
-    fibonachi(n);
-    return 0;
-}
-
 void fibonachi(Fi)
 {
     int F1 = 1, F2 = 1,k,Finum,Finew,Fipos;
@@ -34,4 +17,20 @@ void fibonachi(Fi)
 		}
 		return 0;
     }
+}
+
+main()
+{
+    int n;
+    printf("Введите целое число N: ");  scanf("%d", &n);
+    while (n <= 1)
+	{
+		printf("Введите число N: ");
+		scanf("%d", &n);
+		if (n > 1)
+		break;
+	}
+    system("clear");
+    fibonachi(n);
+    return 0;
 }

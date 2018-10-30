@@ -1,23 +1,19 @@
 #include<stdio.h>
-
 main()
 {
     int n, counter = 0;
     printf("Введите число: ");  scanf("%d", &n);
     system("clear");
-    printf("Колличество чисел в числе %d равно: %d\n", n, number(n));
-
-    return 0;
+    printf("Колличество чисел в числе %d равно: %d\n", n, number(n, counter));
 }
 
-int number(int num)
+int number(int num, int k)
 {
-    int k = 0;
+    if (num == 0)
+        return 1;
     while (num != 0)
     {
-        if (num % 10 >= 0) {
-            k +=1;
-        }
+        k +=1;
         num = num / 10;
     }
     return k;
