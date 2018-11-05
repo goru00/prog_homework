@@ -21,5 +21,6 @@ int main()
 		int numb = i;
 		easynumb(numb);
 	}
+	printf("\n");
 	return 0;
 }
