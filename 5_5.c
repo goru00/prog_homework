@@ -1,6 +1,9 @@
 #include<stdio.h>
 #include<math.h>
 #define x 3
+
+float sinpor(float sinpor);
+
 float sinpor(float n)
 {
     int k = n;
