@@ -1,13 +1,13 @@
 #include<stdio.h>
 void easynumb(int x)
 {
-	int k = 1;
+	int k = 1, tab = 0;
 	for (int a = 1; a <= 9; a++)
 	{
 		if (x % a == 0)
 			k -=1;
 	}
-	if ((x == 3) || ((x == 5)) || (x == 7))
+	if ((x == 3) || ((x == 5)) || ((x == 7) || (x == 2)))
 		printf("%3d ", x);
 	if (k == 0)
 		printf("%3d ", x);
