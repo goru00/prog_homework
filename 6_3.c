@@ -1,26 +1,34 @@
+#include<stdlib.h>
 #include<stdio.h>
-int n;
-
-void matrixinvers()
-{
-    srand(time(NULL));
-    int A[n], max, min;
-    for (int i = 0; i <= n; i++)
-    {
-        A[i] = (rand() % 100) - 1;
-        printf("A[%d] = %d\n", i, A[i]);
-    }
-    for (int i = 0; i <= n; i++)
-    {
-        A[i] = min;
-        A[n] = max;
-        
-        printf("A[%d] = %d\n", i, A[i]);
-    }
-}
-
+#define VALUE 9
 int main()
 {
-    printf("Введите число n: "); scanf("%d", &n);
-    matrixinvers();
+	int a[VALUE], k, max, min;
+	//srand(time(NULL));
+	for (int i = 0; i <= VALUE; i++)
+    {
+    	a[i] = (rand() % 100) + 1;
+        printf("a[%d] = %d\n", i, a[i]);
+    }
+    k = VALUE;
+    for (int i = 0; i <= VALUE; i++)
+    {
+    	if (a[i] == a[k - 1]) {
+    		min = a[i];
+    		max = a[k];
+    		a[i] = max;
+    		a[k] = min;
+    		break;
+    	}
+    	min = a[i];
+    	max = a[k];
+    	a[i] = max;
+    	a[k] = min;
+    	k -=1;
+    }
+    for (int i = 0; i <= VALUE; i++) 
+    {
+    	printf("\na[%d] = %d\n", i, a[i]);
+    }
+    return 0;
 }
