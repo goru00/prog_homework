@@ -4,7 +4,8 @@
 #define VALUE 9
 int main()
 {
-	int a[VALUE], k, count = 0, end;
+	int a[VALUE], k = 1;
+    int b[VALUE];
 	srand(time(NULL));
 	for (int i = 0; i <= VALUE; i++)
     {
@@ -12,20 +13,11 @@ int main()
         printf("a[%d] = %d\n", i, a[i]);
     }
 	printf("\n");
-	end = a[0];
-    for (int i = VALUE; i >= 0; i--)
+    k +=VALUE;
+    for (int i = 0; i <= VALUE; i++)
     {
-		if (i == 0) {
-			printf("a[%d] = %d\n", count, end);
-			break;
-		} else k = a[i];
-		for (int j = 0; j <= VALUE; j++)
-		{
-			a[j] = k;
-			printf("a[%d] = %d\n", count, a[j]);
-			break;
-		}
-		count++;
+        b[i+1] = a[i];        
+        printf("a[%d] = %d\n", i + 1, b[i+1]);
     }
     return 0;
 }

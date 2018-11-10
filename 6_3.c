@@ -15,7 +15,6 @@ int main()
 	end = a[0];
     for (int i = VALUE; i >= 0; i--)
     {
-		a[i] = (rand() % 100) + 1;
 		if (i == 0) {
 			printf("a[%d] = %d\n", count, end);
 			break;
