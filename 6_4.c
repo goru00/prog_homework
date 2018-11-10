@@ -1,3 +1,4 @@
+//commit reset
 #include<stdlib.h>
 #include<stdio.h>
 #define VALUE 9
