@@ -1,0 +1,49 @@
+###########################################
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      529  3.0  0.0  15276  1612 tty1     S    22:58   0:00 /bin/bash ./start-dump-processes.sh
+danko      531  0.0  0.0  17380  1896 tty1     R    22:58   0:00 ps uax
+########
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      547  3.0  0.0  15276  1616 tty1     S    23:01   0:00 /bin/bash ./start-dump-processes.sh
+danko      549  0.0  0.0  17380  1900 tty1     R    23:01   0:00 ps uax
+########
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      547  0.1  0.0  15276  1616 tty1     S    23:01   0:00 /bin/bash ./start-dump-processes.sh
+danko      552  0.0  0.0  17380  1892 tty1     R    23:02   0:00 ps uax
+########
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      554  0.0  0.0  15276  1616 tty1     S    23:02   0:00 /bin/bash ./bash2.sh
+danko      556  0.0  0.0  17380  1896 tty1     R    23:02   0:00 ps uax
+########
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      554  1.0  0.0  15276  1616 tty1     S    23:02   0:00 /bin/bash ./bash2.sh
+danko      559  0.0  0.0  17380  1900 tty1     R    23:02   0:00 ps uax
+########
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      554  0.8  0.0  15276  1616 tty1     S    23:02   0:00 /bin/bash ./bash2.sh
+danko      562  0.0  0.0  17380  1900 tty1     R    23:02   0:00 ps uax
+########
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   8304   136 ?        Ss   22:39   0:00 /init ro
+root         3  0.0  0.0   8304    96 tty1     Ss   22:39   0:00 /init ro
+danko        4  0.0  0.0  16788  3420 tty1     S    22:39   0:00 -bash
+danko      554  0.6  0.0  15276  1616 tty1     S    23:02   0:00 /bin/bash ./bash2.sh
+danko      565  0.0  0.0  17380  1896 tty1     R    23:02   0:00 ps uax
