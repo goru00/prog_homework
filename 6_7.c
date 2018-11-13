@@ -12,6 +12,7 @@ int main()
 		if (a[i] > 0) //считаем кол-во положительных чисел
 			k_pol+=1;
 	}
+	int sum_elem = (k_otr + k_pol) - 1;
 	int pol[k_pol]; //массив с пол.числами
 	int otr[k_otr]; //массив с отр.числами
 	i = 0;

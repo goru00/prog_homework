@@ -2,23 +2,24 @@
 #include<stdlib.h>
 int main()
 {
-    srand(time(NULL));
-    int n, m;
-    printf("Введите размерность(n и m): "); scanf("%d %d", &n, &m);
-    int a[n][m];
-    printf("\n");
-    for (int i = 0; i < n; i++)
+    int n, k = 0;
+    printf("Введите число n: "); scanf("%d", &n);
+    int a[n];
+    for (int i = 0; i <= n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            a[i][j] = (rand() % 100) + 1;
-            printf("%6d", a[i][j]);
-        }
-        printf("\n");
+        printf("%d элемент массива: ", i + 1); scanf("%d", &a[i]);
     }
     printf("\n");
-    if (n == m)
-        printf("Элементы массива симметричны.\n");
-    else printf("Элементы массива не симметричны.\n");
+    for (int i = 0; i <= n; i++)
+    {
+        if (a[i] == a[n - k])
+            k++;
+        else {
+            printf("Элементы массива не симметричны.\n");
+            return 0;
+        }
+    }
+    printf("Элементы массива симметричны.\n");
+    
     return 0;
 }

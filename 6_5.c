@@ -6,10 +6,9 @@ int main()
 {
     int k, count = 0;
     printf("Введите значение k: "); scanf("%d", &k);
-	int a[VALUE];
-    int b[VALUE];
+	int a[VALUE + k];
 	srand(time(NULL));
-	for (int i = 0; i <= VALUE + k; i++)
+	for (int i = 0; i <= VALUE; i++)
     {
     	a[i] = (rand() % 100) + 1;
         printf("a[%d] = %d\n", i, a[i]);

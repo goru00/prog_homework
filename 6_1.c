@@ -1,29 +1,37 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define VALUE 9
+#define SIZE 9
 
 int main()
 {
-    int A[VALUE], min;
+    int A[SIZE];
+    int i;
     srand(time(NULL));
-    for (int i = 0; i <= VALUE; i++)
+    for (int i = 0; i <= SIZE; i++)
     {
         A[i] = (rand() % 100) + 1;
-        printf("A[%d] = %d\n", i + 1, A[i]);
+        printf("A[%d] = %d\n", i, A[i]);
     }
-    for (int i = 1; i <= VALUE; i++)
+    int j, min, index_min;
+    for (i = 0; i < SIZE; i++)
     {
-        sleep(1);
-        system("clear");
-        for (int j = i; j <= VALUE; j++)
-        {
-            if (A[j] < A[j - 1]) { // второй элемент < первый элемент
+        min = A[i];
+        index_min = i;
+        for (j = i; j <= SIZE; j++)
+        
+            if (min > A[j]) 
+            {
                 min = A[j];
-                A[j] = A[j - 1];
-                A[j - 1] = min;
+                index_min = j;
             }
-            printf("A[%d] = %d\n", j, A[j]);
-        }
+        A[index_min] = A[i];
+        A[i] = min;
+        
+    }
+    printf("\n\n");
+    for (int i = 0; i <= SIZE; i++)
+    {
+        printf("a[%d] = %d\n", i, A[i]);
     }
     return 0;
 }
