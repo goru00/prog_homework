@@ -1,25 +1,34 @@
 #include<stdio.h>
 #include<stdlib.h>
-int main()
+
+int simmet(int x, int ar[]);
+
+int simmet(int x, int ar[])
 {
-    int n, k = 0;
-    printf("Введите число n: "); scanf("%d", &n);
-    int a[n];
-    for (int i = 0; i <= n; i++)
+    int k = 0;
+    for (int i = 0; i <= x; i++)
     {
-        printf("%d элемент массива: ", i + 1); scanf("%d", &a[i]);
+        printf("%d элемент массива: ", i); scanf("%d", &ar[i]);
     }
     printf("\n");
-    for (int i = 0; i <= n; i++)
+    for (int i = 0; i <= x; i++)
     {
-        if (a[i] == a[n - k])
+        if (ar[i] == ar[x - k])
             k++;
         else {
-            printf("Элементы массива не симметричны.\n");
-            return 0;
+            return printf("Элементы массива не симметричны\n");
         }
     }
-    printf("Элементы массива симметричны.\n");
-    
+    return printf("Элементы массива симметричны\n");
+
+}
+
+int main()
+{
+    int n;
+    printf("Введите число n: "); scanf("%d", &n);
+    n--;
+    int a[n];
+    simmet(n, &a[n]);
     return 0;
 }
