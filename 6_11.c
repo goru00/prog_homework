@@ -55,23 +55,23 @@ void expmasssiv(int mA[], int mB[], int mC[])
 	int k = VALUE_A + VALUE_B;
 	printf("\n");
 	printf("Массив №3\n");
-	for (int i = 0; i <= VALUE_A + VALUE_B; i++)
+	for (int i = 0; i <= VALUE_A; i++)
 	{
 		for (int j = 0; i <= VALUE_A; i++)
 		{
 			mC[j] = mA[j];
 		}
-		for (int j = VALUE_A + 1, h = 0; j <= k; j++)
+		/*for (int j = VALUE_A + 1, h = 0; j <= k; j++)
 		{
 			mC[j] = mA[h];
 			h++;
-		}
+		}*/
 	}
-	for (int i = 0; i <= VALUE_A + VALUE_B; i++)
+	for (int i = 0; i <= VALUE_A; i++)
 	{
 			min = mC[i];
 			index_j = i;
-			for (int j = i; j <= VALUE_B + VALUE_A; j++)
+			for (int j = i; j <= VALUE_B; j++)
 				if (min > mC[j]) 
             	{
                 min = mC[j];

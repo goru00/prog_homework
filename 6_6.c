@@ -17,6 +17,6 @@ int main()
         a[i] = (a[i - 1] + a[i + 1]) / 2;
         printf("\na[%d] = %d\n", i, a[i]);
     }
-    printf("\na[9] = %d\n", a[9]);
+    printf("\na[%d] = %d\n", VALUE, a[VALUE]);
     return 0;
 }
