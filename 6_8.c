@@ -6,21 +6,24 @@ int small(int count, int num);
 
 int small(int count, int num)
 {
-    for (int i = 0; i <= VALUE; i++)
+    while (count <= VALUE)
     {
-        if ((num / 10) > 0) {
-            if ((a[i] % 100) == ((num % 100) - count)) 
-                printf("a[%d] = %d\n", i, a[i]);
-                return 0;
-        } else {
-            if ((a[i] % 100) == ((num % 100) - count))
-                printf("a[%d] = %d\n", i, a[i]);
-                return 0;
+        for (int i = 0; i <= VALUE; i++)
+        {
+            if (num / 10 > 0) {
+                if (a[i] / 10 - count == num / 10) {
+                    printf("Ближайшее к числу x число: a[%d] = %d\n", i, a[i]);
+                    return 0;
+                }
+            } else if (num / 10 <= 0) {
+                if ((a[i] / 10 == 0) || (a[i] / 10 == 1)) {
+                    printf("Ближайшее к числу x число: a[%d] = %d\n", i, a[i]);
+                    return 0;
+                }
+            }
         }
+        count++; 
     }
-    if (count == 0)
-        count++;
-    return count;
 }
 
 int main()
