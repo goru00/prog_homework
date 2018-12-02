@@ -5,6 +5,10 @@
 #define VALUE_M 4
 int a[VALUE_N][VALUE_M];
 int det_plus = 0, det_minus = 0, pr = 1;
+
+int rektangle(int k);
+int triangle(int k);
+
 int rektangle(int k)
 {
     return a[0][0] * a[1][1] - a[0][1] * a[1][0];
