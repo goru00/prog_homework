@@ -1,7 +1,6 @@
 //6_3
 #include<stdio.h>
 #include<stdlib.h>
-
 int main()
 {
     int n;
@@ -15,7 +14,7 @@ int main()
                 if (j % 2 == 0)
                     a[i][j] = 0;
                 else if (j % 2 == 1)
-                    a[i][j] = 1;
+                    a[i][j] = 1;    
             }
         }
         if (i % 2 == 1) {
