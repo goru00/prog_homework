@@ -1,4 +1,4 @@
-//6_3
+/*6_3*/
 #include<stdio.h>
 #include<stdlib.h>
 int main()
