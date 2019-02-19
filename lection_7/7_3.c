@@ -16,11 +16,11 @@ void asc(int *sort_m, int pointer)
   int i = 0, buf, swap = 0;
   while (i < SIZE) // метод пузырька по возрастанию
   {
-    if (i + 1 != SIZE && sort_m[i] > sort_m[i + 1])  
+    if (i + 1 != SIZE && *(sort_m+i) > *(sort_m+i+1))  
     {
-      buf = sort_m[i];
-      sort_m[i] = sort_m[i + 1];
-      sort_m[i + 1] = buf;
+      buf = *(sort_m+i);
+      *(sort_m+i) = *(sort_m+i+1);
+      *(sort_m+i+1) = buf;
       swap = 1;
     }  
     i++;
@@ -36,11 +36,11 @@ void desc(int *sort_m, int pointer)
   int i = 0, buf, swap = 0;
   while (i < SIZE) // метод пузырька по убыванию
   {
-    if (i + 1 != SIZE && sort_m[i] < sort_m[i + 1])  
+    if (i + 1 != SIZE && *(sort_m+i) < *(sort_m+i+1))  
     {
-      buf = sort_m[i];
-      sort_m[i] = sort_m[i + 1];
-      sort_m[i + 1] = buf;
+      buf = *(sort_m+i);
+      *(sort_m+i) = *(sort_m+i + 1);
+      *(sort_m+i + 1) = buf;
       swap = 1;
     }  
     i++;
