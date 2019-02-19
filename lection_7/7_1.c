@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 #define SIZE 10
+void buuble_sort();
 int main()
 {
   int array[SIZE];
