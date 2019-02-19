@@ -1,6 +1,4 @@
-/* Реализовать пузырьковую сортировку с использованием указателей */
 
-#include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 #define SIZE 10
@@ -24,11 +22,11 @@ void bubble_sort(int *a)
   int i = 0, buf, swap = 0;
   while (i < SIZE) // метод пузырька
   {
-    if (i + 1 != SIZE && a[i] > a[i + 1])  
+    if (i + 1 != SIZE && *(a+i) > *(a+i+1))  
     {
-      buf = a[i];
-      a[i] = a[i + 1];
-      a[i + 1] = buf;
+      buf = *(a+i);
+      *(a+i) = *(a+i+1);
+      *(a+i+1) = buf;
       swap = 1;
     }  
     i++;
