@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<time.h>
 #define SIZE 10
+void sort();
+void mass();
 void bubble();
 void asc();
 void desc();
@@ -51,19 +53,27 @@ void desc(int *sort_m, int pointer)
     }
   }
 }
+void mass(int *arr)
+{
+  for (int i = 0; i < SIZE; i++)
+  {
+    arr[i] = (rand() % 100) + 1;
+    printf("Create: a[%d] = %d\n", i, arr[i]);
+  }
+}
+void sort(int *arr)
+{
+  for (int i = 0; i < SIZE; i++)
+    printf("Sort: a[%d] = %d\n", i, arr[i]);
+}
 int main()
 {
   int array[SIZE];
-  for (int i = 0; i < SIZE; i++)
-  {
-    array[i] = (rand() % 100) + 1;
-    printf("Create: a[%d] = %d\n", i, array[i]);
-  }
+  mass(array);
   int (*a[2])(int *) = {asc, desc};
   int d;
   printf("Выберете направление сортировки: 1 - По возрастанию. 2 - По убыванию : "); scanf("%d", &d);
   bubble((*a[d - 1])(array), d);
-  for (int i = 0; i < SIZE; i++)
-    printf("Sort: a[%d] = %d\n", i, array[i]);
+  sort(array);
   return 0;
 }
