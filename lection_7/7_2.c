@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#include<stdio.h>
 void ver(int *, int *);
+int start_run_t(int);
+int start_run_b(int);
 int main()
 {
 	srand(time(NULL));
