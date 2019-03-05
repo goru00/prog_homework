@@ -60,8 +60,7 @@ void tass(int *mass, char card[][100], char name[][100])
 	while (count + 1 < SIZE_CARTOONS * SIZE_MAST)
 	{
 		ver = (rand() % 52);
-		//printf("Позиция: %d\nЗначение: %d\n", ver, mass[ver]);
-		if (mass[ver] != 0)
+		if (mass[ver] > 0)
 		{
 			if ((ver <= 12) && (ver >= 0)) {
 				printf("%s %s\n", card[ver], name[0]);
@@ -84,7 +83,9 @@ void tass(int *mass, char card[][100], char name[][100])
 				count++;
 			}
 		}
-		if ((mass[0] == 0) && (ver == 0))
+		if ((mass[ver] == 0) && (ver == 0)) {
 			printf("%s %s\n", card[0], name[0]);
+			mass[ver] = -1;
+		}
 	}
 }
