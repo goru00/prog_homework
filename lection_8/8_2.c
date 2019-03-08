@@ -23,6 +23,7 @@ int main()
 	input(array, n, start, m);
 	sort(array, n, m);
 	output(array, n, m);
+	free(array);
 	return 0;
 }
 void pluselem(int *mass, int count, int plus)

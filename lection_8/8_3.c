@@ -17,6 +17,7 @@ int main()
 	printf("Выберете действие: (1 - взять. 2 - добавить) "); scanf("%d", &d);
 	n = relocate((*a[d - 1])(array, n), d);
 	output(array, n - 1);
+	free(array);
 	return 0;
 }
 void input(int *mass, int count)

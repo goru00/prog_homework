@@ -20,6 +20,7 @@ int main()
 	output(array, n);
 	n = minelem(array, n);
 	output(array, n);
+	free(array);
 	return 0;
 }
 int minelem(int *mass, int count)
