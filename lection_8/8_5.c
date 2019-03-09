@@ -7,18 +7,25 @@ void trans();
 int main()
 {
 	srand(time(NULL));
-	int **array, n, m;
+	int **array = NULL, n, m;
 	printf("Введите размерность массива(n и m): "); scanf("%d %d", &n, &m);
 	array = (int **)malloc(n * sizeof(int));
 	input(array, n, m);
 	output(array, n, m);
 	trans(array, n, m);
-	output(array, n, m);
+	output(array, m, n);
+	free(array);
 	return 0;
 }
 void trans(int **mass, int size_n, int size_m)
 {
 	int s;
+	if (size_n > size_m){
+		for (int i = 0; i < size_n; i++)
+			mass[i] = (int *)realloc(mass[i], size_n * sizeof(int));
+	}
+	if (size_m > size_n)
+		mass = (int **)realloc(mass, size_m * sizeof(int)); 
 	for (int i = 0; i < size_n; i++)
 	{
 		for (int j = i + 1; j < size_m; j++)
