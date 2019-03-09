@@ -16,12 +16,6 @@ int main()
 	int (*a[2])(int *, int) = {push, pop};
 	printf("Выберете действие: (1 - добавить. 2 - взять) "); scanf("%d", &d);
 	relocate((*a[d - 1])(array, n), d);
-	if (d == 2)
-		output(array, n - 1);
-	if (d == 1){
-		array[n] = n + 1;
-		output(array, n + 1);
-	}
 	free(array);
 	return 0;
 }
@@ -48,8 +42,11 @@ void relocate(int *mass, int count)
 void push(int *mass, int count)
 {
 	mass = (int *)realloc(mass, (count + 1) * sizeof(int));
+	mass[count] = count + 1;
+	output(mass, count + 1);
 }
 void pop(int *mass, int count)
 {
 	mass = (int *)realloc(mass, (count - 1) * sizeof(int));
+	output(mass, count - 1);
 }
