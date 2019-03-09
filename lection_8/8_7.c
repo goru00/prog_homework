@@ -10,6 +10,7 @@ int main()
 	printf("Введите размерность трехмерного массива: (все 3 измерения)"); scanf("%d %d %d", &n, &m, &t);
 	array = (int ***)malloc(n * sizeof(int));
 	input(array, n, m, t);
+	free(array);
 	return 0;
 }
 void output(int ***mass, int size_n, int size_m, int size_k)
