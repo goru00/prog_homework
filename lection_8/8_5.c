@@ -1,61 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-void input();
-void output();
-void trans();
 int main()
 {
+	int **array;
+	int n, m;
 	srand(time(NULL));
-	int **array = NULL, n, m;
-	printf("Введите размерность массива(n и m): "); scanf("%d %d", &n, &m);
+	printf("Введите размерность массива: "); scanf("%d %d", &n, &m);
 	array = (int **)malloc(n * sizeof(int));
-	input(array, n, m);
-	output(array, n, m);
-	trans(array, n, m);
-	output(array, m, n);
-	free(array);
+	input(n, m, array);
+	if (size_m > size_n)
+		array = (int **)realloc(array, ++n * sizeof(int));
+	if (size_n > )
+	trans(n, m, array);
 	return 0;
 }
-void trans(int **mass, int size_n, int size_m)
+void trans(int size_n, int size_m, int **mass)
 {
-	int s;
-	if (size_n > size_m){
-		for (int i = 0; i < size_n; i++)
-			mass[i] = (int *)realloc(mass[i], size_n * sizeof(int));
-	}
-	if (size_m > size_n)
-		mass = (int **)realloc(mass, size_m * sizeof(int)); 
-	for (int i = 0; i < size_n; i++)
-	{
-		for (int j = i + 1; j < size_m; j++)
+	if (size_m > size_n){
+		mass[i] = (int *)realloc(mass, ++size_m * sizeof(int));
+		for (int i = 0; i <= size_n; i++)
 		{
-			s = mass[i][j];
-			mass[i][j] = mass[j][i];
-			mass[j][i] = s;
+			for (int j = size_m, k = 0; j <= size_m + 1; j++, k++)
+			{
+				mass[0][j] = mass[size_n - k][k];
+			}
 		}
 	}
 }
-void output(int **mass, int size_n, int size_m)
+void input(int size_n, int size_m, int **mass)
 {
 	for (int i = 0; i < size_n; i++)
 	{
+		array = (int *)malloc(size_m * sizeof(int));
 		for (int j = 0; j < size_m; j++)
 		{
-			printf("%3d", mass[i][j]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-}
-void input(int **mass, int size_n, int size_m)
-{
-	for (int i = 0; i < size_n; i++)
-	{
-		mass[i] = (int *)malloc(size_m * sizeof(int));
-		for (int j = 0; j < size_m; j++)
-		{
-			mass[i][j] = (rand() % 50);
+			mass[i][j] = (rand() % 10);
 		}
 	}
-}
+}	
