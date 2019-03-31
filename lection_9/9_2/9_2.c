@@ -1,16 +1,39 @@
 #include<stdio.h>
 #include<stdlib.h>
+int find(char *, FILE *, int);
+void fclear();
 int main()
 {
-    FILE *file = fopen("text", "a+");
-    find(file);
+	char *array;
+	int n = 0, k;
+    FILE *file = fopen("text", "r+");
+    array = (char *)malloc(n * sizeof(char));
+    k = find(array, file, n);
+    fclear(array, file, k);
     return 0;
 }
-void find(FILE *file)
+void fclear(char *mass, FILE *file, int count)
 {
-    int k = 0;
-    while ((fgetc(file)) != "\0")
-        k++;
-    for (int i = 0; i < k; k++)
-        fprintf(file, "");
+	file = fopen("text", "r+");
+	printf("%d\n", count);
+	rewind(file);
+	for (int i = 0; i < count; i++)
+	{
+		fprintf(file, "%s", "s");
+	}
+}
+int find(char *mass, FILE *file, int count)
+{
+    while (!feof(file))
+    {
+    	count = fgetc(file);
+    	fscanf(file, "%s", mass);
+    	if (mass == "\0"){
+    		fclose(file);
+    		break;
+    	}
+    	count++;
+    }
+    printf("%s\n\n", mass);
+    return count;
 }
