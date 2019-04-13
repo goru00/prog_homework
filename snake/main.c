@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include "windows.h"
 #define SIZE_N 12
 #define SIZE_M 12
 void maze();
@@ -11,22 +12,34 @@ struct records
 {
 	int *point;
 };
+struct food
+{
+	int x;
+	int y;
+};
+struct hero
+{
+	int snake_x;
+	int snake_y;
+	int density;
+};
 int main()
 {
 	struct records pointer;
 	pointer.point = NULL;
-	
+	srand(time(NULL));
 	FILE *file = fopen("records.txt", "w+");
 	int **snake = NULL;
 	snake = (int **)malloc(SIZE_N * sizeof(int));
-	menu();
+	menu(file, snake);
 	return 0;
 }
-void menu()
+void menu(FILE *file, int **snake)
 {
+	int flag = 1;
 	int i = 0;
 	char text;
-	while(1)
+	while(flag == 1)
 	{
 		printf("Z M E Y K A\n");
 		printf("Peredvigatsya s pomochiu W(vverh) i S(vniz): \n");
@@ -35,15 +48,27 @@ void menu()
 		text = getch();
 		switch(text)
 		{
+			case 32:
+			{
+				int point = i;
+				if (point == 0)
+					maze(snake);
+				if (point == 1)
+					Records(file);
+				if (point == 2)
+					flag = 0;
+			}
 			case 119:
 			{
 				if (i == 0) {
 					i = 2;
 					output_menu(i);
+					system("cls");
 				} 
 				if (i > 0) {
 					i--;
 					output_menu(i);
+					system("cls");
 				}
 			}
 			case 115:
@@ -51,9 +76,11 @@ void menu()
 				if (i == 2) {
 					i = 0;
 					output_menu(i);
+					system("cls");
 				} else {
 					i++;
 					output_menu(i);
+					system("cls");
 				}
 			}
 		}
@@ -63,30 +90,52 @@ void output_menu(int kursor)
 {
 	if (kursor == 0) 
 		printf("[*] - New Game\n - Records\n - Exit\n");
-	if (kursor == 1)
+	if (kursor == 1) 
 		printf(" - New Game\n[*] - Records\n - Exit\n");
 	if (kursor == 2)
 		printf(" - New Game\n - Records\n[*] - Exit\n");
 }
-void Records()
+void Records(FILE *file)
 {
+	while(!feof(file))
+	{
 
+	}
 }
 void maze(int **snake)
 {
-	for (int i = 0; i < SIZE_N; i++)
+	int eat_food = 0;
+	struct food apple;
+	struct hero h;
+	apple.x = (rand() % 10) + 1;
+	apple.y = (rand() % 10) + 1;
+	h.snake_x = (rand() % 10) + 1;
+	h.snake_y = (rand() % 10) + 1;
+	h.density = 1;
+	int flag = 1;
+	while (flag == 1)
 	{
-		snake[i] = (int *)malloc(SIZE_M * sizeof(int));
-		for (int j = 0; j < SIZE_M; j++)
-			snake[i][j] = 9;
-	}
-	for (int i = 1; i < SIZE_N - 1; i++)
-		for (int j = 1; j < SIZE_M - 1; j++)
+		for (int i = 0; i < SIZE_N; i++)
+		{
+			snake[i] = (int *)malloc(SIZE_M * sizeof(int));
+			for (int j = 0; j < SIZE_M; j++)
+				snake[i][j] = 9;
+		}
+		for (int i = 1; i < SIZE_N - 1; i++)
+		{
+			for (int j = 1; j < SIZE_M - 1; j++)
+			{
 				snake[i][j] = 0;
-	output(snake);
+				snake[apple.x][apple.y] = 5;
+			}
+		}
+		output(snake, eat_food);
+	}
 }
-void output(int **snake)
+void output(int **snake, int eat_food)
 {
+	printf("Score: %d\n", eat_food);
+	printf("Peremechenie na W i D\n");
 	for (int i = 0; i < SIZE_N; i++)
 	{
 		for (int j = 0; j < SIZE_M; j++)
@@ -95,4 +144,6 @@ void output(int **snake)
 		}
 		printf("\n");
 	}
+	sleep(1);
+	system("cls");
 }
