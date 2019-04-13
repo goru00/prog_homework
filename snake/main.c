@@ -16,12 +16,15 @@ struct food
 {
 	int x;
 	int y;
+	int eat_food;
 };
 struct hero
 {
+	int **s;
 	int snake_x;
 	int snake_y;
 	int density;
+	int mooving;
 };
 int main()
 {
@@ -36,6 +39,7 @@ int main()
 }
 void menu(FILE *file, int **snake)
 {
+	struct food apple;
 	int flag = 1;
 	int i = 0;
 	char text;
@@ -51,8 +55,10 @@ void menu(FILE *file, int **snake)
 			case 32:
 			{
 				int point = i;
-				if (point == 0)
+				if (point == 0){
 					maze(snake);
+					printf("End GAME !\nFinal Score: %d\n", apple.eat_food);
+				}
 				if (point == 1)
 					Records(file);
 				if (point == 2)
@@ -104,15 +110,19 @@ void Records(FILE *file)
 }
 void maze(int **snake)
 {
-	int eat_food = 0;
 	struct food apple;
 	struct hero h;
+	apple.eat_food = 0;
 	apple.x = (rand() % 10) + 1;
 	apple.y = (rand() % 10) + 1;
 	h.snake_x = (rand() % 10) + 1;
 	h.snake_y = (rand() % 10) + 1;
 	h.density = 1;
+	h.mooving = (rand() % 4);
+	h.s = NULL;
+	h.s = (int **)malloc(h.density * sizeof(int));
 	int flag = 1;
+	char nap;
 	while (flag == 1)
 	{
 		for (int i = 0; i < SIZE_N; i++)
@@ -126,15 +136,36 @@ void maze(int **snake)
 			for (int j = 1; j < SIZE_M - 1; j++)
 			{
 				snake[i][j] = 0;
-				snake[apple.x][apple.y] = 5;
 			}
 		}
-		output(snake, eat_food);
+		while(flag == 1)
+		{
+			snake[apple.x][apple.y] = 5;
+			snake[h.snake_x][h.snake_y] = 1;
+			output(snake);
+			if (h.mooving == 0) { // move down
+			
+			}
+			if (h.mooving == 1) { // move up
+
+			}
+			if (h.mooving == 2) { // move left
+
+			}
+			if (h.mooving == 3) { // move right
+
+			}
+			if (h.snake_x == SIZE_N)
+				break;
+			if (h.snake_y == SIZE_M)
+				break;
+		}
 	}
 }
-void output(int **snake, int eat_food)
+void output(int **snake)
 {
-	printf("Score: %d\n", eat_food);
+	struct food apple;
+	printf("Score: %d\n", apple.eat_food);
 	printf("Peremechenie na W i D\n");
 	for (int i = 0; i < SIZE_N; i++)
 	{
