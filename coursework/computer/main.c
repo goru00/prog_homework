@@ -8,13 +8,14 @@ void output_menu();
 void create_command();
 void list_command();
 void input_command();
+void run_command();
 int main()
 {
 	int *ram = NULL; // оперативная память
 	int *code_list = NULL; // массив команд
 	ram = (int *)malloc(100 * sizeof(int)); // оперативная память
 	FILE *battary = fopen("result.txt", "w+"); // аккумулятор
-	FILE *command = fopen("command_list.txt", "a+"); // храним команды
+	FILE *command = fopen("command_list.txt", "w+"); // храним команды
 	create_command(command);
 	menu(ram, battary, command, code_list);
 	return 0;
@@ -40,8 +41,8 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 					flag = 0;
 				if (point == 1)
 					list_command(command, code_list);
-				if (point == 3)
-					input_command();
+				if (point == 2)
+					run_command(command, code_list);
 			}
 			case 119:
 			{
@@ -97,7 +98,21 @@ void list_command(FILE *command, int *code_list)
 			printf("[%d] . %d\n", i, code_list[i]);
 		printf("Input <BACKSPACE> that is back.\n\n");
 	}
+	free(code_list);
 	fclose(command);
+}
+void run_command(FILE *command, int *code_list)
+{
+	int i;
+	code_list = (int *)malloc(121 * sizeof(int));
+	command = fopen("command_list.txt", "r");
+	system("cls");
+	printf("Viberete commandu iz spiska: \n");
+	for (i = 0; i < 121; i++)
+		fscanf(command, "%d", &code_list[i]);
+	for (i = 0; i < 121; i++)
+		printf("[%d] . %d\n", i, code_list[i]);
+	printf("Vedite nomer komandi: "); scanf("%d", &i);
 }
 void output_menu(int kursor)
 {
