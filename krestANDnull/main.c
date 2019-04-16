@@ -19,6 +19,7 @@ void menu();
 void area_game_menu();
 void output_menu();
 void output_area_game_menu();
+int kursor_area_game(int **);
 
 int main(int argc, char const *argv[])
 {
@@ -58,26 +59,23 @@ int main(int argc, char const *argv[])
 		{
 			system("clear");
 			printf("Ожидаем ход соперника: \n");
-			bzero(buffer, 3);
+			bzero(buffer, 4);
 			output_area_game(area);
 			while(n == 0)
 			{
-				n = read(newsockfd, buffer, 3);
+				n = read(newsockfd, buffer, 4);
 			}
 			system("clear");
 			printf("Противник сделал ход: \n");
 			sscanf(buffer, "%d", &make[move]);
-			move++;
+			move = (make[move] / 10) % 10;
+			bzero(buffer, 4);
 			change_area_game(area, make, move);
 			output_area_game(area);
-			bzero(buffer, 255);
-			fgets(buffer, 255, stdin);
+			make[move + 1] = kursor_area_game(area, move + 1);
+			sscanf(make[move + 1], "%s", &buffer);
+			fgets(buffer, 4, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
-			if (n < 0)
-				error("Error write\n");
-			int i = strncmp("Buy", buffer, 3);
-			if (i == 0)
-				break;
 		}
 		close(newsockfd);
 		close(sockfd);
@@ -110,10 +108,78 @@ void change_area_game(int **area, int make[], int move)
 	{
 		n = make[k] / 100;
 		m = (make[k] / 10) % 10;
-		if (make[k] % 10 == 1)
-			area[n][m] = 1;
-		if (make[k] % 10 == 2)
-			area[n][m] = 2;
+		area[n][m] = 1;
+	}
+}
+int kursor_area_game(int **area, int move)
+{
+	int flag = 1;
+	char text;
+	int i = 1, j = 1;
+	while (flag == 1)
+	{
+		system("clear");
+		printf("Ваш ход: \n");
+		initscr();
+		text = getch();
+		switch(text)
+		{
+			case 32:
+			{
+				int res;
+				res = (1000 * i) + (100 * j) + (10 * move) + 1;
+				return res;
+			}
+			case 115:
+			{
+				if ((i >= 1) && (i <= SIZE_N - 1)) {
+					output_kursor_area_game(area, i, j);
+					i++;
+				} else {
+					i = 1;
+				}
+			}
+			case 119:
+			{
+				if (i > 1) {
+					output_kursor_area_game(area, i, j);
+					i--;
+				} else {
+					i = 1;
+				}
+			}
+			case 97:
+			{
+				if (j > 1) {
+					output_kursor_area_game(area, i, j);
+					j--;
+				} else {
+					j = 1;
+				}
+			}
+			case 100:
+			{
+				if ((j >= 1) && (j <= SIZE_M - 1)) {
+					output_kursor_area_game(area, i, j);
+					j++;
+				} else {
+					j = 1;
+				}
+			}
+		}
+	}
+	endwin();
+}
+int output_kursor_area_game(int **area, int n, int m)
+{
+	for (int i = 0; i < SIZE_N - 1; i++)
+	{
+		for (int j = 0; j < SIZE_M - 1; j++)
+		{
+			if ((i == n) && (j == m))
+				printf("*");
+		}
+		printf("\n");
 	}
 }
 void output_area_game(int **area)
