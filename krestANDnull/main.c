@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 			exit(1);
 		}
 		int sockfd, newsockfd, portno, n;
-		char buffer[255];
+		int buffer;
 		struct sockaddr_in serv_addr, cli_addr;
 		socklen_t clilen;
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -54,13 +54,13 @@ int main(int argc, char const *argv[])
 			error("Error accept\n");
 		while(1)
 		{
-			bzero(buffer, 256);
+			buffer = 0;
+			//bzero(buffer, 256);
 			n = read(newsockfd, buffer, 255);
 			if (n < 0)
 				error("Error read\n");
-			printf("Client: %s\n", buffer);
-			bzero(buffer, 255);
-			fgets(buffer, 255, stdin);
+			buffer = 0;
+			fgets(buffer, 3, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
 			if (n < 0)
 				error("Error write\n");
