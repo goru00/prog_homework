@@ -32,7 +32,7 @@ void area_game(char **area, int role)
 {
 	create_area_game(area);
 	if (role == 2) { // host
-		output_area_game(char **area);
+		output_area_game(area);
 	}
 	if (role == 1) { // client
 
