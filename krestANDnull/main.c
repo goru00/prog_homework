@@ -66,10 +66,10 @@ int main(int argc, char const *argv[])
 			}
 			system("clear");
 			printf("Противник сделал ход: \n");
-			output_area_game(area);
 			make[move] = (int)buffer;
+			printf("MAKE: %d\n", make[move]);
 			move++;
-			change_area_game(area, make, move);
+			//change_area_game(area, make, move);
 			output_area_game(area);
 			bzero(buffer, 255);
 			fgets(buffer, 255, stdin);
