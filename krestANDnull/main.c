@@ -33,9 +33,7 @@ int main(int argc, char const *argv[])
 		}
 		int sockfd, newsockfd, portno, n;
 		char buffer[255];
-		int meta[9] = {0};
-		int move = 0;
-		int point;
+		int meta[9];
 		struct sockaddr_in serv_addr, cli_addr;
 		socklen_t clilen;
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -56,21 +54,22 @@ int main(int argc, char const *argv[])
 			error("Error accept\n");
 		while(1)
 		{
-			point = 1;
+			printf("Ожидаем ход опонента\n");
 			bzero(buffer, 256);
 			do 
 			{
 				printf("Ожидаем ход опонента\n");
-				output_area_game(area, meta, move, point);
 				n = read(newsockfd, buffer, 255);
-			} while(buffer == 0);
+			}
 			printf("Опонент сделал ход");
-			point = 0;
-			meta[move] = (int)buffer;
-			output_area_game(area, meta, move, point);
+			if (n < 0)
+				error("Error read\n");
+			printf("Client: %s\n", buffer);
 			bzero(buffer, 255);
 			fgets(buffer, 255, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
+			if (n < 0)
+				error("Error write\n");
 			int i = strncmp("Buy", buffer, 3);
 			if (i == 0)
 				break;
@@ -95,32 +94,17 @@ void create_area_game(int **area)
 			}
 		}
 }
-void output_area_game(int **area, int meta[], int move, int point)
+void output_area_game(int **area)
 {
-	int n, m;
-	if (point == 0) {
-		for (int i = 0; i < SIZE_N; i++) 
+	for (int i = 0; i < SIZE_N; i++) 
+	{
+		for (int j = 0; j < SIZE_M; j++) 
 		{
-			for (int j = 0; j < SIZE_M; j++) 
-			{
-				if (area[i][j] == 0) {
-					printf(" ");
-				} else printf("%d", area[i][j]);
-			}
-			printf("\n");
+			if (area[i][j] == 0) {
+				printf(" ");
+			} else printf("%d", area[i][j]);
 		}
-	}
-	if (point == 1) {
-		for (int i = 0; i < SIZE_N; i++) 
-		{
-			for (int j = 0; j < SIZE_M; j++) 
-			{
-				if (area[i][j] == 0) {
-					printf(" ");
-				} else printf("%d", area[i][j]);
-			}
-			printf("\n");
-		}
+		printf("\n");
 	}
 }
 void menu(int **area)
