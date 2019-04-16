@@ -59,6 +59,7 @@ int main(int argc, char const *argv[])
 			n = read(newsockfd, buffer, 255);
 			if (n < 0)
 				error("Error read\n");
+			printf("Client: %d\n", buffer);
 			buffer = 0;
 			fgets(buffer, 3, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
