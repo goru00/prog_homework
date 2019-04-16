@@ -73,6 +73,7 @@ int main(int argc, char const *argv[])
 			bzero(buffer, 4);
 			change_area_game(area, make, move);
 			output_area_game(area);
+			sleep(1);
 			make[move + 1] = kursor_area_game(area, move + 1);
 			sscanf(make[move + 1], "%s", &buffer);
 			fgets(buffer, 4, stdin);
