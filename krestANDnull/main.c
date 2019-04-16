@@ -30,6 +30,7 @@ int main(int argc, char const *argv[])
 }
 void area_game(int **area, int role)
 {
+	endwin();
 	create_area_game(area);
 	if (role == 2) { // host
 		output_area_game(area);
@@ -74,7 +75,6 @@ void menu(int **area)
 		output_menu(i);
 		initscr();
 		text = getch();
-		endwin();
 		switch(text)
 		{
 			case 32:
@@ -89,6 +89,7 @@ void menu(int **area)
 					//Records(file);
 				if (point == 2)
 					flag = 0;
+				endwin();
 			}
 			case 119:
 			{
@@ -102,6 +103,7 @@ void menu(int **area)
 					output_menu(i);
 					system("clear");
 				}
+				endwin();
 			}
 			case 115:
 			{
@@ -114,12 +116,14 @@ void menu(int **area)
 					output_menu(i);
 					system("clear");
 				}
+				endwin();
 			}
 		}
 	}
 }
 void area_game_menu(int **area)
 {
+	endwin();
 	int flag = 1;
 	int i = 0;
 	char text;
@@ -129,6 +133,7 @@ void area_game_menu(int **area)
 		printf("Peredvigatsya s pomochiu W(vverh) i S(vniz): \n");
 		printf("Menu: \n");
 		output_area_game_menu(i);
+		initscr();
 		text = getch();
 		switch(text)
 		{
@@ -157,6 +162,7 @@ void area_game_menu(int **area)
 					system("clear");
 					flag = 0;
 				}
+				endwin();
 			}
 			case 119:
 			{
@@ -170,6 +176,7 @@ void area_game_menu(int **area)
 					output_area_game_menu(i);
 					system("clear");
 				}
+				endwin();
 			}
 			case 115:
 			{
@@ -182,12 +189,14 @@ void area_game_menu(int **area)
 					output_area_game_menu(i);
 					system("clear");
 				}
+				endwin();
 			}
 		}
 	}
 }
 void output_area_game_menu(int kursor)
 {
+	endwin();
 	if (kursor == 0) 
 		printf("[*] - Play on Host\n - Play on Client\n - Play on Computer\n - Back\n");
 	if (kursor == 1) 
@@ -199,6 +208,7 @@ void output_area_game_menu(int kursor)
 }
 void output_menu(int kursor)
 {
+	endwin();
 	if (kursor == 0) 
 		printf("[*] - New Game\n - Records\n - Exit\n");
 	if (kursor == 1) 
