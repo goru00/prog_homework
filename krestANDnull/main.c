@@ -65,6 +65,7 @@ void output_area_game(int **area)
 		{
 			if (area[i][j] == 0)
 				printf(" ");
+			printf("%d", area[i][j]);
 		}
 		printf("\n");
 	}
