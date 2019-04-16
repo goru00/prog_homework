@@ -138,17 +138,13 @@ int kursor_area_game(int **area, int move)
 				if ((i >= 1) && (i <= SIZE_N - 1)) {
 					output_kursor_area_game(area, i, j);
 					i++;
-				} else {
-					i = 1;
-				}
+				} 
 			}
 			case 119:
 			{
 				if (i > 1) {
 					output_kursor_area_game(area, i, j);
 					i--;
-				} else {
-					i = 1;
 				}
 			}
 			case 97:
@@ -156,18 +152,14 @@ int kursor_area_game(int **area, int move)
 				if (j > 1) {
 					output_kursor_area_game(area, i, j);
 					j--;
-				} else {
-					j = 1;
-				}
+				} 
 			}
 			case 100:
 			{
 				if ((j >= 1) && (j <= SIZE_M - 1)) {
 					output_kursor_area_game(area, i, j);
 					j++;
-				} else {
-					j = 1;
-				}
+				} 
 			}
 		}
 	}
@@ -208,8 +200,8 @@ void output_area_game(int **area)
 				printf(" ");
 			} else if (area[i][j] == 9) printf("%d", area[i][j]);
 			if (area[i][j] == 1) {
-				printf("x");
-			} else if (area[i][j] == 2) printf("o");
+				printf("X");
+			} else if (area[i][j] == 2) printf("O");
 		}
 		printf("\n");
 	}
