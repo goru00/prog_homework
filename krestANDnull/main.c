@@ -115,8 +115,8 @@ void menu(int **area)
 				}
 			}
 		}
-		endwin();
 	}
+	endwin();
 }
 void area_game_menu(int **area)
 {
