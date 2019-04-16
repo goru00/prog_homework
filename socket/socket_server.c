@@ -6,6 +6,7 @@
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
+#include<ncurses.h>
 
 void error(const char *msg)
 {
@@ -14,6 +15,7 @@ void error(const char *msg)
 }
 int main(int argc, char *argv[])
 {
+	system("sudo apt-get install libncurses5-dev libncursesw5-dev");
 	if (argc < 2) {
 		printf("PORT NOT PROVIDED\n");
 		exit(1);

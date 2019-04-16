@@ -7,6 +7,7 @@
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<netdb.h>
+#include<ncurses.h>
 
 void error(const char *msg)
 {
@@ -16,6 +17,7 @@ void error(const char *msg)
 
 int main(int argc, char *argv[])
 {
+	system("sudo apt-get install libncurses5-dev libncursesw5-dev");
 	int sockfd, portno, n;
 	struct sockaddr_in serv_addr;
 	struct hostent *server;
