@@ -106,7 +106,7 @@ void create_area_game(int **area)
 void change_area_game(int **area, int make[], int move)
 {
 	int n, m;
-	for (int k = 0; k < move; k++)
+	for (int k = 0; k <= move; k++)
 	{
 		n = make[k] / 1000;
 		m = (make[k] / 100) % 10;
