@@ -22,6 +22,6 @@ int main()
 
 	printf("SERVER SENT: %s\n", server_response);
 
-	close(sock)
+	close(network_socket);
 	return 0;
 }
