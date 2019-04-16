@@ -162,7 +162,7 @@ int kursor_area_game(int **area, int move)
 			}
 			case 100:
 			{
-				if ((j >= 1) && (j <= SIZE_M - 1)) {
+				if ((j >= 1) && (j <= SIZE_M - 2)) {
 					j++;
 					output_kursor_area_game(area, i, j);
 				} else {
