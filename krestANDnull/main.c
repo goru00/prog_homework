@@ -48,7 +48,7 @@ void create_area_game(char **area)
 		area[i] = (char *)malloc(SIZE_M * sizeof(char));
 		for (int j = 0; j < SIZE_M; j++)
 		{
-			area[i][j] = 0;
+			area[i][j] = "0";
 		}
 	}
 }
