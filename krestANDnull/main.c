@@ -201,20 +201,20 @@ void area_game_menu(int **area)
 				if (point == 0) {
 					system("clear");
 					int role = 2; // host
-					area_game(area, role);
+					//area_game(area, role);
 					flag = 0;
 					break;
 				}
 				if (point == 1) {
 					system("clear");
 					int role = 1; // client
-					area_game(area, role);
+					//area_game(area, role);
 					break;
 				}
 				if (point == 2) {
 					system("clear");
 					int role = 0; // computer
-					area_game(area, role);
+					//area_game(area, role);
 					break;
 				}
 				if (point == 3) {
