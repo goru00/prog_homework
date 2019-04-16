@@ -23,12 +23,12 @@ void output_area_game_menu();
 int main(int argc, char const *argv[])
 {
 	system("sudo apt-get install libncurses5-dev libncursesw5-dev");
-	char **area = NULL;
-	area = (char **)malloc(SIZE_N * sizeof(char));
+	int **area = NULL;
+	area = (int **)malloc(SIZE_N * sizeof(int));
 	menu(area);
 	return 0;
 }
-void area_game(char **area, int role)
+void area_game(int **area, int role)
 {
 	create_area_game(area);
 	if (role == 2) { // host
@@ -41,27 +41,27 @@ void area_game(char **area, int role)
 
 	}
 }
-void create_area_game(char **area)
+void create_area_game(int **area)
 {
 	for (int i = 0; i < SIZE_N; i++)
 	{
-		area[i] = (char *)malloc(SIZE_M * sizeof(char));
+		area[i] = (int *)malloc(SIZE_M * sizeof(int));
 		for (int j = 0; j < SIZE_M; j++)
 		{
-			area[i][j] = "0";
+			area[i][j] = 0;
 		}
 	}
 }
-void output_area_game(char **area)
+void output_area_game(int **area)
 {
 	for (int i = 0; i < SIZE_N; i++) {
 		for (int j = 0; j < SIZE_M; j++) {
-			printf("%s", area[i][j]);
+			printf("%d", area[i][j]);
 		}
 		printf("\n");
 	}
 }
-void menu(char **area)
+void menu(int **area)
 {
 	int flag = 1;
 	int i = 0;
@@ -117,7 +117,7 @@ void menu(char **area)
 		}
 	}
 }
-void area_game_menu(char **area)
+void area_game_menu(int **area)
 {
 	int flag = 1;
 	int i = 0;
