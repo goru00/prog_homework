@@ -94,12 +94,12 @@ void menu(char **area)
 				if (i == 0) {
 					i = 2;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				} 
 				if (i > 0) {
 					i--;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 			case 115:
@@ -107,11 +107,11 @@ void menu(char **area)
 				if (i == 2) {
 					i = 0;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				} else {
 					i++;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 		}
@@ -157,12 +157,12 @@ void area_game_menu(char **area)
 				if (i == 0) {
 					i = 3;
 					output_area_game_menu(i);
-					system("cls");
+					system("clear");
 				} 
 				if (i > 0) {
 					i--;
 					output_area_game_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 			case 115:
@@ -170,11 +170,11 @@ void area_game_menu(char **area)
 				if (i == 3) {
 					i = 0;
 					output_area_game_menu(i);
-					system("cls");
+					system("clear");
 				} else {
 					i++;
 					output_area_game_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 		}
