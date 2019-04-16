@@ -69,6 +69,7 @@ void menu(char **area)
 	char text;
 	while(flag == 1)
 	{
+		initscr();
 		printf("K R E S T  AND  N U L L\n");
 		printf("Peredvigatsya s pomochiu W(vverh) i S(vniz): \n");
 		printf("Menu: \n");
