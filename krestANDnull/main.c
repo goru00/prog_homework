@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
 			printf("PORT NOT PROVIDED\n");
 			exit(1);
 		}
-		int sockfd, newsockfd, portno, n;
+		int sockfd, newsockfd, portno, n = 0;
 		char buffer[255];
 		int meta[9];
 		struct sockaddr_in serv_addr, cli_addr;
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 		{
 			printf("Ожидаем ход опонента\n");
 			bzero(buffer, 256);
-			do 
+			while (n == 0)
 			{
 				printf("Ожидаем ход опонента\n");
 				n = read(newsockfd, buffer, 255);
