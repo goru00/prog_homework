@@ -12,6 +12,14 @@
 #define SIZE_N 5
 #define SIZE_M 5
 
+void area_game();
+void create_area_game();
+void output_area_game();
+void menu();
+void area_game_menu();
+void output_menu();
+void output_area_game_menu();
+
 int main(int argc, char const *argv[])
 {
 	system("sudo apt-get install libncurses5-dev libncursesw5-dev");
