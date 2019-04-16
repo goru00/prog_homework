@@ -177,8 +177,9 @@ void output_kursor_area_game(int **area, int n, int m)
 	{
 		for (int j = 0; j < SIZE_M - 1; j++)
 		{
-			if ((i == n) && (j == m))
+			if ((i == n) && (j == m)){
 				printf("*");
+			} else printf("%d", area[i][j]);
 		}
 		printf("\n");
 	}
