@@ -136,8 +136,8 @@ int kursor_area_game(int **area, int move)
 			case 115:
 			{
 				if ((i >= 1) && (i <= SIZE_N - 1)) {
-					output_kursor_area_game(area, i, j);
 					i++;
+					output_kursor_area_game(area, i, j);
 				} else {
 					i = 1;
 				}
@@ -145,8 +145,8 @@ int kursor_area_game(int **area, int move)
 			case 119:
 			{
 				if (i > 1) {
-					output_kursor_area_game(area, i, j);
 					i--;
+					output_kursor_area_game(area, i, j);
 				} else {
 					i = 1;
 				}
@@ -154,8 +154,8 @@ int kursor_area_game(int **area, int move)
 			case 97:
 			{
 				if ((j > 1) && (j < SIZE_M - 1)) {
-					output_kursor_area_game(area, i, j);
 					j--;
+					output_kursor_area_game(area, i, j);
 				} else {
 					j = 1;
 				}
@@ -163,8 +163,8 @@ int kursor_area_game(int **area, int move)
 			case 100:
 			{
 				if ((j >= 1) && (j <= SIZE_M - 1)) {
-					output_kursor_area_game(area, i, j);
 					j++;
+					output_kursor_area_game(area, i, j);
 				} else {
 					j = 1;
 				}
