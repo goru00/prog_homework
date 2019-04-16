@@ -54,7 +54,12 @@ void create_area_game(char **area)
 }
 void output_area_game(char **area)
 {
-	
+	for (int i = 0; i < SIZE_N; i++) {
+		for (int j = 0; j < SIZE_M; j++) {
+			printf("%s", area[i][j]);
+		}
+		printf("\n");
+	}
 }
 void menu(char **area)
 {
