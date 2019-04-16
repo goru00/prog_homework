@@ -92,7 +92,7 @@ void menu(int **area)
 				if (point == 1)
 					//Records(file);
 				if (point == 2)
-					flag = 0;
+					exit(1);
 			}
 			case 119:
 			{
