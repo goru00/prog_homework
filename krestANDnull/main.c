@@ -61,13 +61,13 @@ int main(int argc, char const *argv[])
 			do 
 			{
 				printf("Ожидаем ход опонента\n");
-				output_area_game(area, meta, move);
+				output_area_game(area, meta, move, point);
 				n = read(newsockfd, buffer, 255);
 			} while(buffer == 0);
 			printf("Опонент сделал ход");
 			point = 0;
 			meta[move] = (int)buffer;
-			output_area_game(area, meta, move);
+			output_area_game(area, meta, move, point);
 			bzero(buffer, 255);
 			fgets(buffer, 255, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
@@ -95,7 +95,7 @@ void create_area_game(int **area)
 			}
 		}
 }
-void output_area_game(int **area, int meta[], int move)
+void output_area_game(int **area, int meta[], int move, int point)
 {
 	int n, m;
 	if (point == 0) {
