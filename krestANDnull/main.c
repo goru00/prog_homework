@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
 	menu(area);
 	return 0;
 }
-void area_game(int **area, int role)
+void area_game(int **area, int role, int argc, char const *argv[])
 {
 	create_area_game(area);
 	if (role == 2) { // host
