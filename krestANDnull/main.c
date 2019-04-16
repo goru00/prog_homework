@@ -12,6 +12,7 @@
 #define SIZE_N 5
 #define SIZE_M 5
 
+void area_game();
 void create_area_game();
 void output_area_game();
 void menu();
@@ -33,7 +34,6 @@ int main(int argc, char const *argv[])
 		}
 		int sockfd, newsockfd, portno, n = 0;
 		char buffer[255];
-		int meta[9];
 		struct sockaddr_in serv_addr, cli_addr;
 		socklen_t clilen;
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -54,14 +54,15 @@ int main(int argc, char const *argv[])
 			error("Error accept\n");
 		while(1)
 		{
-			printf("Ожидаем ход опонента\n");
+			system("clear");
+			printf("Ожидаем ход соперника: \n");
 			bzero(buffer, 256);
-			while (n == 0)
+			output_area_game(area);
+			while(n == 0)
 			{
-				printf("Ожидаем ход опонента\n");
 				n = read(newsockfd, buffer, 255);
 			}
-			printf("Опонент сделал ход");
+			printf("Противник сделал ход\n");
 			if (n < 0)
 				error("Error read\n");
 			printf("Client: %s\n", buffer);
@@ -77,6 +78,10 @@ int main(int argc, char const *argv[])
 		close(newsockfd);
 		close(sockfd);
 	return 0;
+}
+void area_game(int **area, int role)
+{
+	create_area_game(area);
 }
 void create_area_game(int **area)
 {
@@ -185,20 +190,20 @@ void area_game_menu(int **area)
 				if (point == 0) {
 					system("clear");
 					int role = 2; // host
-					//area_game(area, role);
+					area_game(area, role);
 					flag = 0;
 					break;
 				}
 				if (point == 1) {
 					system("clear");
 					int role = 1; // client
-					//area_game(area, role);
+					area_game(area, role);
 					break;
 				}
 				if (point == 2) {
 					system("clear");
 					int role = 0; // computer
-					//area_game(area, role);
+					area_game(area, role);
 					break;
 				}
 				if (point == 3) {
