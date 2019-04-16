@@ -67,9 +67,8 @@ int main(int argc, char const *argv[])
 			system("clear");
 			printf("Противник сделал ход: \n");
 			output_area_game(area);
+			make[move] = (int)buffer;
 			move++;
-			make[move - 1] = (int)buffer;
-			printf("MAKE: %d\n", make[move - 1]);
 			change_area_game(area, make, move);
 			output_area_game(area);
 			bzero(buffer, 255);
