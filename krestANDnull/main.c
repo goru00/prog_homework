@@ -26,12 +26,6 @@ int main(int argc, char const *argv[])
 	int **area = NULL;
 	area = (int **)malloc(SIZE_N * sizeof(int));
 	menu(area);
-	return 0;
-}
-void area_game(int **area, int role, int argc, char const *argv[])
-{
-	create_area_game(area);
-	if (role == 2) { // host
 		system("clear");
 		output_area_game(area);
 		if (argc < 2) {
@@ -76,13 +70,11 @@ void area_game(int **area, int role, int argc, char const *argv[])
 		}
 		close(newsockfd);
 		close(sockfd);
-	}
-	if (role == 1) { // client
-
-	}
-	if (role == 0) { // computer
-
-	}
+	return 0;
+}
+void area_game(int **area, int role)
+{
+	create_area_game(area);
 }
 void create_area_game(int **area)
 {
@@ -134,6 +126,7 @@ void menu(int **area)
 				if (point == 0){
 					system("clear");
 					area_game_menu(area);
+					flag = 0;
 					break;
 				}
 				if (point == 1)
@@ -191,6 +184,7 @@ void area_game_menu(int **area)
 					system("clear");
 					int role = 2; // host
 					area_game(area, role);
+					flag = 0;
 					break;
 				}
 				if (point == 1) {
