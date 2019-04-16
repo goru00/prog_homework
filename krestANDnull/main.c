@@ -66,14 +66,15 @@ void menu(int **area)
 	int flag = 1;
 	int i = 0;
 	char text;
-	initscr();
 	while(flag == 1)
 	{
 		printf("K R E S T  AND  N U L L\n");
 		printf("Peredvigatsya s pomochiu W(vverh) i S(vniz): \n");
 		printf("Menu: \n");
 		output_menu(i);
+		initscr();
 		text = getch();
+		endwin();
 		switch(text)
 		{
 			case 32:
