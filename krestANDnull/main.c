@@ -12,7 +12,6 @@
 #define SIZE_N 5
 #define SIZE_M 5
 
-void area_game();
 void create_area_game();
 void output_area_game();
 void menu();
@@ -34,6 +33,9 @@ int main(int argc, char const *argv[])
 		}
 		int sockfd, newsockfd, portno, n;
 		char buffer[255];
+		int meta[9] = {0};
+		int move = 0;
+		int point;
 		struct sockaddr_in serv_addr, cli_addr;
 		socklen_t clilen;
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -54,16 +56,21 @@ int main(int argc, char const *argv[])
 			error("Error accept\n");
 		while(1)
 		{
+			point = 1;
 			bzero(buffer, 256);
-			n = read(newsockfd, buffer, 255);
-			if (n < 0)
-				error("Error read\n");
-			printf("Client: %s\n", buffer);
+			do 
+			{
+				printf("Ожидаем ход опонента\n");
+				output_area_game(area, meta, move);
+				n = read(newsockfd, buffer, 255);
+			} while(buffer == 0);
+			printf("Опонент сделал ход");
+			point = 0;
+			meta[move] = (int)buffer;
+			output_area_game(area, meta, move);
 			bzero(buffer, 255);
 			fgets(buffer, 255, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
-			if (n < 0)
-				error("Error write\n");
 			int i = strncmp("Buy", buffer, 3);
 			if (i == 0)
 				break;
@@ -71,10 +78,6 @@ int main(int argc, char const *argv[])
 		close(newsockfd);
 		close(sockfd);
 	return 0;
-}
-void area_game(int **area, int role)
-{
-	create_area_game(area);
 }
 void create_area_game(int **area)
 {
@@ -92,17 +95,32 @@ void create_area_game(int **area)
 			}
 		}
 }
-void output_area_game(int **area)
+void output_area_game(int **area, int meta[], int move)
 {
-	for (int i = 0; i < SIZE_N; i++) 
-	{
-		for (int j = 0; j < SIZE_M; j++) 
+	int n, m;
+	if (point == 0) {
+		for (int i = 0; i < SIZE_N; i++) 
 		{
-			if (area[i][j] == 0) {
-				printf(" ");
-			} else printf("%d", area[i][j]);
+			for (int j = 0; j < SIZE_M; j++) 
+			{
+				if (area[i][j] == 0) {
+					printf(" ");
+				} else printf("%d", area[i][j]);
+			}
+			printf("\n");
 		}
-		printf("\n");
+	}
+	if (point == 1) {
+		for (int i = 0; i < SIZE_N; i++) 
+		{
+			for (int j = 0; j < SIZE_M; j++) 
+			{
+				if (area[i][j] == 0) {
+					printf(" ");
+				} else printf("%d", area[i][j]);
+			}
+			printf("\n");
+		}
 	}
 }
 void menu(int **area)
