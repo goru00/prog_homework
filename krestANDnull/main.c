@@ -58,15 +58,15 @@ int main(int argc, char const *argv[])
 		{
 			system("clear");
 			printf("Ожидаем ход соперника: \n");
-			bzero(buffer, 256);
+			bzero(buffer, 3);
 			output_area_game(area);
 			while(n == 0)
 			{
-				n = read(newsockfd, buffer, 255);
+				n = read(newsockfd, buffer, 3);
 			}
 			system("clear");
 			printf("Противник сделал ход: \n");
-			make[move] = buffer;
+			sscanf(buffer, "%d", &make[move]);
 			printf("MAKE: %d\n", make[move]);
 			move++;
 			//change_area_game(area, make, move);
