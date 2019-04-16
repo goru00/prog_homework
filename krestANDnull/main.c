@@ -119,9 +119,9 @@ int kursor_area_game(int **area, int move)
 	int i = 1, j = 1;
 	while (flag == 1)
 	{
-		system("clear");
-		printf("Ваш ход: \n");
 		initscr();
+		printf("Ваш ход: \n");
+		output_kursor_area_game(area, i, j);
 		text = getch();
 		switch(text)
 		{
