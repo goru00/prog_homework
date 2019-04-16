@@ -51,6 +51,14 @@ void create_area_game(int **area)
 			area[i][j] = 0;
 		}
 	}
+	for (int j = 0; j < SIZE_M; j++)
+		area[0][j] = 9;
+	for (int i = 1; i < SIZE_N - 1; i++)
+		area[i][0] = 9;
+	for (int j = 0; j < SIZE_M; j++)
+		area[SIZE_N][j] = 9;
+	for (int i = SIZE_N - 1; i > 0; i--)
+		area[i][SIZE_M] = 9;
 }
 void output_area_game(int **area)
 {
@@ -115,8 +123,8 @@ void menu(int **area)
 				}
 			}
 		}
+		endwin();
 	}
-	endwin();
 }
 void area_game_menu(int **area)
 {
