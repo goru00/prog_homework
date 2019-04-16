@@ -107,8 +107,8 @@ void change_area_game(int **area, int make[], int move)
 	int n, m;
 	for (int k = 0; k < move; k++)
 	{
-		n = make[k] / 100;
-		m = (make[k] / 10) % 10;
+		n = make[k] / 1000;
+		m = (make[k] / 100) % 10;
 		area[n][m] = 1;
 	}
 }
@@ -173,9 +173,9 @@ int kursor_area_game(int **area, int move)
 }
 void output_kursor_area_game(int **area, int n, int m)
 {
-	for (int i = 0; i < SIZE_N - 1; i++)
+	for (int i = 0; i < SIZE_N; i++)
 	{
-		for (int j = 0; j < SIZE_M - 1; j++)
+		for (int j = 0; j < SIZE_M; j++)
 		{
 			if ((i == n) && (j == m)){
 				printf("*");
