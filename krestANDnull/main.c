@@ -43,18 +43,24 @@ void area_game(char **area, int role)
 }
 void create_area_game(char **area)
 {
-	area[0] = (char *)malloc(SIZE_M * sizeof(char));
-	for (int j = 0; j < SIZE_M; j++)
+	for (int i = 0; i < SIZE_N; i++)
+	{
+		area[i] = (char *)malloc(SIZE_M * sizeof(char));
+		for (int j = 0; j < SIZE_M; j++)
+		{
+			area[i][j] = 0;
+		}
+	}
+	for (int j = 0; j < SIZE_M; j++) {
 		area[0][j] = "-";
+	}
 	for (int i = 1; i < SIZE_N - 1; i++) {
-		area[i] = (char *)malloc(1 * sizeof(char));
 		area[i][0] = "|";
 	}
-	area[SIZE_N] = (char *)malloc(SIZE_M * sizeof(char));
-	for (int j = 0; j < SIZE_M; j++)
+	for (int j = 0; j < SIZE_M; j++) {
 		area[SIZE_N][j] = "-";
+	}
 	for (int i = SIZE_N - 1; i > 0; i++) {
-		area[i] = (char *)malloc(1 * sizeof(char));
 		area[i][SIZE_M] = "|";
 	}
 }
@@ -67,9 +73,9 @@ void menu(char **area)
 	int flag = 1;
 	int i = 0;
 	char text;
+	initscr();
 	while(flag == 1)
 	{
-		initscr();
 		printf("K R E S T  AND  N U L L\n");
 		printf("Peredvigatsya s pomochiu W(vverh) i S(vniz): \n");
 		printf("Menu: \n");
@@ -81,6 +87,7 @@ void menu(char **area)
 			{
 				int point = i;
 				if (point == 0){
+					system("clear");
 					area_game_menu(area);
 					break;
 				}
@@ -135,22 +142,27 @@ void area_game_menu(char **area)
 			{
 				int point = i;
 				if (point == 0) {
+					system("clear");
 					int role = 2; // host
 					area_game(area, role);
 					break;
 				}
 				if (point == 1) {
+					system("clear");
 					int role = 1; // client
 					area_game(area, role);
 					break;
 				}
 				if (point == 2) {
+					system("clear");
 					int role = 0; // computer
 					area_game(area, role);
 					break;
 				}
-				if (point == 3) 
+				if (point == 3) {
+					system("clear");
 					flag = 0;
+				}
 			}
 			case 119:
 			{
@@ -183,13 +195,13 @@ void area_game_menu(char **area)
 void output_area_game_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("[*] - Play on Host\n - Play on Client\n - Play on Computer\n - Exit\n");
+		printf("[*] - Play on Host\n - Play on Client\n - Play on Computer\n - Back\n");
 	if (kursor == 1) 
-		printf(" - Play on Host\n[*] - Play on Client\n - Play on Computer\n - Exit\n");
+		printf(" - Play on Host\n[*] - Play on Client\n - Play on Computer\n - Back\n");
 	if (kursor == 2) 
-		printf(" - Play on Host\n - Play on Client\n[*] - Play on Computer\n - Exit\n");
+		printf(" - Play on Host\n - Play on Client\n[*] - Play on Computer\n - Back\n");
 	if (kursor == 3) 
-		printf(" - Play on Host\n - Play on Client\n - Play on Computer\n[*] - Exit\n");
+		printf(" - Play on Host\n - Play on Client\n - Play on Computer\n[*] - Back\n");
 }
 void output_menu(int kursor)
 {
