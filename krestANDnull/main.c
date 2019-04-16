@@ -19,7 +19,8 @@ void menu();
 void area_game_menu();
 void output_menu();
 void output_area_game_menu();
-int kursor_area_game(int **);
+int kursor_area_game(int **, int);
+void output_kursor_area_game();
 
 int main(int argc, char const *argv[])
 {
@@ -170,7 +171,7 @@ int kursor_area_game(int **area, int move)
 	}
 	endwin();
 }
-int output_kursor_area_game(int **area, int n, int m)
+void output_kursor_area_game(int **area, int n, int m)
 {
 	for (int i = 0; i < SIZE_N - 1; i++)
 	{
