@@ -44,21 +44,18 @@ void area_game(int **area, int role)
 void create_area_game(int **area)
 {
 	for (int i = 0; i < SIZE_N; i++)
-	{
-		area[i] = (int *)malloc(SIZE_M * sizeof(int));
-		for (int j = 0; j < SIZE_M; j++)
 		{
-			area[i][j] = 0;
+			area[i] = (int *)malloc(SIZE_M * sizeof(int));
+			for (int j = 0; j < SIZE_M; j++)
+				area[i][j] = 9;
 		}
-	}
-	for (int j = 0; j < SIZE_M; j++)
-		area[0][j] = 9;
-	for (int i = 1; i < SIZE_N - 1; i++)
-		area[i][0] = 9;
-	for (int j = 0; j < SIZE_M; j++)
-		area[SIZE_N][j] = 9;
-	for (int i = SIZE_N - 1; i > 0; i--)
-		area[i][SIZE_M] = 9;
+		for (int i = 1; i < SIZE_N - 1; i++)
+		{
+			for (int j = 1; j < SIZE_M - 1; j++)
+			{
+				area[i][j] = 0;
+			}
+		}
 }
 void output_area_game(int **area)
 {
