@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	if (sockfd < 0) {
 		error("Error opening Socket");
 	}
-	bzero((char *), &serv_addr, sizeof(serv_addr));
+	bzero((char *) &serv_addr, sizeof(serv_addr));
 	portno = atoi(argv[1]);
 
 	serv_addr.sin_family = AF_INET;
