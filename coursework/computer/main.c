@@ -96,11 +96,11 @@ void list_command(FILE *command, int *code_list)
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
 	system("clear");
+	printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
 	int flag = 1;
 	char text;
 	while (flag == 1)
 	{
-		printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
 		for (int i = 0; i < 121; i++)
 			fscanf(command, "%d", &code_list[i]);
 		for (int i = 0; i < 121; i++)
@@ -133,11 +133,11 @@ void run_command(FILE *command, int *code_list)
 void output_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("\t\t[*] - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t - Shutdown\n");
+		printf("\t\t[*] - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t - Run Shell\n\t\t - Shutdown\n");
 	if (kursor == 1) 
-		printf("\t\t - Input Command\n\t\t[*] - List Command\n\t\t - Run Command\n\t\t - Shutdown\n");
+		printf("\t\t - Input Command\n\t\t[*] - List Command\n\t\t - Run Command\n\t\t - Run Shell\n\t\t - Shutdown\n");
 	if (kursor == 2)
-		printf("\t\t - Input Command\n\t\t - List Command\n\t\t[*] - Run Command\n\t\t - Shutdown\n");
+		printf("\t\t - Input Command\n\t\t - List Command\n\t\t[*] - Run Command\n\t\t - Run Shell\n\t\t - Shutdown\n");
 	if (kursor == 3)
 		printf("\t\t - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t[*] - Run Shell\n\t\t - Shutdown\n");
 	if (kursor == 4)
