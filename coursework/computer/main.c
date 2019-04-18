@@ -7,6 +7,7 @@ void create_command();
 void list_command();
 void input_command();
 void run_command();
+void run_shell();
 int main()
 {
 	int *ram = NULL; // оперативная память
@@ -37,6 +38,8 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 			{
 				int point = i;
 				if (point == 3)
+					run_shell();
+				if (point == 4)
 					flag = 0;
 				if (point == 1)
 					list_command(command, code_list);
@@ -46,7 +49,7 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 			case 119:
 			{
 				if (i == 0) {
-					i = 3;
+					i = 4;
 					output_menu(i);
 					system("clear");
 				} 
@@ -58,7 +61,7 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 			}
 			case 115:
 			{
-				if (i == 3) {
+				if (i == 4) {
 					i = 0;
 					output_menu(i);
 					system("clear");
@@ -132,5 +135,7 @@ void output_menu(int kursor)
 	if (kursor == 2)
 		printf("\t\t - Input Command\n\t\t - List Command\n\t\t[*] - Run Command\n\t\t - Shutdown\n");
 	if (kursor == 3)
-		printf("\t\t - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t[*] - Shutdown\n");
+		printf("\t\t - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t[*] - Run Shell\n\t\t - Shutdown\n");
+	if (kursor == 4)
+		printf("\t\t - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t - Run Shell\n\t\t[*] - Shutdown\n");
 }
