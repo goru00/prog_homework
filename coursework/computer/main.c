@@ -107,7 +107,7 @@ void list_command(FILE *command, int *code_list)
 	text = getchar();
 	switch(text)
 	{
-		case 8:
+		case 115:
 		{
 			free(code_list);
 			fclose(command);
