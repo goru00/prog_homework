@@ -97,23 +97,15 @@ void list_command(FILE *command, int *code_list)
 	command = fopen("command_list.txt", "r");
 	system("clear");
 	printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
-	int flag = 1;
 	char text;
-	while (flag == 1)
-	{
-		for (int i = 0; i < 121; i++)
-			fscanf(command, "%d", &code_list[i]);
-		for (int i = 0; i < 121; i++)
-			printf("[%d] . %d\n", i, code_list[i]);
-		printf("Input <BACKSPACE> that is back.\n\n");
-		system("stty raw");
-		text = getchar();
-		if (text == 8) {
-			flag = 0;
-			break;
-		}
-		system("stty cooked");
-	}
+	for (int i = 0; i < 121; i++)
+		fscanf(command, "%d", &code_list[i]);
+	for (int i = 0; i < 121; i++)
+		printf("[%d] . %d\n", i, code_list[i]);
+	printf("Input <BACKSPACE> that is back.\n\n");
+	system("stty raw");
+	text = getchar();
+	system("stty cooked");
 	free(code_list);
 	fclose(command);
 }
