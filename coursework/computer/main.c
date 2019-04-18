@@ -13,8 +13,8 @@ int main()
 	int *ram = NULL; // оперативная память
 	int *code_list = NULL; // массив команд
 	ram = (int *)malloc(100 * sizeof(int)); // оперативная память
-	FILE *battary = fopen("bin/result.txt", "w+"); // аккумулятор
-	FILE *command = fopen("bin/command_list.txt", "w+"); // храним команды
+	FILE *battary = fopen("result.txt", "w+"); // аккумулятор
+	FILE *command = fopen("command_list.txt", "w+"); // храним команды
 	create_command(command);
 	menu(ram, battary, command, code_list);
 	return 0;
