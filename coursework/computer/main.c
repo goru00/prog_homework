@@ -13,8 +13,8 @@ int main()
 	int *ram = NULL; // оперативная память
 	int *code_list = NULL; // массив команд
 	ram = (int *)malloc(100 * sizeof(int)); // оперативная память
-	FILE *battary = fopen("result.txt", "w+"); // аккумулятор
-	FILE *command = fopen("command_list.txt", "w+"); // храним команды
+	FILE *battary = fopen("bin/result.txt", "w+"); // аккумулятор
+	FILE *command = fopen("bin/command_list.txt", "w+"); // храним команды
 	create_command(command);
 	menu(ram, battary, command, code_list);
 	return 0;
@@ -75,6 +75,10 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 		system("stty cooked");
 	}
 }
+void run_shell()
+{
+
+}
 void input_command()
 {
 
@@ -92,11 +96,11 @@ void list_command(FILE *command, int *code_list)
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
 	system("clear");
-	printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
 	int flag = 1;
 	char text;
 	while (flag == 1)
 	{
+		printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
 		for (int i = 0; i < 121; i++)
 			fscanf(command, "%d", &code_list[i]);
 		for (int i = 0; i < 121; i++)
