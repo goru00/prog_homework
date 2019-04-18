@@ -1,8 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#include<conio.h>
-#include "windows.h"
 void menu();
 void output_menu();
 void create_command();
@@ -26,12 +24,13 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 	int flag = 1, i = 0;
 	while (flag == 1)
 	{
-		//system("cls");
+		system("clear");
 		printf("\t\tOperation System K O J A N I E  M U D A K\n");
 		printf("\t\t\t\tWelcome!\n");
 		printf("\t\tMenu: \n\n");
 		output_menu(i);
-		select = getch();
+		system("stty raw");
+		select = getchar();
 		switch(select)
 		{
 			case 32:
@@ -49,12 +48,12 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 				if (i == 0) {
 					i = 3;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				} 
 				if (i > 0) {
 					i--;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 			case 115:
@@ -62,14 +61,15 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 				if (i == 3) {
 					i = 0;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				} else {
 					i++;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 		}
+		system("stty cooked");
 	}
 }
 void input_command()
@@ -88,15 +88,24 @@ void list_command(FILE *command, int *code_list)
 {
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
+	system("clear");
 	printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
-	while (getch() != 8)
+	int flag = 1;
+	char text;
+	while (flag == 1)
 	{
-		system("cls");
 		for (int i = 0; i < 121; i++)
 			fscanf(command, "%d", &code_list[i]);
 		for (int i = 0; i < 121; i++)
 			printf("[%d] . %d\n", i, code_list[i]);
 		printf("Input <BACKSPACE> that is back.\n\n");
+		system("stty raw");
+		text = getchar();
+		if (text == 8) {
+			flag = 0;
+			break;
+		}
+		system("stty cooked");
 	}
 	free(code_list);
 	fclose(command);
@@ -106,7 +115,7 @@ void run_command(FILE *command, int *code_list)
 	int i;
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
-	system("cls");
+	system("clear");
 	printf("Viberete commandu iz spiska: \n");
 	for (i = 0; i < 121; i++)
 		fscanf(command, "%d", &code_list[i]);

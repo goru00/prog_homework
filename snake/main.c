@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<conio.h>
-#include "windows.h"
+//#include<conio.h>
+//#include "windows.h"
+#include<ncurses.h>
 #define SIZE_N 12
 #define SIZE_M 12
 void maze();
@@ -9,7 +10,7 @@ void output();
 void menu();
 void output_menu();
 void end_game(int);
-int move(int **);
+void move(int **);
 struct records
 {
 	int *point;
@@ -137,7 +138,7 @@ void maze(int **snake)
 		flag = move(snake);
 	}
 }
-int move(int **snake)
+void move(int **snake)
 {
 	struct hero h;
 	int score = 0;

@@ -7,7 +7,6 @@
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<netdb.h>
-#include<ncurses.h>
 
 #define SIZE_N 5
 #define SIZE_M 5
