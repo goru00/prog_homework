@@ -75,7 +75,7 @@ int main(int argc, char const *argv[])
 			output_area_game(area);
 			sleep(1);
 			make[move + 1] = kursor_area_game(area, move + 1);
-			sscanf(make[move + 1], "%s", &buffer);
+			//sscanf(make[move + 1], "%s", &buffer);
 			fgets(buffer, 4, stdin);
 			n = write(newsockfd, buffer, strlen(buffer));
 		}
