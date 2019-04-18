@@ -105,9 +105,16 @@ void list_command(FILE *command, int *code_list)
 	printf("Input <BACKSPACE> that is back.\n\n");
 	system("stty raw");
 	text = getchar();
+	switch(text)
+	{
+		case 8:
+		{
+			free(code_list);
+			fclose(command);
+			break;
+		}
+	}
 	system("stty cooked");
-	free(code_list);
-	fclose(command);
 }
 void run_command(FILE *command, int *code_list)
 {
