@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-//#include<conio.h>
+void menu();
+void output_menu();
 int main()
 {
 	srand(time(NULL));
@@ -8,23 +9,21 @@ int main()
 	menu(enemy_lab, ally_lab);
 	return 0;
 }
-void start_game(int **enemy_lab, int **ally_lab)
-{
-
-}
 void menu(int **enemy_lab, int **ally_lab)
 {
 	int flag = 1;
 	int i = 0;
-	char text;
+	char select;
 	while(flag == 1)
 	{
+		system("clear");
 		printf("\t\tW A R S H I P S\n");
-		printf("Peredvigatsya s pomochiu W(vverh) i S(vniz): \n");
-		printf("Menu: \n");
+		printf("\t\tPeredvigatsya s pomochiu W(vverh) i S(vniz): \n");
+		printf("\t\t\tMenu: \n");
 		output_menu(i);
-		//text = getch();
-		switch(text)
+		system("stty raw");
+		select = getchar();
+		switch(select)
 		{
 			case 32:
 			{
@@ -43,12 +42,12 @@ void menu(int **enemy_lab, int **ally_lab)
 				if (i == 0) {
 					i = 2;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				} 
 				if (i > 0) {
 					i--;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 			case 115:
@@ -56,14 +55,15 @@ void menu(int **enemy_lab, int **ally_lab)
 				if (i == 2) {
 					i = 0;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				} else {
 					i++;
 					output_menu(i);
-					system("cls");
+					system("clear");
 				}
 			}
 		}
+		system("stty cooked");
 	}
 }
 void output_menu(int kursor)
