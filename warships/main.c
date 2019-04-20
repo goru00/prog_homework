@@ -56,7 +56,8 @@ void menu(int **enemy_lab, int **ally_lab)
 					i = 0;
 					output_menu(i);
 					system("clear");
-				} else {
+				} 
+				if (i < 3) {
 					i++;
 					output_menu(i);
 					system("clear");
