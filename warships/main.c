@@ -29,7 +29,7 @@ void menu(int **enemy_lab, int **ally_lab)
 			{
 				int point = i;
 				if (point == 0){
-					start_game(enemy_lab, ally_lab);
+					//start_game(enemy_lab, ally_lab);
 					break;
 				}
 				if (point == 1)
