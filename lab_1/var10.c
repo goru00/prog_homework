@@ -15,7 +15,7 @@ double f(double x, const double eps)
 int main(int argc, char const *argv[])
 {
 	double x = 0.5;
-	const double eps = 1e-16;
+	const double eps = 1e-2;
 	printf("%lf\t%lf\n", sqrt(1 + x), f(x, eps));
 	return 0;
 }

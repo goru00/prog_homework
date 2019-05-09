@@ -14,7 +14,7 @@ double f(double x, const double eps)
 }
 int main(int argc, char const *argv[])
 {
-	double x = 2;
+	double x = 1;
 	const double eps = 1e-16;
 	printf("%lf\t%lf\n", sin(x), f(x, eps));
 	return 0;
