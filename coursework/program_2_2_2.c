@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-
 double F(double, double, double);
 double FindRoot(double (*)(double), double, double, double);
 
@@ -22,7 +21,7 @@ double F(double x, double c, double d)
 }
 int main()
 {
-	double a, b, eps, c, d, x;
+	double a, b, eps, c, d;
 	printf("Введите интервал(a и b): ");
 	scanf("%lf %lf", &a, &b);
 	printf("Введите значения параметров c и d: ");
@@ -31,7 +30,6 @@ int main()
 		printf("Ошибка!\n");
 	printf("Введите точность(eps. например: 0.0001): ");
 	scanf("%lf", &eps);
-	x = FindRoot(F, a, b, eps);
-	printf("x = %lf\n", x);
+	printf("x = %lf\n", FindRoot(F, a, b, eps));
 	return 0;
 }

@@ -18,7 +18,7 @@ double FindRoot(double (*f)(double), double a, double b, double eps)
 	while ((b - a)/2 > eps)
 	{
 		cde = (a + b) / 2;
-		if (f(a)* f(cde) > 0) a = cde;
+		if (f(a) * f(cde) > 0) a = cde;
 		else b = cde;
 	}
 	return cde;

@@ -1,6 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include<conio.h>
+#include<string.h>
+#include<time.h>
 void menu();
 void output_menu();
 void create_command();
@@ -25,38 +28,35 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 	int flag = 1, i = 0;
 	while (flag == 1)
 	{
-		system("clear");
+		system("cls");
 		printf("\t\tOperation System K O J A N I E  M U D A K\n");
 		printf("\t\t\t\tWelcome!\n");
 		printf("\t\tMenu: \n\n");
 		output_menu(i);
-		system("stty raw");
-		select = getchar();
+		select = getch();
 		switch(select)
 		{
-			case 32:
+			case 13:
 			{
-				int point = i;
-				if (point == 3)
-					run_shell();
-				if (point == 4)
-					flag = 0;
-				if (point == 1)
+				if (i == 1) {
 					list_command(command, code_list);
-				if (point == 2)
-					run_command(command, code_list);
+				}
+				if (i == 4) {
+					flag = 0;
+					break;
+				}
 			}
 			case 119:
 			{
 				if (i == 0) {
 					i = 4;
 					output_menu(i);
-					system("clear");
+					system("cls");
 				} 
 				if (i > 0) {
 					i--;
 					output_menu(i);
-					system("clear");
+					system("cls");
 				}
 			}
 			case 115:
@@ -64,22 +64,17 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 				if (i == 4) {
 					i = 0;
 					output_menu(i);
-					system("clear");
+					system("cls");
 				} else {
 					i++;
 					output_menu(i);
-					system("clear");
+					system("cls");
 				}
 			}
 		}
-		system("stty cooked");
 	}
 }
 void run_shell()
-{
-
-}
-void input_command()
 {
 
 }
@@ -95,16 +90,15 @@ void list_command(FILE *command, int *code_list)
 {
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
-	system("clear");
+	system("cls");
 	printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
 	char text;
 	for (int i = 0; i < 121; i++)
 		fscanf(command, "%d", &code_list[i]);
 	for (int i = 0; i < 121; i++)
 		printf("[%d] . %d\n", i, code_list[i]);
-	printf("Input <BACKSPACE> that is back.\n\n");
-	system("stty raw");
-	text = getchar();
+	printf("Input <BACKSPACE> that is back.\nInput <ENTER> to be continue.\n");
+	text = getch();
 	switch(text)
 	{
 		case 115:
@@ -113,21 +107,89 @@ void list_command(FILE *command, int *code_list)
 			fclose(command);
 			break;
 		}
+		case 13:
+		{
+			run_command(command, code_list);
+		}
 	}
-	system("stty cooked");
 }
 void run_command(FILE *command, int *code_list)
 {
-	int i;
+	int flag = 1, j = 0;
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
-	system("clear");
+	system("cls");
 	printf("Viberete commandu iz spiska: \n");
-	for (i = 0; i < 121; i++)
+	for (int i = 0; i < 121; i++)
 		fscanf(command, "%d", &code_list[i]);
-	for (i = 0; i < 121; i++)
+	for (int i = 0; i < 121; i++)
 		printf("[%d] . %d\n", i, code_list[i]);
-	printf("Vedite nomer komandi: "); scanf("%d", &i);
+	while (flag == 1)
+	{char text;
+		system("cls");
+		for (int i = 0; i < 121; i++) {
+			if (j != i) {
+				printf("[%d] . %d\n", i, code_list[i]);
+			} else printf("[*] | [%d] . %d\n", i, code_list[i]);
+		}
+		printf("Input <ENTER> to be continue.\n");
+		text = getch();
+		switch(text)
+		{
+			case 13:
+			{
+				dict(command, code_list, j);
+			}
+			case 119:
+			{
+				j = j - 1;
+				if (j < 0)
+					j = 120;
+			}
+			case 115:
+			{
+				j++;
+				if (j == 121)
+					j = 0;
+			}
+		}
+	}
+}
+void dict(FILE *command, int *code_list, int i)
+{
+	if ((i / 100 == 10) || (i % 100 == 10)) {
+
+	}
+	if ((i / 100 == 11) || (i % 100 == 11)) {
+		
+	}
+	if ((i / 100 == 20) || (i % 100 == 20)) {
+		
+	}
+	if ((i / 100 == 21) || (i % 100 == 21)) {
+		
+	}
+	if ((i / 100 == 30) || (i % 100 == 30)) {
+		
+	}
+	if ((i / 100 == 31) || (i % 100 == 31)) {
+		
+	}
+	if ((i / 100 == 32) || (i % 100 == 32)) {
+		
+	}
+	if ((i / 100 == 40) || (i % 100 == 40)) {
+		
+	}
+	if ((i / 100 == 41) || (i % 100 == 41)) {
+		
+	}
+	if ((i / 100 == 42) || (i % 100 == 42)) {
+		
+	}
+	if ((i / 100 == 43) || (i % 100 == 43)) {
+		
+	}
 }
 void output_menu(int kursor)
 {
