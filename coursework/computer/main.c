@@ -6,6 +6,8 @@
 #include<time.h>
 void menu();
 void output_menu();
+void dict();
+void shell_command();
 void create_command();
 void list_command();
 void input_command();
@@ -22,14 +24,23 @@ int main()
 	menu(ram, battary, command, code_list);
 	return 0;
 }
+void logo()
+{
+	system("cls");
+	printf("\t\tOperation System K O J I M A  G E N I U S\n");
+}
+void input_command()
+{
+	logo();
+	//printf("Vvedite nomer komandi: "); scanf();
+}
 void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 {
 	char select;
 	int flag = 1, i = 0;
 	while (flag == 1)
 	{
-		system("cls");
-		printf("\t\tOperation System K O J A N I E  M U D A K\n");
+		logo();
 		printf("\t\t\t\tWelcome!\n");
 		printf("\t\tMenu: \n\n");
 		output_menu(i);
@@ -44,6 +55,15 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 				if (i == 4) {
 					flag = 0;
 					break;
+				}
+				if (i == 3) {
+					run_shell(command, code_list, battary);
+				}
+				if (i == 2) {
+					run_command(command, code_list);
+				}
+				if (i == 0) {
+					input_command();
 				}
 			}
 			case 119:
@@ -74,7 +94,21 @@ void menu(int *ram, FILE *battary, FILE *command, int *code_list)
 		}
 	}
 }
-void run_shell()
+void run_shell(FILE *battary, FILE *command, int *code_list)
+{
+	create_command(command);
+	int flag = 1;
+	logo();
+	while (flag == 1)
+	{
+		char c[100];
+		printf("\n\t\tshell:> "); scanf("%s", &c);
+		if (c == "w") {
+			printf("Hello!\n");
+		}
+	}
+}
+void shell_command()
 {
 
 }
@@ -91,17 +125,22 @@ void list_command(FILE *command, int *code_list)
 	code_list = (int *)malloc(121 * sizeof(int));
 	command = fopen("command_list.txt", "r");
 	system("cls");
-	printf("Najmite lubyu klavishu dlya podtverjdeniya\n");
 	char text;
 	for (int i = 0; i < 121; i++)
 		fscanf(command, "%d", &code_list[i]);
-	for (int i = 0; i < 121; i++)
-		printf("[%d] . %d\n", i, code_list[i]);
-	printf("Input <BACKSPACE> that is back.\nInput <ENTER> to be continue.\n");
+	for (int i = 0; i < 121; i+=5) {
+		printf("[%d] . %d\t[%d] . %d\t[%d] . %d\t[%d] . %d\t[%d] . %d\n", 
+			i, code_list[i],
+			i + 1, code_list[i + 1],
+			i + 2, code_list[i + 2], 
+			i + 3, code_list[i + 3],
+			i + 4, code_list[i + 4]);
+	}
+	printf("\nNajmite lubyu klavishu dlya vihoda\nInput <ENTER> to be continue.\n");
 	text = getch();
 	switch(text)
 	{
-		case 115:
+		case 8:
 		{
 			free(code_list);
 			fclose(command);
@@ -138,6 +177,8 @@ void run_command(FILE *command, int *code_list)
 		{
 			case 13:
 			{
+				system("cls");
+				printf("Vi deystvitelno hotite ispolsovat komandu [%d] . %d\n", j, code_list[j]);
 				dict(command, code_list, j);
 			}
 			case 119:
