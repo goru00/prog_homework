@@ -166,7 +166,6 @@ void marker()
 	}
 	system("cls");
 	test_area();
-	sleep(1);
 }
 int joy_menu(int *flag)
 {
