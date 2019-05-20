@@ -3,6 +3,7 @@
 #include<math.h>
 #include<time.h>
 #include<conio.h>
+#include <windows.h>
 int i = 0, j = 0, i_start = 0, i_end = 2, i_menu = 0;
 int area[3][3] = {0};
 void game()
@@ -10,9 +11,9 @@ void game()
 	int flag = 1, hum;
 	while (flag == 1)
 	{
-		output(i_end);
+		output();
 		joy(&flag);
-		output(i_end);
+		output();
 	}
 	menu();
 }
@@ -178,7 +179,7 @@ int joy_menu(int *flag)
 			*flag = 0;
 			return i_menu;
 		}
-		case 119: // вверх
+		case 56: // вверх
 		{
 			if (i_menu == i_start) {
 				i_menu = i_end;
@@ -193,7 +194,7 @@ int joy_menu(int *flag)
 				return i_menu;
 			}
 		}
-		case 115: // вниз
+		case 50: // вниз
 		{
 			if (i_menu == i_end) {
 				i_menu = i_start;
@@ -228,7 +229,7 @@ int joy(int *flag)
 		{
 			*flag = 0;
 		}
-		case 119: // вверх
+		case 56: // вверх
 		{
 			if (i == i_start) {
 				i = i_end;
@@ -243,7 +244,7 @@ int joy(int *flag)
 				return i;
 			}
 		}
-		case 115: // вниз
+		case 50: // вниз
 		{
 			if (i == i_end) {
 				i = i_start;
@@ -257,7 +258,7 @@ int joy(int *flag)
 				return i;
 			}
 		}
-		case 100: // вправо
+		case 54: // вправо
 			{
 				if (j == i_end) {
 					j = i_start;
@@ -268,7 +269,7 @@ int joy(int *flag)
 				}
 				j++;
 			}
-		case 97: // влево
+		case 52: // влево
 		{
 			if (j <= i_start) {
 				j = i_end;
