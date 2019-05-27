@@ -9,7 +9,7 @@
 int enemy_ships_one[4][2], enemy_ships_two[3][2], enemy_ships_three[2][2], enemy_ships_four[1][2];
 int alien_ships_one[4][2], alien_ships_two[3][2], alien_ships_three[2][2], alien_ships_four[1][2];
 int area_alien[SIZE_N][SIZE_M], area_enemy[SIZE_N][SIZE_M];
-int i = 0, j = 0, i_start = 0, i_end = 2, i_menu = 0;
+int i = 0, j = 0, i_start = 0, i_end = 9, i_menu = 0;
 void menu()
 {
 	int flag = 1;
@@ -17,6 +17,7 @@ void menu()
 	i_menu = 0;
 	while (flag == 1)
 	{
+		i_end = 2;
 		logo();
 		output_menu(i_menu);
 		joy_menu(&flag);
@@ -45,11 +46,45 @@ void output()
 	}
 	printf("Dlya vihoda najmite ESC\n\n\n");
 }
-void game()
+void preparing()
 {
 	int flag = 1;
 	while (flag == 1)
 	{
+		system("cls");
+		printf("Preparing Game.\n");
+		printf("___________________\n");
+		i_end = 9;
+		preparing_output_ships_marker();
+		preparing_output_ships();
+		joy(&flag);
+		preparing_output_ships();
+	}
+}
+void preparing_output_ships_marker()
+{
+
+}
+void preparing_output_ships()
+{
+	for (int k = 0; k < SIZE_N; k++) {
+		for (int p = 0; p < SIZE_M; p++) {
+			if ((i == k) && (p == j)) {
+				printf("*|");
+			} else if (area_alien[k][p] == 0) {
+				printf("_|");
+			} else if (alien_ships_one[k][p])
+		}
+		printf("\n");
+	}
+}
+void game()
+{
+	int flag = 1;
+	preparing();
+	while (flag == 1)
+	{
+		system("cls");
 		output();
 		joy(&flag);
 		output();

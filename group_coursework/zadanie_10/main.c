@@ -8,7 +8,7 @@ int i = 0, j = 0, i_start = 0, i_end = 2, i_menu = 0;
 int area[3][3] = {0};
 void game()
 {
-	int flag = 1, hum;
+	int flag = 1;
 	while (flag == 1)
 	{
 		output();

@@ -5,14 +5,40 @@
 #include<string.h>
 #define SIZE_N 7
 #define SIZE_M 7
-int i = 0, j = 0, area[7][7] = {0}, i_start = 0, i_end = 2, i_menu = 0, N, i_question, ration = 0, left_ration;
+int i = 0, j = 0, area[7][7] = {0}, i_start = 0, i_end = 2, i_menu = 0, N, i_question, ration = 0, left_ration, k, p;
+void menu();
+void game(char *);
+void output(int focus[][4], int);
+int marker(int focus[][4], int, char *);
+void congratulation();
+void question();
+int joy(int *flag, int focus[][4], int N, char *start_time);
+int joy_menu(int *);
+void Records();
+void output_menu();
+void logo();
+char * settime(struct tm *u)
+{
+  char s[40];
+  char *tmp;
+  for (int i = 0; i<40; i++) s[i] = 0;
+  int length = strftime(s, 40, "%d.%m.%Y %H:%M:%S", u);
+  tmp = (char*)malloc(sizeof(s));
+  strcpy(tmp, s);
+  return(tmp);
+}
 void menu()
 {
+	struct tm *u;
+	char *start_time; char *finish_time;
 	ration = 0;
 	int flag = 1;
 	i = 0, j = 0;
 	i_menu = 0;
 	i_end = 2;
+	const time_t timer = time(NULL);
+	u = localtime(&timer);
+	start_time = settime(u);
 	while (flag == 1)
 	{
 		logo();
@@ -20,13 +46,16 @@ void menu()
 		joy_menu(&flag);
 	}
 	if (i_menu == 0) 
-		game();
+		game(start_time);
+	if (i_menu == 1){
+		Records(0, start_time, finish_time);
+	}
 	if (i_menu == 2)
 		exit(1);
 }
-void game()
+void game(char *start_time)
 {
-	N = (rand() % 4) + 2; int focus[N][4], rooms = 0;
+	N = (rand() % 4) + 2; int focus[N][4];
 	area[3][0] = 2; area[0][3] = 2; area[3][6] = 2; area[6][3] = 2;
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -50,7 +79,7 @@ void game()
 	} else if (i_rand == 3) {
 		focus[ration + 1][1] = 1;
 	}
-	int k = (rand() % N), p = (rand() % 4); 
+	k = (rand() % N); p = (rand() % 4); 
 	while (focus[k][p] != 0)
 	{
 		k = (rand() % N), p = (rand() % 4);
@@ -64,7 +93,7 @@ void game()
 	while (flag == 1)
 	{
 		output(focus, N);
-		joy(&flag, focus, N);
+		joy(&flag, focus, N, start_time);
 		output(focus, N);
 	}
 	menu();
@@ -97,20 +126,20 @@ void output(int focus[][4], int N)
 		printf("\n");
 	}
 	if ((i == 3) && (j == 3)) {
-		printf("Podskazka. Najmite [ENTER] chtobi vospolzovatsya eu.\n");
+		printf("Подсказка. Нажмите [ENTER], чтобы воспользоваться ею.\n");
 	} else if ((i == 3) && (j == 0)) {
-		printf("Voiti v komnatu na Zapade.Najmite [ENTER] chtobi voiti v komnatu\n");
+		printf("Войти в комнату на Западе.Нажмите [ENTER] чтобы войти в комнату\n");
 	} else if ((i == 0) && (j == 3)) {
-		printf("Voiti v komnatu na Severe.Najmite [ENTER] chtobi voiti v komnatu\n");
+		printf("Войти в комнату на Севере.Нажмите [ENTER] чтобы войти в комнату\n");
 	} else if ((i == 3) && (j == 6)) {
-		printf("Voiti v komnatu na Vostoke.Najmite [ENTER] chtobi voiti v komnatu\n");
+		printf("Войти в комнату на Востоке.Нажмите [ENTER] чтобы войти в комнату\n");
 	} else if ((i == 6) && (j == 3)) {
-		printf("Voiti v komnatu na Yge.Najmite [ENTER] chtobi voiti v komnatu\n");
+		printf("Войти в комнату на Юге.Нажмите [ENTER] чтобы войти в комнату\n");
 	}
-	printf("Napravleniya: \n");
-	printf("    C    \n"
-		   "3---|---V\n"
-		   "    Y    \n");
+	printf("Стороны света: \n");
+	printf("    С    \n"
+		   "З---|---В\n"
+		   "    Ю    \n");
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < 4; j++) {
 			printf("%2d", focus[i][j]);
@@ -118,46 +147,71 @@ void output(int focus[][4], int N)
 		printf("\n");
 	}
 }
-void marker(int focus[][4], int N)
+int marker(int focus[][4], int N, char *start_time)
 {
 	if ((i == 3) && (j == 3)) {
 		int flag = 1; char text[100];
 		i_question = (rand() % N); 
-		printf("Za pravilnyi otvet vi poluchite podksazku.\nVnimanie, vopros: ");
+		printf("За правильный ответ Вы получите подсказку\nВнимание, вопрос: ");
 		question();
-		printf("Vash otvet: "); scanf("%s", text);
-	}
-	if ((i == 3) && (j == 0)) {
-		if ((focus[ration][0] == focus[ration - 1][2]) && (ration > 0)) {
+		printf("Ваш ответ: "); scanf("%s", text);
+	} else if ((i == k) && (p == j)) {
+		congratulation(start_time);
+	} else if ((i == 3) && (j == 0)) {
+		if ((focus[ration][0] == focus[ration - 1][2]) && ((ration > 0) && (focus[ration][0] != 5)) && ((focus[ration][0] != 0) && (focus[ration - 1][2] != 0))) {
 			left_ration = ration;
 			ration--;
-		} else if ((focus[ration][0] == focus[ration + 1][2]) && (ration >= 0)) {
+		} else if ((focus[ration][0] == focus[ration + 1][2]) && ((ration >= 0) && (focus[ration][0] != 0)) && (focus[ration + 1][2] != 0)) {
 			left_ration = ration;
 			ration++;
+		} else if (focus[ration][0] == 5) {
+			congratulation(start_time);
+		} else if (focus[ration][0] == 0) {
+			printf("Дверь закрыта!\n");
+			sleep(1);
+			return 1;
 		}
 	} else if ((i == 0) && (j == 3)) {
-		if ((focus[ration][1] == focus[ration - 1][3]) && (ration > 0)) {
+		if ((focus[ration][1] == focus[ration - 1][3]) && ((ration > 0) && (focus[ration][1] != 5)) && ((focus[ration][1] != 0) && (focus[ration - 1][3] != 0))) {
 			left_ration = ration;
 			ration--;
-		} else if ((focus[ration][1] == focus[ration + 1][3]) && (ration >= 0)) {
+		} else if ((focus[ration][1] == focus[ration + 1][3]) && ((ration >= 0)) && (focus[ration][1] != 0) && (focus[ration + 1][3] != 0)) {
 			left_ration = ration;
 			ration++;
+		} else if (focus[ration][1] == 5) {
+			congratulation(start_time);
+		} else if (focus[ration][1] == 0) {
+			printf("Дверь закрыта!\n");
+			sleep(1);
+			return 1;
 		}
 	} else if ((i == 3) && (j == 6)) {
-		if ((focus[ration][2] == focus[ration - 1][0]) && (ration > 0)) {
+		if ((focus[ration][2] == focus[ration - 1][0]) && ((ration > 0) && (focus[ration][2] != 5)) && ((focus[ration][2] != 0) && (focus[ration - 1][0] != 0))) {
 			left_ration = ration;
 			ration--;
-		} else if ((focus[ration][2] == focus[ration + 1][0]) && (ration >= 0)) {
+		} else if ((focus[ration][2] == focus[ration + 1][0]) && ((ration >= 0)) && ((focus[ration][2] != 0) && (focus[ration + 1][0] != 0))) {
 			left_ration = ration;
 			ration++;
+		} else if (focus[ration][2] == 5) {
+			congratulation(start_time);
+		} else if (focus[ration][2] == 0) {
+			printf("Дверь закрыта!\n");
+			sleep(1);
+			return 1;
 		}
 	} else if ((i == 6) && (j == 3)) {
-		if ((focus[ration][3] == focus[ration - 1][1]) && (ration > 0)) {
+		if ((focus[ration][3] == focus[ration - 1][1]) && ((ration > 0) && (focus[ration][3] != 5)) && ((focus[ration][3] != 0) && (focus[ration - 1][1] != 0))) {
 			left_ration = ration;
 			ration--;
-		} else if ((focus[ration][3] == focus[ration + 1][1]) && (ration >= 0)) {
+		} else if ((focus[ration][3] == focus[ration + 1][1]) && (ration >= 0) && ((focus[ration][3] != 0) && (focus[ration + 1][1] != 0))) {
 			left_ration = ration;
 			ration++;
+		} else if (focus[ration][3] == 5) {
+			congratulation(start_time);
+		} else if (focus[ration][3] == 0) {
+			printf("Дверь закрыта!\n");
+			sleep(1);
+			return 1;
 		}
 	} 
 	int i_rand = rand() % 4, k = 0;
@@ -168,15 +222,15 @@ void marker(int focus[][4], int N)
 		for (int j = 0; j < 4; j++) {
 			if (focus[ration][j] == 1) k++;
 		}
-		if (k == 1)
+		if ((k == 1) && (ration != N))
 			focus[ration][i_rand] = 1;
-		if (i_rand == 0) {
+		if ((i_rand == 0) && ((k == 1)) && (ration != N)) {
 			focus[ration + 1][2] = 1; 
-		} else if (i_rand == 1) {
+		} else if ((i_rand == 1) && ((k == 1)) && (ration != N)) {
 			focus[ration + 1][3] = 1;
-		} else if (i_rand == 2) {
+		} else if ((i_rand == 2) && ((k == 1)) && (ration != N)) {
 			focus[ration + 1][0] = 1;
-		} else if (i_rand == 3) {
+		} else if ((i_rand == 3) && ((k == 1)) && (ration != N)) {
 			focus[ration + 1][1] = 1;
 		}
 	}
@@ -190,10 +244,18 @@ void marker(int focus[][4], int N)
 		i = 6;
 	}
 }
-void congratulation()
+void congratulation(char *start_time)
 {
+	char *finish_time;
+	struct tm *u;
+	const time_t timer = time(NULL);
+	u = localtime(&timer);
 	system("cls");
-	printf("Congratulation! Vi nashli vihod.\n");
+	printf("Поздравляем! Вы нашли выход!\n");
+	finish_time = settime(u);
+	printf("Время начала: "); puts(start_time);
+	printf("\nКонец: "); puts(finish_time);
+	Records(1, start_time, finish_time);
 	sleep(2);
 	menu();
 }
@@ -215,7 +277,7 @@ void question()
 	}
 	fclose(file);
 }
-int joy(int *flag, int focus[][4], int N)
+int joy(int *flag, int focus[][4], int N, char *start_time)
 {
 	char select = getch();
 	switch(select)
@@ -223,35 +285,35 @@ int joy(int *flag, int focus[][4], int N)
 		case 13:
 		{
 			system("cls");
-			marker(focus, N);
+			marker(focus, N, start_time);
 			return i;
 		}
 		case 27:
 		{
 			*flag = 0;
 		}
-		case 56: // ╨▓╨▓╨╡╤А╤Е
+		case 56: // вверх
 		{
 			if (j == 3) {
 				i--;
 			}
 			return i;
 		}
-		case 50: // ╨▓╨╜╨╕╨╖
+		case 50: // вниз
 		{
 			if (j == 3) {
 				i++;
 			}
 			return i;
 		}
-		case 54: // ╨▓╨┐╤А╨░╨▓╨╛
+		case 54: // вправо
 		{
 			if (i == 3) {
 				j++;
 			}
 			return j;
 		}	
-		case 52: // ╨▓╨╗╨╡╨▓╨╛
+		case 52: // влево
 		{
 			if (i == 3) {
 				j--;
@@ -264,14 +326,39 @@ int joy(int *flag, int focus[][4], int N)
 		}
 	}
 }
+void Records(int N, char *start_time, char *finish_time)
+{
+	char text;
+	if (N == 1) {
+		FILE *records = fopen("data.txt", "a+");
+		fprintf(records, "%s %s\n", start_time, finish_time);
+		fclose(records);
+	} else if (N == 0) {
+		do
+		{
+			system("cls");
+			printf("Результаты: \n\n");
+			FILE *records = fopen("data.txt", "r+");
+			char mass[100];
+			while(fgets(mass, 100, records))
+			{
+				if (mass[strlen(mass) - 1] == '\n') {
+					mass[strlen(mass) - 1] = '\0';
+			}
+				printf("%s\n", mass);
+			}
+		} while (getch() != 27);
+		menu();
+	}
+}
 void output_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("\t\t[*] - New Game\n\t\t - Records\n\t\t - Exit\n");
+		printf("\t\t[*] - Новая игра\n\t\t - Лучшие результаты\n\t\t - Выход из игры\n");
 	if (kursor == 1) 
-		printf("\t\t - New Game\n\t\t[*] - Records\n\t\t - Exit\n");
+		printf("\t\t - Новая игра\n\t\t[*] - Лучшие результаты\n\t\t - Выход из игры\n");
 	if (kursor == 2) 
-		printf("\t\t - New Game\n\t\t - Records\n\t\t[*] - Exit\n");
+		printf("\t\t - Новая игра\n\t\t - Лучшие результаты\n\t\t[*] - Выход из игры\n");
 }
 int joy_menu(int *flag)
 {
@@ -284,7 +371,7 @@ int joy_menu(int *flag)
 			*flag = 0;
 			return i_menu;
 		}
-		case 56: // ╨▓╨▓╨╡╤А╤Е
+		case 56: // вверх
 		{
 			if (i_menu == i_start) {
 				i_menu = i_end;
@@ -299,7 +386,7 @@ int joy_menu(int *flag)
 				return i_menu;
 			}
 		}
-		case 50: // ╨▓╨╜╨╕╨╖
+		case 50: // вниз
 		{
 			if (i_menu == i_end) {
 				i_menu = i_start;
@@ -323,10 +410,11 @@ void logo()
 {
 	system("cls");
 	printf("\t\t\tL A B I R I N T\n");
-	printf("\t\tMenu: \n");
+	printf("\t\tМеню: \n");
 }
 int main()
 {
+	system("chcp 866");
 	srand(time(NULL));
 	menu();
 	return 0;
