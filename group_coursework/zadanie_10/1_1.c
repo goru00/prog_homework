@@ -9,8 +9,7 @@ double f(double x, double eps)
 	while (fabs(a) >= eps) 
 	{
 		s += pow(-1.0, n) * a; n++;
-		a = cos(n * x);
-		a /= (n * n);
+		a = (cos(n * x))/(n*n);
 	}
 	return s;
 }
