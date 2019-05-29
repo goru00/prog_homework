@@ -21,7 +21,6 @@ double FindRoot(double x, double c, double d)
  { 
  x1 = x; 
  x = x - f(x,c,d) / f1(x,c,d); 
- printf("%lf\n", x); 
  i++; 
  } while(fabs(f(x,c,d)) >= e); 
  } while (f(x,c,d)*f1(x1,c,d) < 0); 
