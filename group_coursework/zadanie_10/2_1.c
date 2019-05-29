@@ -1,8 +1,9 @@
 #include<stdio.h> 
 #include<math.h> 
+#define e 1e-13
 double f1(double, double, double); 
 double f(double, double, double); 
-double FindRoot(double,double,double,double); 
+double FindRoot(double,double,double); 
 double f1(double x, double c, double d) 
 { 
  return c * cos(c * x); 
@@ -11,7 +12,7 @@ double f(double x, double c, double d)
 { 
  return sin(c * x) - d; 
 } 
-double FindRoot(double x, double c, double d, double e) 
+double FindRoot(double x, double c, double d) 
 { 
  double x1; int i = 0; 
  do 
@@ -29,8 +30,8 @@ double FindRoot(double x, double c, double d, double e)
 } 
 int main() 
 { 
- double c, d, x = 0, e = 1e-13; 
+ double c, d, x = 0; 
  printf("Введите значение c и d: "); scanf("%lf %lf", &c, &d); 
- printf("x = %lf, f(x) = %lf\n", x, FindRoot(x, c, d, e)); 
+ printf("f(x) = %lf\n", FindRoot(x, c, d)); 
  return 0; 
 }
