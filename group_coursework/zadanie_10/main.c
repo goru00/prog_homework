@@ -4,6 +4,15 @@
 #include<time.h>
 #include<conio.h>
 #include <windows.h>
+void game();
+void output();
+void ur();
+void test_area();
+void logo();
+int menu();
+void output_menu();
+int joy_menu(int *);
+int joy(int *);
 int i = 0, j = 0, i_start = 0, i_end = 2, i_menu = 0;
 int area[3][3] = {0};
 void game()
