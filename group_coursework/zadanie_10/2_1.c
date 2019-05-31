@@ -6,11 +6,11 @@ double f(double, double, double); // прототип функции f
 double FindRoot(double,double,double); // прототип функции FindRoot
 double f1(double x, double c, double d) // объявляем функцию f и передаем c, d и x
 { 
- return 4*pow(x,3)+c*3*pow(x,2)-d*x; // возвращаем значение производной 
+ return 5*pow(x,4)+c*2*x-d; // возвращаем значение производной 
 } 
 double f(double x, double c, double d) //объявляем функцию f и передаем c, d и x
 { 
- return pow(x,4)+c*pow(x, 3)-d*x; //возвращаем значение функции 
+ return pow(x,5)+c*pow(x,2)-d; //возвращаем значение функции 
 } 
 double FindRoot(double x, double c, double d) //объявляем функцию f передаем c, d и x
 { 
