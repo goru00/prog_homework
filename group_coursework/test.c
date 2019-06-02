@@ -1,14 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
-#ifdef _WIN32
-    #include<conio.h>
-    #include<windows.h>
+#ifdef __MINGW32__ 
+#include<conio.h> 
+#include<windows.h> 
 #endif
-
 void button()
 {
     char select;
-    #ifdef _WIN32
+    #if _WIN32
         select = getch();
     #else
         system("stty raw");
