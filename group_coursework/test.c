@@ -5,20 +5,20 @@
     #include<windows.h>
 #endif
 
-void khbit(char *select)
+void button()
 {
+    char select;
     #ifdef _WIN32
         select = getch();
-    #elif _unix_
+    #else
         system("stty raw");
         select = getchar();
         system("stty cooked");
     #endif
+    if (select == 56) printf("OK!\n");
 }
 int main()
 {
-    char *select;
-    khbit(select);
-    if (select == 56) printf("OK!\n");
+    button();
     return 0;
 }
