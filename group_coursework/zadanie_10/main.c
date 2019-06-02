@@ -174,7 +174,7 @@ int menu()
 void output_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("\t\t[*] - New Game\n\t\t - Records\n\t\t - Exit\n");
+		printf("\t\t[*] - Новая игра\n\t\t - Records\n\t\t - Exit\n");
 	if (kursor == 1) 
 		printf("\t\t - New Game\n\t\t[*] - Records\n\t\t - Exit\n");
 	if (kursor == 2) 
