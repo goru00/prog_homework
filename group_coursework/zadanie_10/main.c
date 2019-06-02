@@ -70,18 +70,18 @@ void output()
 		}
 		printf("\n");
 	}
-	printf("Dlya vihoda najmite ESC\n\n\n");
+	printf("Для выхода в главное меню нажмите [ESCAPE]\n\n\n");
 }
 void ur(int k_h, int k_comp)
 {
 	if (k_h == 3) {
 		display();
-		printf("POBEDA KOJANOGO UBLUDKA!\n");
+		printf("Победа игрока!\n");
 		sleep(5);
 		menu();
 	} else if (k_comp == 3) {
 		display();
-		printf("HAHAHA, PAREN, ETO  I K E A!\nTI PROIGRAL!\n");
+		printf("Победа компьютера\n");
 		sleep(5);
 		menu();
 	}
@@ -139,7 +139,7 @@ void test_area()
 		}
 	}
 	if (k == 9) {
-		printf("NICHYA, POCONI\nDAVAITE PO NOVOY\n");
+		printf("К сожалению, ничья.\n");
 		sleep(2);
 		menu();
 	}
@@ -147,8 +147,8 @@ void test_area()
 void logo()
 {
 	display();
-	printf("\t\t\tKREST  A N D  NULL\n");
-	printf("\t\tMenu: \n");
+	printf("\t\t\tКрестики-Нолики\n");
+	printf("\t\tМеню: \n");
 }
 int menu()
 {
@@ -174,11 +174,11 @@ int menu()
 void output_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("\t\t[*] - Новая игра\n\t\t - Records\n\t\t - Exit\n");
+		printf("\t\t[*] - Новая игра\n\t\t - Результаты\n\t\t - Выход\n");
 	if (kursor == 1) 
-		printf("\t\t - New Game\n\t\t[*] - Records\n\t\t - Exit\n");
+		printf("\t\t - Новая игра\n\t\t[*] - Результаты\n\t\t - Выход\n");
 	if (kursor == 2) 
-		printf("\t\t - New Game\n\t\t - Records\n\t\t[*] - Exit\n");
+		printf("\t\t - Новая игра\n\t\t - Результаты\n\t\t[*] - Выход\n");
 }
 void marker()
 {
@@ -186,7 +186,7 @@ void marker()
 		area[i][j] = 1;
 	} else {
 		display();
-		printf("NELZYA!\n");
+		printf("Клетка занята!\n");
 		sleep(2);
 		game();
 	} 
