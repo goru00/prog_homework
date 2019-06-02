@@ -70,7 +70,8 @@ void output()
 		}
 		printf("\n");
 	}
-	printf("Для выхода в главное меню нажмите [ESCAPE]\n\n\n");
+	printf("Для выхода в главное меню нажмите [ESCAPE]\nПередвигаться с помощью:\n");
+	printf("[NUM8]-Вверх\n[NUM2]-Вниз\n[NUM4]-Влево\n[NUM6]-Вправо\n");
 }
 void ur(int k_h, int k_comp)
 {
@@ -148,7 +149,7 @@ void logo()
 {
 	display();
 	printf("\t\t\tКрестики-Нолики\n");
-	printf("\t\tМеню: \n");
+	printf("\t\tМеню: \n\t\tПередвигаться с помощью:[NUM8]-Вверх.[NUM2]-Вниз.[NUM4]-Влево.[NUM6]-Вправо\n");
 }
 int menu()
 {
