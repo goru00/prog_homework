@@ -1,12 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
-#ifdef __MINGW32__ 
+#ifdef __WIN32 
 #include<conio.h> 
 #include<windows.h> 
 #endif
+char *select;
 void button()
 {
-    char select;
     #if _WIN32
         select = getch();
         printf("WIN\n");
