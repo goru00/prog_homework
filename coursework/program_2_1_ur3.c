@@ -6,7 +6,7 @@ double f(double,double,double);
 double FindRoot(double,double,double,double);
 double f(double x,double c,double d)
 {
-	return pow(x,5)+c*pow(x,2)-d;
+	return sin(c*x)-d;
 }
 double FindRoot(double a,double b,double c, double d)
 {

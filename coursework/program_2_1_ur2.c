@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#define eps 0.00001
+#define eps 1e-13
 double f(double,double,double);
 double FindRoot(double,double,double,double);
 double f(double x,double c,double d)
@@ -19,7 +19,7 @@ double FindRoot(double a,double b,double c, double d)
             b = cde;
         i++;
     }
-    printf("Chislo iteracii: %d\n", i);
+    printf("Число итераций: %d\n", i);
     return cde;
 }
 int main()

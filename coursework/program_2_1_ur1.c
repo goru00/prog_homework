@@ -11,7 +11,7 @@ double f(double x,double c,double d)
 double FindRoot(double a,double b, double c, double d)
 {
 	double cde; int i = 0;
-	while (b - a >= eps){
+	while ((b - a) >= eps){
         cde = (a + b) / 2;
         if(f(b,c,d) * f(cde,c,d) < 0)
             a = cde;
