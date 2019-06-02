@@ -2,8 +2,10 @@
 #include<stdlib.h>
 #include<math.h>
 #include<time.h>
-#include<conio.h>
-#include <windows.h>
+#ifdef _WIN32
+	#include<conio.h>
+	#include <windows.h>
+#endif
 void game();
 void output();
 void ur();
@@ -26,9 +28,17 @@ void game()
 	}
 	menu();
 }
+void display()
+{
+	#ifdef _WIN32
+		system("cls");
+	#else
+		system("clear");
+	#endif
+}
 void output()
 {
-	system("cls");
+	display();
 	for (int k = 0; k < i_end + 1; k++) {
 		for (int p = 0; p < i_end + 1; p++)
 		{
@@ -49,12 +59,12 @@ void output()
 void ur(int k_h, int k_comp)
 {
 	if (k_h == 3) {
-		system("cls");
+		display();
 		printf("POBEDA KOJANOGO UBLUDKA!\n");
 		sleep(5);
 		menu();
 	} else if (k_comp == 3) {
-		system("cls");
+		display();
 		printf("HAHAHA, PAREN, ETO  I K E A!\nTI PROIGRAL!\n");
 		sleep(5);
 		menu();
@@ -120,7 +130,7 @@ void test_area()
 }
 void logo()
 {
-	system("cls");
+	display();
 	printf("\t\t\tKREST  A N D  NULL\n");
 	printf("\t\tMenu: \n");
 }
@@ -159,7 +169,7 @@ void marker()
 	if (area[i][j] == 0) {
 		area[i][j] = 1;
 	} else {
-		system("cls");
+		display();
 		printf("NELZYA!\n");
 		sleep(2);
 		game();
@@ -174,7 +184,7 @@ void marker()
 			flag = 0;
 		}
 	}
-	system("cls");
+	display();
 	test_area();
 }
 int joy_menu(int *flag)
@@ -184,7 +194,7 @@ int joy_menu(int *flag)
 	{
 		case 13:
 		{
-			system("cls");
+			display();
 			*flag = 0;
 			return i_menu;
 		}
@@ -193,13 +203,13 @@ int joy_menu(int *flag)
 			if (i_menu == i_start) {
 				i_menu = i_end;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i_menu;
 			} 
 			if (i_menu > i_start) {
 				i_menu--;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i_menu;
 			}
 		}
@@ -208,18 +218,18 @@ int joy_menu(int *flag)
 			if (i_menu == i_end) {
 				i_menu = i_start;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i_menu;
 			} else {
 				i_menu++;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i_menu;
 			}
 		}
 		default: 
 		{
-			system("cls");
+			display();
 		}
 	}
 }
@@ -230,7 +240,7 @@ int joy(int *flag)
 	{
 		case 13:
 		{
-			system("cls");
+			display();
 			marker();
 			return i;
 		}
@@ -243,13 +253,13 @@ int joy(int *flag)
 			if (i == i_start) {
 				i = i_end;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i;
 			} 
 			if (i > i_start) {
 				i--;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i;
 			}
 		}
@@ -258,12 +268,12 @@ int joy(int *flag)
 			if (i == i_end) {
 				i = i_start;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i;
 			} else {
 				i++;
 				//output_menu(i);
-				system("cls");
+				display();
 				return i;
 			}
 		}
@@ -271,10 +281,10 @@ int joy(int *flag)
 			{
 				if (j == i_end) {
 					j = i_start;
-					system("cls");
+					display();
 				} else {
 					j++;
-					system("cls");
+					display();
 				}
 				j++;
 			}
@@ -282,15 +292,15 @@ int joy(int *flag)
 		{
 			if (j <= i_start) {
 				j = i_end;
-				system("cls");
+				display();
 			} else {
 				j--;
-				system("cls");
+				display();
 			}
 		}
 		default: 
 		{
-			system("cls");
+			display();
 		}
 	}
 }
