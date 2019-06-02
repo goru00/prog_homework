@@ -4,9 +4,9 @@
 #include<conio.h> 
 #include<windows.h> 
 #endif
-char *select;
 void button()
 {
+    char select;
     #if _WIN32
         select = getch();
         printf("WIN\n");
@@ -16,7 +16,7 @@ void button()
         system("stty cooked");
         printf("UNIX\n");
     #endif
-    if (select == 56) printf("OK!\n");
+    if (select == 'w') printf("OK!\n");
 }
 int main()
 {
