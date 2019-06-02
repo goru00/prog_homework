@@ -6,12 +6,14 @@
 	#include<conio.h>
 	#include <windows.h>
 #endif
+char button();
 void game();
 void output();
 void ur();
 void test_area();
 void logo();
 int menu();
+void display();
 void output_menu();
 int joy_menu(int *);
 int joy(int *);
@@ -27,6 +29,20 @@ void game()
 		output();
 	}
 	menu();
+}
+char button()
+{
+    char select;
+    #if _WIN32
+        select = getch();
+        printf("WIN\n");
+    #else
+        system("stty raw");
+        select = getchar();
+        system("stty cooked");
+        printf("UNIX\n");
+    #endif
+    return select;
 }
 void display()
 {
@@ -189,7 +205,8 @@ void marker()
 }
 int joy_menu(int *flag)
 {
-	char select = getch();
+	char select;
+	select = button();
 	switch(select)
 	{
 		case 13:
@@ -235,7 +252,8 @@ int joy_menu(int *flag)
 }
 int joy(int *flag)
 {
-	char select = getch();
+	char select;
+	select = button();
 	switch(select)
 	{
 		case 13:
@@ -306,6 +324,9 @@ int joy(int *flag)
 }
 int main()
 {
+	#ifdef _WIN32
+		system("chcp 866");
+	#endif
 	srand(time(NULL));
 	menu();
 	return 0;

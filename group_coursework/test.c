@@ -4,7 +4,7 @@
 #include<conio.h> 
 #include<windows.h> 
 #endif
-void button()
+char button()
 {
     char select;
     #if _WIN32
@@ -16,10 +16,12 @@ void button()
         system("stty cooked");
         printf("UNIX\n");
     #endif
-    if (select == 'w') printf("OK!\n");
+    return select;
 }
 int main()
 {
-    button();
+    char text;
+    text = button();
+    if (text == 'w') printf("OK!\n");
     return 0;
 }
