@@ -5,7 +5,7 @@ typedef double (*func)(double x, double c, double d); // задаем тип fun
 double fx(double, double, double);      // прототип вычисляемой функции
 double fx(double x, double d, double c) // вычисляемая функция
  {
-  return pow(x, 3) + d*pow(x,2) + c;
+  return pow(x, 4) + d*pow(x,3) - c*x;
  }
 
 double decision(func fx, double x1, double x2, double c, double d)
