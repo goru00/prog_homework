@@ -1,0 +1,7 @@
+<!DOCTYPE AFC>
+<algorithm version="1.2">
+  <branch>
+    <assign dest="f" src="pow(x, 4) + d * pow(x, 3) - c * x"/>
+    <ou vars="Вернуть f"/>
+  </branch>
+</algorithm>
