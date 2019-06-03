@@ -24,7 +24,7 @@ double FindRoot(double a,double b,double c, double d)
 }
 int main()
 {
-	double a,b,c,d,x;
+	double a,b,c,d,x = 1;
 	printf("Введите длину a и b: "); scanf("%lf%lf",&a,&b);
 	printf("Введите c и d: "); scanf("%lf%lf",&c,&d);
 	if(f(a,c,d)*f(b,c,d)>0)
