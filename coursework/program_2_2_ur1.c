@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <math.h>
-#define eps 1e-13
+#define eps 1e-6
 typedef double (*func)(double x, double c, double d); // задаем тип func
 double fx(double, double, double);      // прототип вычисляемой функции
 double fx(double x, double d, double c) // вычисляемая функция
  {
-  return pow(x, 5) + d*pow(x,2) - c;
+  return sin(c*x)-d;
  }
 
 double decision(func fx, double x1, double x2, double c, double d)
