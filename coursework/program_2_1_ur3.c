@@ -16,6 +16,7 @@ y = v;
 v = (x1 * fx(x2, c, d) - x2 * fx(x1, c, d)) / (fx(x2, c, d) - fx(x1, c, d));
 x1 = x2; x2 = v; i++;
 } while (fabs(y - v) >= eps);
+printf("Кол-во итераций: %d\n", i);
 return x1;
 }
 int main()
