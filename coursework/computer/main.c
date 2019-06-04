@@ -1,247 +1,263 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
-#include<conio.h>
+#include<ctype.h>
 #include<string.h>
-#include<time.h>
-void menu();
-void output_menu();
-void dict();
-void shell_command();
-void create_command();
-void list_command();
-void input_command();
-void run_command();
-void run_shell();
-int main()
+#define COMMAND_SIZE 30
+#define ADD 30
+#define SUB 31
+#define GOTO 40
+#define LOAD 20
+#define DIV 32
+#define INPUT 10
+#define OUTPUT 11
+#define STORE 21
+#define NEG_GOTO 41
+#define ZERO_GOTO 42
+#define HALT 43
+#define help printf("--help - помощь\nrun - выполнить\nclear - очистить экран\nexit - выйти из shell\n")
+#define COMMAND_LENGTH 100
+
+int *ram;
+char line[COMMAND_SIZE];
+int command;
+int argument;
+int result;
+int acc = 0;
+int i = 0, j = 0, i_start = 0, i_end = 2, i_menu = 0;
+
+char button();
+void intrpr(char*,int*, int*);
+int alu(int,int,int*,int*,FILE **);
+int alu(int command,int argument,int *acc, int *ram,FILE **prog)
 {
-	int *ram = NULL; // оперативная память
-	int *code_list = NULL; // массив команд
-	ram = (int *)malloc(100 * sizeof(int)); // оперативная память
-	FILE *battary = fopen("result.txt", "w+"); // аккумулятор
-	FILE *command = fopen("command_list.txt", "w+"); // храним команды
-	create_command(command);
-	menu(ram, battary, command, code_list);
-	return 0;
+				switch(command){
+				case ADD:
+					*acc += ram[argument];
+				break;
+				case GOTO:
+					fseek(*prog,argument,SEEK_SET);
+					break;
+				case LOAD:
+					*acc = ram[argument];
+					break;
+				case SUB:
+					*acc -= ram[argument];
+					break;
+				case DIV:
+					*acc /= ram[argument];
+					break;
+				case INPUT:
+					scanf("%d", &ram[argument]);
+					break;
+				case OUTPUT:
+					printf("%d\n",*acc);
+					break;
+				case STORE:
+					ram[argument] = *acc;
+					break;
+				case NEG_GOTO:
+					if(*acc < 0)
+					fseek(*prog,argument,SEEK_SET);
+					break;
+				case ZERO_GOTO:
+					if(*acc == 0)
+					fseek(*prog,argument,SEEK_SET);
+					break;
+				case HALT:
+					return 1;
+					break;
+				}
+			return 0;
+}
+void computer(char *filename)
+{ 
+	 int *ram;
+	 char line[COMMAND_SIZE];
+	 int command;
+	 int argument;
+	 int result;
+	 ram=(int*)calloc(100,sizeof(int));
+	 int acc = 0;
+	 FILE *prog;
+	  if((prog = fopen(filename,"r")) == NULL){
+	 printf("ERROR!\n");
+	 }
+	 while(fgets(line,COMMAND_SIZE,prog) != NULL){
+		 
+		 intrpr(line,&command,&argument);
+		 result = alu(command,argument,&acc,ram,&prog);
+		 if(result)
+			break;
+	 }
+	 
+}
+void run()
+{
+	char ex[2][30] = {"exit", "help"};
+	printf("shell:> ");
+	char command[COMMAND_LENGTH];
+    while(fgets(command,COMMAND_LENGTH,stdin) != NULL){
+      	char *h=strchr(command,'\n');
+      	*h = '\0';
+		command[COMMAND_LENGTH-1] = '\0';
+	   	if(!strncmp(command,"run ",4)) {
+			computer(strchr(command,' ')+1);
+			continue;
+		} else if(strcmp(ex[0],command) == 0) {
+			exit(1);
+		} else if (strcmp(ex[1],command) == 0) {
+			help;
+		}
+	  	printf("shell:> ");
+      	system(command);
+    }
+}
+void intrpr(char *line,int *command, int *argument)
+{
+			char comm[COMMAND_SIZE];
+			char arg[COMMAND_SIZE];
+			int i;
+			for(i = 0; line[i] != ' ' && line[i] != '\n';i++)
+				comm[i] = line[i];
+			comm[i] = '\0';
+			if(!strcmp(comm,"ADD"))
+				*command = ADD;
+			else if(!strcmp(comm,"SUB"))
+				*command = SUB;
+			else if(!strcmp(comm,"GOTO"))
+				*command = GOTO;
+			else if(!strcmp(comm,"LOAD"))
+				*command = LOAD;
+			else if(!strcmp(comm,"DIV"))
+				*command = DIV;
+			else if(!strcmp(comm,"INPUT"))
+				*command = INPUT;
+			else if(!strcmp(comm,"OUTPUT"))
+				*command = OUTPUT;
+			else if(!strcmp(comm,"STORE"))
+				*command = STORE;
+			else if(!strcmp(comm,"NEG_GOTO"))
+				*command = NEG_GOTO;
+			else if(!strcmp(comm,"ZERO_GOTO"))
+				*command = ZERO_GOTO;
+			else if(!strcmp(comm,"HALT"))
+				*command = HALT;
+			else
+				*command = atoi(comm);
+			for(; i != EOF && i != '\n';i++)
+				arg[i] = line[i];
+			*argument = atoi(arg);
 }
 void logo()
 {
-	system("cls");
-	printf("\t\tOperation System K O J I M A  G E N I U S\n");
+	display();
+	printf("\t\tCOMPUTER\n\t\tMenu:\n");
 }
-void input_command()
+void menu()
 {
-	logo();
-	//printf("Vvedite nomer komandi: "); scanf();
-}
-void menu(int *ram, FILE *battary, FILE *command, int *code_list)
-{
-	char select;
-	int flag = 1, i = 0;
-	while (flag == 1)
-	{
-		logo();
-		printf("\t\t\t\tWelcome!\n");
-		printf("\t\tMenu: \n\n");
-		output_menu(i);
-		select = getch();
-		switch(select)
-		{
-			case 13:
+			int flag = 1;
+			while (flag == 1) 
 			{
-				if (i == 1) {
-					list_command(command, code_list);
-				}
-				if (i == 4) {
-					flag = 0;
-					break;
-				}
-				if (i == 3) {
-					run_shell(command, code_list, battary);
-				}
-				if (i == 2) {
-					run_command(command, code_list);
-				}
-				if (i == 0) {
-					input_command();
-				}
+				logo();
+				output_menu(i_menu);
+				joy_menu(&flag);
 			}
-			case 119:
-			{
-				if (i == 0) {
-					i = 4;
-					output_menu(i);
-					system("cls");
-				} 
-				if (i > 0) {
-					i--;
-					output_menu(i);
-					system("cls");
-				}
+			if (i_menu == 0) { 
+				display();
+				printf("Чтобы получить подсказку о командах, воспользуйтесь --help\n");
+				run();
 			}
-			case 115:
-			{
-				if (i == 4) {
-					i = 0;
-					output_menu(i);
-					system("cls");
-				} else {
-					i++;
-					output_menu(i);
-					system("cls");
-				}
-			}
-		}
-	}
-}
-void run_shell(FILE *battary, FILE *command, int *code_list)
-{
-	create_command(command);
-	int flag = 1;
-	logo();
-	while (flag == 1)
-	{
-		char c[100];
-		printf("\n\t\tshell:> "); scanf("%s", &c);
-		if (c == "w") {
-			printf("Hello!\n");
-		}
-	}
-}
-void shell_command()
-{
-
-}
-void create_command(FILE *command)
-{
-	int code[] = {10, 11, 20, 21, 30, 31, 32, 40, 41, 42, 43};
-	for (int i = 0; i < 11; i++)
-		for (int j = 0; j < 11; j++)
-			fprintf(command, "%d%d\n", code[i], code[j]);
-	fclose(command);
-}
-void list_command(FILE *command, int *code_list)
-{
-	code_list = (int *)malloc(121 * sizeof(int));
-	command = fopen("command_list.txt", "r");
-	system("cls");
-	char text;
-	for (int i = 0; i < 121; i++)
-		fscanf(command, "%d", &code_list[i]);
-	for (int i = 0; i < 121; i+=5) {
-		printf("[%d] . %d\t[%d] . %d\t[%d] . %d\t[%d] . %d\t[%d] . %d\n", 
-			i, code_list[i],
-			i + 1, code_list[i + 1],
-			i + 2, code_list[i + 2], 
-			i + 3, code_list[i + 3],
-			i + 4, code_list[i + 4]);
-	}
-	printf("\nNajmite lubyu klavishu dlya vihoda\nInput <ENTER> to be continue.\n");
-	text = getch();
-	switch(text)
-	{
-		case 8:
-		{
-			free(code_list);
-			fclose(command);
-			break;
-		}
-		case 13:
-		{
-			run_command(command, code_list);
-		}
-	}
-}
-void run_command(FILE *command, int *code_list)
-{
-	int flag = 1, j = 0;
-	code_list = (int *)malloc(121 * sizeof(int));
-	command = fopen("command_list.txt", "r");
-	system("cls");
-	printf("Viberete commandu iz spiska: \n");
-	for (int i = 0; i < 121; i++)
-		fscanf(command, "%d", &code_list[i]);
-	for (int i = 0; i < 121; i++)
-		printf("[%d] . %d\n", i, code_list[i]);
-	while (flag == 1)
-	{char text;
-		system("cls");
-		for (int i = 0; i < 121; i++) {
-			if (j != i) {
-				printf("[%d] . %d\n", i, code_list[i]);
-			} else printf("[*] | [%d] . %d\n", i, code_list[i]);
-		}
-		printf("Input <ENTER> to be continue.\n");
-		text = getch();
-		switch(text)
-		{
-			case 13:
-			{
-				system("cls");
-				printf("Vi deystvitelno hotite ispolsovat komandu [%d] . %d\n", j, code_list[j]);
-				dict(command, code_list, j);
-			}
-			case 119:
-			{
-				j = j - 1;
-				if (j < 0)
-					j = 120;
-			}
-			case 115:
-			{
-				j++;
-				if (j == 121)
-					j = 0;
-			}
-		}
-	}
-}
-void dict(FILE *command, int *code_list, int i)
-{
-	if ((i / 100 == 10) || (i % 100 == 10)) {
-
-	}
-	if ((i / 100 == 11) || (i % 100 == 11)) {
-		
-	}
-	if ((i / 100 == 20) || (i % 100 == 20)) {
-		
-	}
-	if ((i / 100 == 21) || (i % 100 == 21)) {
-		
-	}
-	if ((i / 100 == 30) || (i % 100 == 30)) {
-		
-	}
-	if ((i / 100 == 31) || (i % 100 == 31)) {
-		
-	}
-	if ((i / 100 == 32) || (i % 100 == 32)) {
-		
-	}
-	if ((i / 100 == 40) || (i % 100 == 40)) {
-		
-	}
-	if ((i / 100 == 41) || (i % 100 == 41)) {
-		
-	}
-	if ((i / 100 == 42) || (i % 100 == 42)) {
-		
-	}
-	if ((i / 100 == 43) || (i % 100 == 43)) {
-		
-	}
+			if (i_menu == 2)
+				exit(1);
 }
 void output_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("\t\t[*] - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t - Run Shell\n\t\t - Shutdown\n");
+		printf("\t\t[*] - Командная строка\n\t\t - Список команд\n\t\t - Выход\n");
 	if (kursor == 1) 
-		printf("\t\t - Input Command\n\t\t[*] - List Command\n\t\t - Run Command\n\t\t - Run Shell\n\t\t - Shutdown\n");
-	if (kursor == 2)
-		printf("\t\t - Input Command\n\t\t - List Command\n\t\t[*] - Run Command\n\t\t - Run Shell\n\t\t - Shutdown\n");
-	if (kursor == 3)
-		printf("\t\t - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t[*] - Run Shell\n\t\t - Shutdown\n");
-	if (kursor == 4)
-		printf("\t\t - Input Command\n\t\t - List Command\n\t\t - Run Command\n\t\t - Run Shell\n\t\t[*] - Shutdown\n");
+		printf("\t\t - Командная строка\n\t\t[*] - Список команд\n\t\t - Выход\n");
+	if (kursor == 2) 
+		printf("\t\t - Командная строка\n\t\t - Список команд\n\t\t[*] - Выход\n");
+}
+int joy_menu(int *flag)
+{
+	char select;
+	select = button();
+	switch(select)
+	{
+		case 13:
+		{
+			display();
+			*flag = 0;
+			return i_menu;
+		}
+		case 56: // вверх
+		{
+			if (i_menu == i_start) {
+				i_menu = i_end;
+				//output_menu(i);
+				display();
+				return i_menu;
+			} 
+			if (i_menu > i_start) {
+				i_menu--;
+				//output_menu(i);
+				display();
+				return i_menu;
+			}
+		}
+		case 50: // вниз
+		{
+			if (i_menu == i_end) {
+				i_menu = i_start;
+				//output_menu(i);
+				display();
+				return i_menu;
+			} else {
+				i_menu++;
+				//output_menu(i);
+				display();
+				return i_menu;
+			}
+		}
+		default: 
+		{
+			display();
+		}
+	}
+}
+void display()
+{
+	#ifdef _WIN32
+		system("cls");
+	#else
+		system("clear");
+	#endif
+}
+char button()
+{
+    char select;
+    #if _WIN32
+        select = getch();
+    #else
+        system("stty raw");
+        select = getchar();
+        system("stty cooked");
+    #endif
+    return select;
+}
+int main()
+{
+			ram=(int*)calloc(100,sizeof(int));
+			menu();
+			FILE *prog;
+			if((prog = fopen("program.txt","r")) == NULL)
+				return -1;
+			while(fgets(line,COMMAND_SIZE,prog) != NULL){
+				intrpr(line,&command,&argument);
+				result = alu(command,argument,&acc,ram,&prog);
+				if(result)
+					break;
+			}
+			return 0;
 }
