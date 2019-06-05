@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#define eps 0.00001
+#define eps 1e-6
 double f(double,double,double);
 double FindRoot(double,double,double,double,double);
 double f(double x,double c,double d)
