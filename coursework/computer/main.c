@@ -14,7 +14,7 @@
 #define NEG_GOTO 41
 #define ZERO_GOTO 42
 #define HALT 43
-#define help printf("--help - помощь\nrun - выполнить\nclear - очистить экран\nexit - выйти из shell\n")
+#define help printf("help - помощь\nrun - выполнить\nclear - очистить экран\nexit - выйти из shell\n")
 #define COMMAND_LENGTH 100
 
 int *ram;
@@ -23,11 +23,20 @@ int command;
 int argument;
 int result;
 int acc = 0;
-int i = 0, j = 0, i_start = 0, i_end = 2, i_menu = 0;
+int i = 0, j = 0, i_start = 0, i_end = 1, i_menu = 0;
 
 char button();
 void intrpr(char*,int*, int*);
 int alu(int,int,int*,int*,FILE **);
+void computer();
+void run();
+void intrpr();
+void logo();
+void menu();
+void output_menu();
+int joy_menu(int *);
+void display();
+char button();
 int alu(int command,int argument,int *acc, int *ram,FILE **prog)
 {
 				switch(command){
@@ -164,7 +173,7 @@ void menu()
 			}
 			if (i_menu == 0) { 
 				display();
-				printf("Чтобы получить подсказку о командах, воспользуйтесь --help\n");
+				printf("Чтобы получить подсказку о командах, воспользуйтесь help\n");
 				run();
 			}
 			if (i_menu == 2)
@@ -173,11 +182,9 @@ void menu()
 void output_menu(int kursor)
 {
 	if (kursor == 0) 
-		printf("\t\t[*] - Командная строка\n\t\t - Список команд\n\t\t - Выход\n");
+		printf("\t\t[*] - Командная строка\n\t\t - Выход\n");
 	if (kursor == 1) 
-		printf("\t\t - Командная строка\n\t\t[*] - Список команд\n\t\t - Выход\n");
-	if (kursor == 2) 
-		printf("\t\t - Командная строка\n\t\t - Список команд\n\t\t[*] - Выход\n");
+		printf("\t\t - Командная строка\n\t\t[*] - Выход\n");
 }
 int joy_menu(int *flag)
 {
