@@ -2,16 +2,10 @@
 #include <math.h>
 double fact(int i)   
 {
-	if(i == 0)
-	{
-		return 1;	
-	}
-    if(i < 0)
-    {
+	if(i == 0) return 1;	
+    if(i < 0) {
     	return 0;
-    }
-    else
-    return i * fact(i - 1);		
+    } else return i * fact(i - 1);		
 }
 int dec(double E, double *row)
 {
@@ -26,35 +20,33 @@ int dec(double E, double *row)
 }
 int dr(double E, int i, double *inf)
 {
-    int k=1, l=1;
-    double sum3 = 0;
+    int k=1, l=1; double sum = 0;
     do
 	{
 		for (int k = l; k >= 1; k--)
 		{
 			if ((k % 2) == 0)
 			{
-				sum3 = 1 / (2 + sum3);
+				sum = 1 / (2 + sum);
 			}
 			else
 			{
-				sum3 = 1 / (k - sum3);
+				sum = 1 / (k - sum);
 			}
 		}
-		if (fabs(M_E - (sum3 + 1))<E)
+		if (fabs(M_E - (sum + 1))<E)
 		{
 			break;
 		}
 		l++;
 	} 
 	while (l < i + 10);
-    *inf=1+sum3;	
+    *inf=1+sum;	
     return l;
 }
 int main() 
 {
-	int i, l;
-	double row=0, E; 				
+	int i, l; double row=0, E; 				
 	printf("Введите точность вычисления: "); scanf("%lf", &E);			
     i = dec(E, &row);	
     printf("Значение числового ряда: %10.10lf; Кол-во членов ряда: %d\n", row, i);
