@@ -21,7 +21,7 @@ int dec(double E, double *row)
 		*row+=1/fact(i);			
 		i++;
 	}
-	while(M_E - *row>E);	
+	while(M_E-*row>E);	
     return i;
 }
 int dr(double E, int i, double *inf)
