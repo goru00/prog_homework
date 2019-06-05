@@ -1,19 +1,65 @@
 #include<stdio.h>
-#include<math.h>
-double FindRoot(double e)
+#include <math.h>
+double fact(int i)   
 {
-    double s = 1.0, a = 1.0; int n = 1;
-    while (fabs(a) >= e)
+	if(i == 0)
+	{
+		return 1;	
+	}
+    if(i < 0)
     {
-        s+=a; n++;
-        a *= 1.0/n;
+    	return 0;
     }
-    return s;
+    else
+    return i * fact(i - 1);		
 }
-int main()
+int dec(double E, double *row)
 {
-    double eps;
-    printf("Введите точность вычисления: "); scanf("%lf", &eps);
-    printf("%lf\n", FindRoot(eps));
-    return 0;
+    int i = 0;
+    do
+	{
+		*row+=1/fact(i);			
+		i++;
+	}
+	while(M_E - *row>E);	
+    return i;
+}
+int dr(double E, int i, double *inf)
+{
+    int k=1, l=1;
+    double sum3 = 0;
+    do
+	{
+		for (int k = l; k >= 1; k--)
+		{
+			if ((k % 2) == 0)
+			{
+				sum3 = 1 / (2 + sum3);
+			}
+			else
+			{
+				sum3 = 1 / (k - sum3);
+			}
+		}
+		if (fabs(M_E - (sum3 + 1))<E)
+		{
+			break;
+		}
+		l++;
+	} 
+	while (l < i + 10);
+    *inf=1+sum3;	
+    return l;
+}
+int main() 
+{
+	int i, l;
+	double row=0, E; 				
+	printf("Введите точность вычисления: "); scanf("%lf", &E);			
+    i = dec(E, &row);	
+    printf("Значение числового ряда: %10.10lf; Кол-во членов ряда: %d\n", row, i);
+    double inf;	
+    l = dr(E,i, &inf);				
+    printf("Значение цепной дроби: %10.10lf; Кол-во членов дроби: %d \n", inf, l);
+	return 0;
 }
