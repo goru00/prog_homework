@@ -6,11 +6,11 @@ double FK(double, double, double); // прототип функции f
 double dcs(double,double,double); // прототип функции FindRoot
 double FK_proizv(double x, double c, double d) // объявляем функцию f и передаем c, d и x
 { 
- return 5*pow(x,4)+c*2*x-d; // возвращаем значение производной 
+ return c*cos(c*x)-d;//возвращаем значение производной 
 } 
 double FK(double x, double c, double d) //объявляем функцию f и передаем c, d и x
 { 
- return pow(x,5)+c*pow(x,2)-d; //возвращаем значение функции 
+ return sin(c*x)-d; //возвращаем значение функции 
 } 
 double dcs(double x, double c, double d) //объявляем функцию f передаем c, d и x
 { 
