@@ -1,5 +1,0 @@
-What is the logical operation "And" in C?
-What is the correct record of the output format operator, if the variables a,b type float?
-What is the correct entry of the format input operator, if variables a,in the type int?
-Which cycle will always run at least once?
-The array is initialized as follows:
