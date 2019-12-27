@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\Student\Desktop\workdesk\курсовая работа\programm\num3\main\main\main.cpp(110,9): warning C4838: преобразование из "int" в "bool" требует сужающего преобразования
+C:\Users\Student\Desktop\workdesk\курсовая работа\programm\num3\main\main\main.cpp(111,9): warning C4838: преобразование из "int" в "bool" требует сужающего преобразования
+C:\Users\Student\Desktop\workdesk\курсовая работа\programm\num3\main\main\main.cpp(112,9): warning C4838: преобразование из "int" в "bool" требует сужающего преобразования
+  main.vcxproj -> C:\Users\Student\Desktop\workdesk\курсовая работа\programm\num3\main\Debug\main.exe
