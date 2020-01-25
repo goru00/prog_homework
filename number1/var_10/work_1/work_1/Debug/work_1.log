@@ -1,0 +1,3 @@
+﻿  work_1.cpp
+C:\Users\Дмитрий\Desktop\prog_homework\var_10\work_1\work_1\work_1.cpp(14): warning C4715: Fraction::comparison: значение возвращается не при всех путях выполнения
+  work_1.vcxproj -> C:\Users\Дмитрий\Desktop\prog_homework\var_10\work_1\Debug\work_1.exe
