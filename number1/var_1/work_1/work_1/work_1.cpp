@@ -1,70 +1,91 @@
 ﻿#include<iostream>
 #include<math.h>
+#define PI 3.14159
 using namespace std;
 class Angle
 {
 private:
-	double grad_angle, min_angle;
+	int grad_angle, min_angle;
 public:
-	Angle(double m_grad_angle, double m_min_angle)
-	{
-		grad_angle = m_grad_angle;
-		min_angle = m_min_angle;
-	}
-	Angle() {} // настоящие мужики в любой ситуации создают конструктор по умолчанию
+	Angle(int m_grad_angle, int m_min_angle) : grad_angle(m_grad_angle), min_angle(m_min_angle) { }
+	Angle() : grad_angle(0), min_angle(0) {} 
 	~Angle() {}
-	void rad()
-	{
-		grad_angle = grad_angle * 3.14159 / 180;
-		min_angle = min_angle * 3.14159 / (60 * 180);
-	}
-	void sum(double value)
-	{
-		grad_angle += value;
-		min_angle += value;
-	}
-	void substract(double value)
-	{
-		grad_angle -= value;
-		min_angle -= value;
-	}
-	void sinx() { sin(grad_angle); sin(min_angle); }
-	friend bool operator==(const Angle &angle1, const Angle &angle2);
-	friend bool operator<(const Angle& angle1, const Angle& angle2);
-	friend bool operator>(const Angle& angle1, const Angle& angle2);
-	friend ostream& operator<< (ostream& out, const Angle& angle);
+	int get_grad_angle() { return grad_angle; }
+	int get_min_angle() { return min_angle; }
+	double getRad();
+	void Roughs();
+	Angle Range();
+	Angle sum(int, int);
+	Angle substract(int, int);
+	double sinA();
+	friend ostream& operator<< (ostream&, const Angle&);
+	bool operator==(const Angle&);
+	bool operator<(const Angle&);
 };
-bool operator==(const Angle &angle1, const Angle &angle2)
-{
-	return (angle1.grad_angle == angle2.grad_angle);
+double Angle::sinA() 
+{ 
+	return sin(this->getRad()); 
 }
-bool operator<(const Angle &angle1, const Angle &angle2)
-{
-	return (angle1.grad_angle < angle2.grad_angle);
+double Angle::getRad() 
+{ 
+	return (grad_angle + min_angle / 60) * PI / 180; 
 }
-bool operator>(const Angle &angle1, const Angle &angle2)
+void Angle::Roughs()
 {
-	return (angle1.grad_angle > angle2.grad_angle);
+	min_angle += grad_angle * 60;
+	grad_angle = min_angle / 60;
+	min_angle = min_angle % 60;
+}
+Angle Angle::Range()
+{
+	if (min_angle < 0) {
+		grad_angle--;
+		min_angle += 60;
+	}
+	if (grad_angle > 0) grad_angle %= 360;
+	else grad_angle %= 360 + 360;
+	return *this;
+}
+Angle Angle::sum(int in_grad, int in_min)
+{
+	grad_angle += in_grad;
+	min_angle += in_min;
+	this->Roughs();
+	return *this;
+}
+Angle Angle::substract(int in_grad, int in_min)
+{
+	grad_angle -= in_grad;
+	min_angle -= in_min;
+	this->Roughs();
+	return *this;
+}
+bool Angle::operator<(const Angle& angle)
+{
+	return ((this->grad_angle + this->min_angle) * 60 < (angle.grad_angle + angle.min_angle) * 60);
+}
+bool Angle::operator==(const Angle& angle)
+{
+	return ((this->grad_angle + this->min_angle) * 60 == (angle.grad_angle + angle.min_angle) * 60);
 }
 ostream& operator<< (ostream& out, const Angle& angle)
 {
-	out << angle.grad_angle << "\t" << angle.min_angle << endl;
+	out << "(" << angle.grad_angle << " , " << angle.min_angle << ")";
 	return out;
 }
 int main()
 {
 	setlocale(0, "");
-	Angle obj1(135.5, 25);
-	Angle obj2(13, 23);
-	obj1.rad(); cout << "Переведем в радианы первый угол: " << obj1;
-	obj2.rad(); cout << "Переведем в радианы второй угол: " << obj2; // сравнивать в радианах два объекта как по мне намного легче :)
-
-	if (obj1 == obj2) cout << "Оба угла равны";
-	else if (obj1 > obj2) cout << "Первый угол больше второго\n";
-	else if (obj1 < obj2) cout << "Второй угол больше первого\n";
-
-	obj1.sum(156.5); cout << "Увеличение: " << obj1;
-	obj1.substract(123.7); cout << "Уменьшение: " << obj1;
-	obj1.sinx(); cout << "Преобразование в синус: " << obj1;
+	Angle obj1(135, 25);
+	Angle obj2(136, 25);
+	cout << "Переведем в радианы первый угол: " << obj1.getRad() << endl;
+	cout << "Переведем в радианы второй угол: " << obj2.getRad() << endl;
+	cout << "Приведем к диапазону 0-360 первый угол: " << obj1.Range() << " и второй: " << obj2.Range() << endl;
+	cout << "Увеличим первый угол: " << obj1.sum(25, 27) << endl;
+	cout << "Уменьшим второй угол: " << obj2.substract(25, 27) << endl;
+	cout << "Синус первого угла: " << obj1.sinA() << endl;
+	if (obj1 == obj2) cout << "Углы равны!\n";
+	else if (obj1 < obj2) cout << "Второй угол больше первого!\n";
+	else cout << "Первый угол больше второго!\n";
 	return 0;
 }
