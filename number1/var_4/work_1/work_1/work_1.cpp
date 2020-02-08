@@ -1,122 +1,144 @@
 ﻿#include<iostream>
+#include<cstdlib>
+#include<ctime>
 using namespace std;
 class Matrix
 {
 private:
-	double** Matr;
-	int n;
-	int m;
+	double** matrix;
+	int n, m;
 public:
-	Matrix() { Matr = 0; n = 0; m = 0; } // краткое пояснение. при создании матрицы без каких-либо значений, конструктор по умолчанию заполняет 0
-	Matrix(int m_n, int m_m) : n(m_n), m(m_m) { Create(); }
+	Matrix()
+	{
+		matrix = 0;
+		n = 0;
+		m = 0;
+	}
+	Matrix(int _n, int _m) : n(_n), m(_m) 
+	{
+		matrix = new double* [n];
+		for (int i = 0; i < n; i++) {
+			matrix[i] = new double[m];
+			for (int j = 0; j < m; j++) {
+				matrix[i][j] = (rand() % 100 + 1) + (rand() % 100 + 1) * 0.1;
+			}
+		}
+	}
 	~Matrix() { }
-	void Create()
-	{
-		Matr = new double* [n];
-		for (int i = 0; i < n; i++) {
-			Matr[i] = new double[m];
-			for (int j = 0; j < m; j++) {
-				Matr[i][j] = (i + j) * 0.1;
+	int get_n() { return n; }
+	int get_m() { return m; }
+	bool error(int, int);
+	Matrix multiplies_value(int);
+	Matrix degree(int);
+	double* operator[] (int);
+	Matrix operator+(const Matrix&);
+	Matrix operator-(const Matrix&);
+	Matrix operator*(const Matrix&);
+	Matrix operator=(const Matrix&);
+	friend ostream& operator<<(ostream&, const Matrix&);
+};
+bool Matrix::error(int matr_n, int matr_m)
+{
+	if (matr_n == n && matr_m == m) return true;
+	return false;
+}
+Matrix Matrix::multiplies_value(int value)
+{
+	Matrix temp(n, m);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			temp.matrix[i][j] = matrix[i][j] * value;
+		}
+	}
+	return temp;
+}
+Matrix Matrix::degree(int value)
+{
+	Matrix temp = Matrix(n, m);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			for (int k = 0; k < value; k++) {
+				temp.matrix[i][j] += matrix[i][k] * matrix[k][j];
 			}
 		}
 	}
-	Matrix prfornum(int value)
-	{
-		Matrix temp = Matrix(n, m);
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				temp[i][j] = Matr[i][j] * value;
+	return temp;
+}
+double* Matrix::operator[] (int i)
+{
+	return matrix[i];
+}
+Matrix Matrix::operator+(const Matrix& matr)
+{
+	if (error(matr.n, matr.m)) {
+		Matrix temp(matr.n, matr.m);
+		for (int i = 0; i < matr.n; i++) {
+			for (int j = 0; j < matr.m; j++) {
+				temp.matrix[i][j] = matrix[i][j] + matr.matrix[i][j];
 			}
 		}
 		return temp;
 	}
-	Matrix pr(const Matrix& b)
-	{
-		Matrix temp = Matrix(n, b.m);
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < b.m; j++) {
-				for (int k = 0; k < m; k++)
-					temp[i][j] += Matr[i][k] * b.Matr[k][j];
+	else cout << "Невозможно!\n";
+}
+Matrix Matrix::operator-(const Matrix& matr)
+{
+	if (error(matr.n, matr.m)) {
+		Matrix temp(matr.n, matr.m);
+		for (int i = 0; i < matr.n; i++) {
+			for (int j = 0; j < matr.m; j++) {
+				temp.matrix[i][j] = matrix[i][j] - matr.matrix[i][j];
 			}
 		}
 		return temp;
-	}
-	Matrix sum(const Matrix& b)
-	{
-		Matrix temp = Matrix(n, b.m);
+	} else cout << "Невозможно!\n";
+}
+Matrix Matrix::operator*(const Matrix& matr)
+{
+	if (m == matr.n) {
+		Matrix temp = Matrix(n, matr.m);
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < b.m; j++) {
-				temp[i][j] = Matr[i][j] + b.Matr[i][j];
-			}
-		}
-		return temp;
-	}
-	Matrix substract(const Matrix& b)
-	{
-		Matrix temp = Matrix(n, b.m);
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < b.m; j++) {
-				temp[i][j] = Matr[i][j] - b.Matr[i][j];
-			}
-		}
-		return temp;
-	}/*
-	Matrix degree(int value)
-	{
-		double Q;
-		Matrix temp = Matrix(n, m);
-		for (int g = 0; g < value; g++) {
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < m; j++) {
-					for (int k = 0; k < m; k++)
-						Q += temp[i][k] * temp[k][j];
-					temp[i][j] += Q;
+			for (int j = 0; j < matr.m; j++) {
+				for (int k = 0; k < m; k++) {
+					temp.matrix[i][j] += matrix[i][j] * matr.matrix[i][j];
 				}
 			}
-			
 		}
 		return temp;
-	}*/
-	double* operator [] (int index)
-	{
-		return getRow(index);
-	}
-	double* getRow(int index)
-	{
-		if (index >= 0 && index < n)
-			return Matr[index];
-		return 0;
-	}
-	friend ostream& operator<<(ostream& out, const Matrix& matr);
-	friend bool operator==(const Matrix& matr1, const Matrix& matr2);
-};
-bool operator==(const Matrix& matr1, const Matrix& matr2)
+	} else cout << "Невозможно!\n";
+}
+Matrix Matrix::operator=(const Matrix& matr)
 {
-	if (matr1.n != matr2.n || matr1.m != matr2.m)
-		return false;
+	Matrix temp(matr.n, matr.m);
+	for (int i = 0; i < matr.n; i++) {
+		for (int j = 0; j < matr.m; j++) {
+			temp.matrix[i][j] = matr.matrix[i][j];
+		}
+	}
+	return temp;
 }
 ostream& operator<<(ostream& out, const Matrix& matr)
 {
+	out << endl;
 	for (int i = 0; i < matr.n; i++) {
 		for (int j = 0; j < matr.m; j++) {
-			out << "\t" << matr.Matr[i][j];
+			cout.width(10); 
+			out << matr.matrix[i][j];
 		}
-		cout << endl; // делаю костыли без смс и регистрации
+		out << endl;
 	}
 	return out;
 }
 int main()
 {
 	setlocale(0, "");
-	Matrix matr1(5, 5);
-	Matrix matr2(5, 5);
-	cout << "Первая матрица:\n" << matr1 << endl << "Вторая матрица:\n" << matr2 << endl;
-	if (matr1 == matr2) {
-		cout << "Сложение матриц:\n" << matr1.sum(matr2) << endl;
-		cout << "Разность матриц:\n" << matr1.substract(matr2) << endl;
-		cout << "Умножение матриц:\n" << matr1.pr(matr2);
-	}
-	cout << "Умножение матрицы 1 на число:\n" << matr1.prfornum(5) << endl;
-	//cout << "Возведение матрицы в степень:\n" << matr1.degree(3) << endl;
+	srand(time(NULL));
+	Matrix matr1(4, 5), matr2(5, 5), sum, substract, multiplies;
+	cout << "Первая матрица: " << matr1 << "\nВторая матрица: \n" << matr2 << endl;
+	cout << "Сумма матриц: " << (sum = matr1 + matr2) << endl; 
+	cout << "Разность матриц: " << (substract = matr1 - matr2) << endl;
+	cout << "Умножаем матрицу 1 на число " << 5 << " : " << matr1.multiplies_value(5) << endl;
+	cout << "Перемножаем матрицы друг на друга: " << (multiplies = matr1 * matr2) << endl;
+	cout << "Возведение матрицы в степень 4" << ": " << matr1.degree(5) << endl;
 	return 0;
 }
