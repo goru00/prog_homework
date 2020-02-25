@@ -1,6 +1,0 @@
-﻿  work_1.cpp
-C:\Users\Дмитрий\Desktop\prog_homework\prog_homework\number1\var_4\work_1\work_1\work_1.cpp(136,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Дмитрий\Desktop\prog_homework\prog_homework\number1\var_4\work_1\work_1\work_1.cpp(84): warning C4715: Matrix::operator+: значение возвращается не при всех путях выполнения
-C:\Users\Дмитрий\Desktop\prog_homework\prog_homework\number1\var_4\work_1\work_1\work_1.cpp(96): warning C4715: Matrix::operator-: значение возвращается не при всех путях выполнения
-C:\Users\Дмитрий\Desktop\prog_homework\prog_homework\number1\var_4\work_1\work_1\work_1.cpp(110): warning C4715: Matrix::operator*: значение возвращается не при всех путях выполнения
-  work_1.vcxproj -> C:\Users\Дмитрий\Desktop\prog_homework\prog_homework\number1\var_4\work_1\Debug\work_1.exe
