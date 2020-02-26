@@ -7,7 +7,8 @@ using namespace std;
 
 bool set(double* A, int N, bool flag, int tail, int& head, double a)
 {
-	if (flag) return false;
+	if ((head == tail) && !flag) return false;
+
 	A[head++] = a;
 	if (head == N) head = 0;
 	return true;
@@ -28,9 +29,10 @@ bool show(double* A, int N, bool flag, int tail, int head) {
 		return false;
 	do
 	{
-		cout << A[tail++] << '\n';
+		cout << A[tail++] << '\t';
 		if (tail == N) tail = 0;
 	} while (head != tail);
+	cout << "\n";
 	return true;
 }
 int main()
@@ -46,6 +48,15 @@ int main()
 	get(C, N, flag, tail, head, number);
 	cout << "Number:" << number << endl;
 	set(C, N, flag, tail, head, 10);
+	set(C, N, flag, tail, head, 12);
+	set(C, N, flag, tail, head, 13);
 	show(C, N, flag, tail, head);
+	set(C, N, flag, tail, head, 18);
+	show(C, N, flag, tail, head);
+	/*set(C, N, flag, tail, head, 13);
+	set(C, N, flag, tail, head, 15);
+	set(C, N, flag, tail, head, 17);
+	set(C, N, flag, tail, head, 18);
+	show(C, N, flag, tail, head);*/
 	system("pause");
 }
