@@ -17,6 +17,8 @@ namespace ConsoleApp1
             this.b = b;
             this.c = c;
         }
+        public double GetValue(double value) => a * value - Math.Cos(value);
+        public double GetMiddle() => 0.5 * (b + c);
         public double Element(double eps)
         {
             double Element_b = GetValue(b);
@@ -30,7 +32,8 @@ namespace ConsoleApp1
                 {
                     c = middle;
                     Element_c = Elementmiddle;
-                } else if (Elementmiddle * Element_c < 0)
+                }
+                else if (Elementmiddle * Element_c < 0)
                 {
                     b = middle;
                     Element_b = Elementmiddle;
@@ -38,8 +41,6 @@ namespace ConsoleApp1
             }
             return GetMiddle();
         }
-        public double GetValue(double value) { return a * value - Math.Cos(value); }
-        public double GetMiddle() { return 0.5 * (b + c); }
     }
     class Program
     {
@@ -52,3 +53,4 @@ namespace ConsoleApp1
         }
     }
 }
+
