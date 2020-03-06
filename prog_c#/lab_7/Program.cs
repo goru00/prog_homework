@@ -38,7 +38,7 @@ namespace ConsoleApp1
             }
             return words;
         }
-        static void Output(string[] text)
+        static void Output(in string[] text)
         {
             foreach (string s in text)
             {
