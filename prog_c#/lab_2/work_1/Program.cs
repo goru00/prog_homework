@@ -12,7 +12,7 @@ namespace ConsoleApp1
         {
             double y = 0, x = 0;
             int r = 0;
-            try 
+            try
             {
                 Console.Write("Введите x: ");
                 x = Convert.ToDouble(Console.ReadLine());
@@ -28,10 +28,7 @@ namespace ConsoleApp1
             int px2 = px3 - r;
             int px4 = 2;
             int px5 = 4;
-            if (x < px1 || x > px5)
-            {
-                throw new Exception();
-            }
+            if (x < px1 || x > px5) throw new Exception("неверный задан диапазон");
             if (px2 == x)
             {
                 y = 0;
