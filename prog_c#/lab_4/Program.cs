@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ namespace ConsoleApp1
 {
     class Fun
     {
-        double a, b, c;
+        double a, b, c, eps;
         public Fun(double a, double b, double c)
         {
             this.a = a;
@@ -19,27 +19,34 @@ namespace ConsoleApp1
         }
         public double GetValue(double value) => a * value - Math.Cos(value);
         public double GetMiddle() => 0.5 * (b + c);
-        public double Element(double eps)
+        public double Element
         {
-            double Element_b = GetValue(b);
-            double Element_c = GetValue(c);
-            if (Element_b * Element_c > 0) throw new Exception("Корней нет");
-            while (Math.Abs(Element_b - Element_c) > eps)
-            {
-                double middle = GetMiddle();
-                double Elementmiddle = GetValue(middle);
-                if (Elementmiddle * Element_b < 0)
-                {
-                    c = middle;
-                    Element_c = Elementmiddle;
-                }
-                else if (Elementmiddle * Element_c < 0)
-                {
-                    b = middle;
-                    Element_b = Elementmiddle;
-                }
-            }
-            return GetMiddle();
+        	set
+        	{
+        		eps = value;
+        	}
+        	get
+        	{
+            	double Element_b = GetValue(b);
+            	double Element_c = GetValue(c);
+            	if (Element_b * Element_c > 0) throw new Exception("Корней нет");
+            	while (Math.Abs(Element_b - Element_c) > eps)
+            	{
+                	double middle = GetMiddle();
+                	double Elementmiddle = GetValue(middle);
+                	if (Elementmiddle * Element_b < 0)
+                	{
+                    	c = middle;
+                    	Element_c = Elementmiddle;
+                	}
+                	else if (Elementmiddle * Element_c < 0)
+                	{
+                    	b = middle;
+                    	Element_b = Elementmiddle;
+                	}
+            	}
+            	return GetMiddle();
+        	}
         }
     }
     class Program
@@ -47,7 +54,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Fun element1 = new Fun(1, 0, 1);
-            double sqr = element1.Element(0.0000001);
+            element1.Element = 0.0000001;
+            double sqr = element1.Element;
             Console.WriteLine("Корень уравнения: " + sqr);
             Console.ReadKey();
         }
