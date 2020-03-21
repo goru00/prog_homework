@@ -8,19 +8,19 @@ namespace ConsoleApp1
 {
     class Program
     {
-        static int[,] push(int[,] mass, int n, int m)
+        static double[,] push(double[,] mass, int n, int m)
         {
             Random rand = new Random();
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
                 {
-                    mass[i, j] = rand.Next(-10, 5);
+                    mass[i, j] = rand.Next(-10, 5) * 0.1;
                 }
             }
             return mass;
         }
-        static void output(int[,] mass, int n, int m)
+        static void output(double[,] mass, int n, int m)
         {
             for (int i = 0; i < n; i++)
             {
@@ -32,31 +32,39 @@ namespace ConsoleApp1
             }
             Console.WriteLine();
         }
-        static int[,] massSort(int[,] mass, int n, int m)
+        static double[,] massSort(double[,] mass)
         {
-            int k = 0, _j = 0, flag, max = 0, countS = 0;
-            bool flagS = false;
-            for (int i = 0; i < n; i++, k++)
+            int length, count = 0;
+            bool flag = false;
+            if ((length = mass.GetLength(0)) != mass.GetLength(1)) throw new Exception("матрица не является квадратной!");
+            for (int i = 0; i < length; i++)
             {
-                max = mass[k, k];
-                for (int j = 0; j < m; j++)
+                int _i = 0, _j = 0;
+                double max = double.MinValue, temp;
+                for (int j = 0; j < length; j++)
                 {
-                    if (mass[i, j] < 0) countS++;
-                    if (max <= mass[i, j])
+                    for (int k = 0; k < length; k++)
                     {
-                        max = mass[i, j];
-                        _j = j;
+                        if (mass[j, k] < 0) count++;
+                        if (j != k || j > i)
+                        {
+                            if (mass[j, k] > max)
+                            {
+                                max = mass[j, k];
+                                _i = j;
+                                _j = k;
+                            }
+                        }
+                    }
+                    if (!flag && count == length)
+                    {
+                        itt(j);
+                        flag = true;
                     }
                 }
-                if (countS == m && !flagS)
-                {
-                    itt(i);
-                    flagS = true;
-                }
-                countS = 0;
-                flag = mass[k, k];
-                mass[k, k] = max;
-                mass[i, _j] = flag;
+                temp = mass[i, i];
+                mass[i, i] = mass[_i, _j];
+                mass[_i, _j] = temp;
             }
             return mass;
         }
@@ -64,10 +72,10 @@ namespace ConsoleApp1
         static void Main()
         {
             const int n = 5, m = 5;
-            int[,] mass = new int[n, m];
+            double[,] mass = new double[n, m];
             push(mass, n, m);
             output(mass, n, m);
-            massSort(mass, n, m);
+            massSort(mass);
             output(mass, n, m);
             Console.ReadKey();
         }
