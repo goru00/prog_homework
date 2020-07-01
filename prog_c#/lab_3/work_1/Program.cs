@@ -4,60 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp3
+namespace ConsoleApp1
 {
     class Program
     {
-        static double Func(double x, int r)
-        {
-            double y = 0;
-            int px1 = -5;
-            int px3 = -r - 2;
-            int px2 = px3 - r;
-            int px4 = 2;
-            int px5 = 4;
-            if (x < px1 || x > px5)
-            {
-                Console.WriteLine("Неверный диапазон");
-                Console.ReadKey();
-                return y;
-            }
-            if (px2 == x || px5 == x)
-            {
-                y = 0;
-            }
-            else if (px2 > x && px1 < x)
-            {
-                y = 1;
-            }
-            else if (px1 < x && px2 > x)
-            {
-                y = Math.Sqrt(Math.Pow(r, 2) - Math.Pow(x - px2, 2));
-                y *= -1;
-            }
-            else if (px3 <= x && x <= px4)
-            {
-                y = -2;
-            }
-            else if (px4 < x && px5 > x)
-            {
-                y = ((x - px4) * 2) / (px5 - px4);
-            }
-            return y;
-        }
         static void Main(string[] args)
         {
-            double xstart = -5, xend = 4, dx;
-            int r;
-            Console.Write("Введите радиус: ");
-            r = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите шаг: ");
-            dx = Convert.ToDouble(Console.ReadLine());
-            for (; xstart <= xend; xstart+=dx)
+            Console.WriteLine("Start x = ");
+            double x = double.Parse(Console.ReadLine());
+            Console.WriteLine("End x = ");
+            double x2 = double.Parse(Console.ReadLine());
+            Console.WriteLine("dx = ");
+            double dx = double.Parse(Console.ReadLine());
+            while (x <= x2)
             {
-                Console.WriteLine("y = " + Func(xstart, r));
+                double y = -100;
+                double r = 2;
+                if (x < -5 || x > 5)
+                {
+                    throw new Exception("Значение функции не определено");
+                }
+                else if (x >= -5 && x < -3)
+                    y = 1;
+                else if (x == -3)
+                    Console.WriteLine("В точке -3 функция имеет разрыв и принимает два значения у1=1 у2=0");
+                else if (x > -3 && x <= -1)
+                    y = -Math.Sqrt(-Math.Pow(x + 1, 2) + r * r);
+                else if (x > -1 && x <= 2)
+                    y = -2;
+                else if (x > 2)
+                    y = x - 4;
+                if (y != -100)
+                    Console.WriteLine("Значение функции при Х={0:f2} равнo {1:f2}", x, y);
+                x += dx;
             }
             Console.ReadKey();
+
         }
     }
 }

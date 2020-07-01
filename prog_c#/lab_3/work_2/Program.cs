@@ -4,33 +4,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp5
+namespace Круги
 {
     class Program
     {
-        static void Shot(double x, double y, int r)
-        {
-            if (Math.Sqrt(x * x + y * y) <= r)
-            {
-                if ((y >= 0 && y >= x) || (y <= 0 && y <= x))
-                    Console.WriteLine("Точка попадает в закр.область");
-                else Console.WriteLine("Точка НЕ попадает в закр.область");
-            }
-        }
         static void Main(string[] args)
         {
-            double x, y;
-            int r;
-            Console.Write("Введите радиус: ");
-            r = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < 10; i++)
+            // Радиус
+            double R, R2;
+
+            // Координаты точки
+            double X, Y;
+
+            // Признак попадания точки в верхнюю часть рисунка
+            bool up;
+
+            // Признак попадания точки в нижнюю часть рисунка
+            bool down;
+
+            // Ввод и контроль параметра
+            Console.Write("Радиус: ");
+            if (!Double.TryParse(Console.ReadLine(), out R))
             {
-                Console.Write($"Введите координаты для {i + 1} мишени:\nx= ");
-                x = Convert.ToDouble(Console.ReadLine());
-                Console.Write("y= ");
-                y = Convert.ToDouble(Console.ReadLine());
-                Shot(x, y, r);
+                Console.WriteLine("Радиус ошибочен");
             }
+            else if (R <= 0.0)
+            {
+                Console.WriteLine("Радиус не положительный");
+            }
+            else
+            {
+                R2 = R * R;
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.Write("X: ");
+                    if (!Double.TryParse(Console.ReadLine(), out X))
+                    {
+                        Console.WriteLine("Координата ошибочна");
+                        break;
+                    }
+                    Console.Write("Y: ");
+                    if (!Double.TryParse(Console.ReadLine(), out Y))
+                    {
+                        Console.WriteLine("Координата ошибочна");
+                        break;
+                    }
+                    // Для большей точности не будем использовать извлечение квадратного корня
+                    up = Y >= 0.0 && X >= -R && (X + R) * (X + R) + Y * Y <= R2;
+                    down = Y <= 0.0 && X <= R && (X - R) * (X - R) + Y * Y <= R2;
+                    Console.WriteLine(up || down ? "Точка попадает в закрашенную область" : "Точка не попадает в закрашенную область");
+                }
+            }
+            Console.ReadKey();
         }
     }
 }
