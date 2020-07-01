@@ -8,23 +8,23 @@ namespace ConsoleApp1
 {
     class Program
     {
-        static double[,] push(double[,] mass, int n, int m)
+        static double[,] push(double[,] mass)
         {
             Random rand = new Random();
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < mass.GetLength(0); i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < mass.GetLength(1); j++)
                 {
-                    mass[i, j] = rand.Next(-10, 5) * 0.1;
+                    mass[i, j] = rand.Next(-10, 1) * 0.1;
                 }
             }
             return mass;
         }
-        static void output(double[,] mass, int n, int m)
+        static void output(double[,] mass)
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < mass.GetLength(0); i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < mass.GetLength(1); j++)
                 {
                     Console.Write("\t" + mass[i, j]);
                 }
@@ -34,18 +34,14 @@ namespace ConsoleApp1
         }
         static double[,] massSort(double[,] mass)
         {
-            int length, count = 0;
-            bool flag = false;
-            if ((length = mass.GetLength(0)) != mass.GetLength(1)) throw new Exception("матрица не является квадратной!");
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < mass.GetLength(0); i++)
             {
                 int _i = 0, _j = 0;
                 double max = double.MinValue, temp;
-                for (int j = 0; j < length; j++)
+                for (int j = 0; j < mass.GetLength(0); j++)
                 {
-                    for (int k = 0; k < length; k++)
+                    for (int k = 0; k < mass.GetLength(1); k++)
                     {
-                        if (mass[j, k] < 0) count++;
                         if (j != k || j > i)
                         {
                             if (mass[j, k] > max)
@@ -56,11 +52,6 @@ namespace ConsoleApp1
                             }
                         }
                     }
-                    if (!flag && count == length)
-                    {
-                        itt(j);
-                        flag = true;
-                    }
                 }
                 temp = mass[i, i];
                 mass[i, i] = mass[_i, _j];
@@ -68,15 +59,35 @@ namespace ConsoleApp1
             }
             return mass;
         }
-        static void itt(int count) { Console.WriteLine("Все отрицательные числа в строке номер: " + (count + 1)); }
+        static void otr(double[,] mass)
+        {
+            for (int i = 0, count = 0; i < mass.GetLength(0); i++)
+            {
+                for (int j = 0; j < mass.GetLength(1); j++)
+                {
+                    if (mass[i, j] < 0) count++;
+                }
+                if (count == mass.GetLength(0))
+                {
+                    Console.WriteLine("Все отр.числа находятся в " + (i + 1) + " строке");
+                    break;
+                }
+                else count = 0;
+            }
+        }
         static void Main()
         {
             const int n = 5, m = 5;
             double[,] mass = new double[n, m];
-            push(mass, n, m);
-            output(mass, n, m);
-            massSort(mass);
-            output(mass, n, m);
+            if (mass.GetLength(0) != mass.GetLength(1)) throw new Exception("матрица не является квадратной");
+            else
+            {
+                push(mass);
+                output(mass);
+                massSort(mass);
+                output(mass);
+                otr(mass);
+            }
             Console.ReadKey();
         }
     }
