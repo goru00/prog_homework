@@ -24,9 +24,12 @@ namespace ConsoleApp1
                 Console.WriteLine(error.Message);
             }
         }
+        // Может быть это не рационально, но в отличии от метода Contains, заданное слово подсчитывается точно без ошибок
+        // Были случаи, когда слово dolore принималось за dolor
+        // Поэтому я сделал разделение по предложениям(поэтому и точка) и положил в массив, а потом разделил в предложении слова(поэтому пробел) и так же положил в другой массив
         static string[] SearchWord(in string text, in string word)
         {
-            string[] words = text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] words = text.Split(new[] { ". " }, StringSplitOptions.RemoveEmptyEntries); // Точка с пробелом для того, чтобы не считалось, что это аббревиатура(нап. U.S.A) 
             for (int i = 0, count = 0; i < words.Length; i++, count = 0)
             {
                 string[] copytext = words[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -47,7 +50,7 @@ namespace ConsoleApp1
         }
         static void Main(string[] args)
         {
-            string path = @"text.txt"; // здесь указать полный путь до файла, либо кинуть файл в папку Debug проекта
+            string path = @"G:\workdesk\prog_homework\prog_c#\lab_7\text.txt"; // Здесь указать полный путь до файла, либо кинуть файл в папку Debug проекта
             string text = "";
             Console.Write("Введите слово: ");
             string word = Console.ReadLine();
@@ -58,4 +61,3 @@ namespace ConsoleApp1
         }
     }
 }
-
