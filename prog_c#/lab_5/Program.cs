@@ -1,59 +1,81 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
 
-namespace ConsoleApp1
+namespace Mass
 {
     class Program
-    {     
-        static int[] pushMass(int[] mass)
-        {
-            Random rand = new Random();
-            for (int i = 0; i < mass.Length; i++)                      
-                mass[i] = rand.Next(-10, 10);            
-            return mass;
-        }        
-        static void outMass(int[] mass)
-        {
-            for (int i = 0; i < mass.Length; i++)
-                System.Console.Write("\t" + mass[i]);
-            System.Console.WriteLine();
-        }
-        static int sumMass(int[] mass)
-        {
-            int sum = 0;
-            for (int i = 0; i < mass.Length; i++)
-            {
-                if (mass[i] > 0)
-                    sum += mass[i];
-            }
-            return sum;
-        }
-        static int countS(int[] mass)
-        {
-            int k = 0;
-            for (int i = 0; i < mass.Length; i++)
-            {
-                if (mass[i] > 0) k++;             
-            }
-            return k;
-        }
+    {
         static void Main(string[] args)
         {
-            Random rand = new Random();
-            const int n = 5;
-            int[] mass = new int[n];
-            pushMass(mass);
-            System.Console.WriteLine("Исходный массив: ");
-            outMass(mass);
-            mass[rand.Next(0, n)] = 0;
-            Array.Sort(mass); // сортируем элементы 
-            outMass(mass);
-            System.Console.WriteLine("Кол-во положительных элементов: " + countS(mass));
-            System.Console.WriteLine("Сумма элементов: " + sumMass(mass));
-            System.Console.ReadKey();
+            Console.WriteLine("Введите количество элементов массива");
+            int n = int.Parse(Console.ReadLine());
+            int[] arr = new int[n];
+            Random r = new Random();
+            int count = 0;
+            
+            for(int i=0; i<n; i++)
+            {
+                arr[i] = r.Next(-2, 3);
+                if (arr[i] > 0) count++;
+            }
+
+            Console.WriteLine("Массив до преобразования");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write(arr[i] + " ");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Количество положительных элементов массива: "+count);
+
+            int indexLastZero = -1;
+            for(int i=0; i<n; i++)
+            {
+                if(arr[i]==0)
+                {
+                    indexLastZero = i;
+                }
+            }
+            if(indexLastZero!=-1)
+            {
+                int sum = 0;
+                for (int i=indexLastZero; i<n; i++)
+                {
+                    sum += arr[i];
+                }
+                Console.WriteLine("Сумма элементов массива, расположенных после последнего элемента, равного нулю: " + sum);
+            }
+            else
+                Console.WriteLine("В массиве нет элементов равных нулю");
+            
+            int[] tempArr = new int[n];
+            int t = 0;
+
+            for(int i=0; i<n; i++)
+            {
+                if (arr[i] < 1)
+                    tempArr[t++] = arr[i];
+            }
+
+            for(int i=0; i<n; i++)
+            {
+                if (arr[i] >= 1)
+                    tempArr[t++] = arr[i];
+            }
+
+            arr = tempArr;
+            Console.WriteLine("Массив после преобразования");
+            for(int i=0; i<n; i++)
+            {
+                Console.Write(arr[i]+" ");
+            }
+            Console.WriteLine();
+
+            Console.ReadKey();
+
         }
     }
 }
