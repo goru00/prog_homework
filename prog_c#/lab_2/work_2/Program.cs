@@ -1,35 +1,126 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace Круги
 {
     class Program
     {
         static void Main(string[] args)
         {
-            double x = 0, y = 0;
-            int r = 0;
-            try
+            // Радиус
+            double R, R2;
+
+            // Координаты точки
+            double X, Y;
+
+            // Признак попадания точки в верхнюю часть рисунка
+            bool up;
+
+            // Признак попадания точки в нижнюю часть рисунка
+            bool down;
+
+            // Ввод и контроль параметра
+            Console.Write("Радиус: ");
+            if (!Double.TryParse(Console.ReadLine(), out R))
             {
-                Console.Write("Введите x: ");
-                x = Convert.ToDouble(Console.ReadLine());
-                Console.Write("Введите y: ");
-                y = Convert.ToDouble(Console.ReadLine());
-                Console.Write("Введите r: ");
-                r = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Радиус ошибочен");
             }
-            catch (Exception error)
+            else if (R <= 0.0)
             {
-                Console.WriteLine(error.Message);
+                Console.WriteLine("Радиус не положительный");
             }
-            if (Math.Sqrt(x * x + y * y) <= r)
+            else
             {
-                if ((y >= 0 && y >= x) || (y <= 0 && y <= x))
-                    Console.WriteLine("Точка попадает в закр.область");
-                else Console.WriteLine("Точка НЕ попадает в закр.область");
+                // Выполняем несколько тестов
+                Console.WriteLine("Вводите координаты точек до тех пор,\nпока не будет введена точка (0,0)");
+                R2 = R * R;
+                do
+                {
+                    Console.Write("X: ");
+                    if (!Double.TryParse(Console.ReadLine(), out X))
+                    {
+                        Console.WriteLine("Координата ошибочна");
+                        break;
+                    }
+                    Console.Write("Y: ");
+                    if (!Double.TryParse(Console.ReadLine(), out Y))
+                    {
+                        Console.WriteLine("Координата ошибочна");
+                        break;
+                    }
+
+                    // Для большей точности не будем использовать извлечение квадратного корня
+                    up = Y >= 0.0 && X >= -R && (X + R) * (X + R) + Y * Y <= R2;
+                    down = Y <= 0.0 && X <= R && (X - R) * (X - R) + Y * Y <= R2;
+                    Console.WriteLine(up || down ? "Точка попадает в закрашенную область" : "Точка не попадает в закрашенную область");
+                } while (X != 0.0 || Y != 0.0);
+            }
+            Console.Write("Для завершения работы нажмите любую клавишу...");
+            Console.ReadKey();
+        }
+    }
+}using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Круги
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Радиус
+            double R, R2;
+
+            // Координаты точки
+            double X, Y;
+
+            // Признак попадания точки в верхнюю часть рисунка
+            bool up;
+
+            // Признак попадания точки в нижнюю часть рисунка
+            bool down;
+
+            // Ввод и контроль параметра
+            Console.Write("Радиус: ");
+            if (!Double.TryParse(Console.ReadLine(), out R))
+            {
+                Console.WriteLine("Радиус ошибочен");
+            }
+            else if (R <= 0.0)
+            {
+                Console.WriteLine("Радиус не положительный");
+            }
+            else
+            {
+                // Выполняем несколько тестов
+                Console.WriteLine("Вводите координаты точек до тех пор,\nпока не будет введена точка (0,0)");
+                R2 = R * R;
+                do
+                {
+                    Console.Write("X: ");
+                    if (!Double.TryParse(Console.ReadLine(), out X))
+                    {
+                        Console.WriteLine("Координата ошибочна");
+                        break;
+                    }
+                    Console.Write("Y: ");
+                    if (!Double.TryParse(Console.ReadLine(), out Y))
+                    {
+                        Console.WriteLine("Координата ошибочна");
+                        break;
+                    }
+
+                    // Для большей точности не будем использовать извлечение квадратного корня
+                    up = Y >= 0.0 && X >= -R && (X + R) * (X + R) + Y * Y <= R2;
+                    down = Y <= 0.0 && X <= R && (X - R) * (X - R) + Y * Y <= R2;
+                    Console.WriteLine(up || down ? "Точка попадает в закрашенную область" : "Точка не попадает в закрашенную область");
+                } while (X != 0.0 || Y != 0.0);
             }
             Console.ReadKey();
         }
