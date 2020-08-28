@@ -1,216 +1,152 @@
 ﻿#include<iostream>
 #include<string>
+#include <algorithm> // дабы не писать огромные тернарные условия, проще использовать функцию max
 using namespace std;
-template<class T>
-class Node
-{
-private:
-	Node* left, * right;
-	T data;
-	int height;
-public:
-	Node(T data = T())
-	{
-		this->data = data;
-		left = right = NULL;
-		height = 1;
-	}
-	Node* GetLeft() { return left; }
-	void SetLeft(Node* left) { this->left = left; }
-	Node* GetRight() { return right; }
-	void SetRight(Node* right) { this->right = right; }
-	T GetData() { return data; }
-	void SetData(T data) { this->data = data; }
-	int GetHeight() { return height; }
-	void SetHeight(int height) { this->height = height; }
-};
 template<class T>
 class Tree
 {
+public:
+	template<class Data>
+	class Node
+	{
+	public:
+		T data;
+		Node<T>* left, * right;
+		int height;
+		Node(T data = T())
+		{
+			this->data = data;
+			right = left = NULL;
+			height = 0;
+		}
+	};
+	Tree()
+	{
+		root = NULL;
+	}
+	~Tree()
+	{
+
+	}
+	Node<T>* GetRoot() { return root; }
+	int Height(Node<T>*);
+	Node<T>* LeftRotate(Node<T>* n)
+	{
+		Node<T>* child = n->right->left, * parent = n->right;
+		n->right->left = n;
+		n->right = child;
+		n->height = max(Height(n->left), Height(n->right)) + 1;
+		if (n->right != NULL) n->right->height = max(Height(n->right->left), Height(n->right->right)) + 1;
+		return parent;
+	}
+	Node<T>* RightRotate(Node<T>* n)
+	{
+		Node<T>* child = n->left->right, * parent = n->left;
+		n->left->right = n;
+		n->left = child;
+		n->height = max(Height(n->left), Height(n->right)) + 1;
+		if (n->left != NULL) n->left->height = max(Height(n->left->left), Height(n->left->right)) + 1;
+		return parent;
+	}
+	Node<T>* LeftRightRotate(Node<T>* n)
+	{
+		n->left = LeftRotate(n->left);
+		return RightRotate(n);
+	}
+	Node<T>* RightLeftRotate(Node<T>* n)
+	{
+		n->right = RightRotate(n->right);
+		return LeftRotate(n);
+	}
+	void Insert(T data) { root = Insert(root, data); }
+	Node<T>* Insert(Node<T>* n, T data) // доавбление элемента с последующей балансировкой дерева
+	{
+		if (n == NULL) return n = new Node<T>(data);
+		else
+		{
+			if (data == n->data) return n;
+			else if (data < n->data) n->left = Insert(n->left, data);
+			else n->right = Insert(n->right, data);
+		}
+		if (Height(n->left) - Height(n->right) == 2)
+		{
+			if (data < n->left->data) n = RightRotate(n);
+			else n = LeftRightRotate(n);
+		}
+		else if (Height(n->left) - Height(n->right) == -2)
+		{
+			if (data > n->right->data) n = LeftRotate(n);
+			else n = RightLeftRotate(n);
+		}
+		n->height = max(Height(n->left), Height(n->right)) + 1;
+		return n;
+	}
+	void Show()
+	{
+		Show(root);
+	}
+	void Show(Node<T>* n)
+	{
+		if (n == NULL) return;
+		Show(n->left);
+		cout << n->data << " " << n->height << endl;
+		Show(n->right);
+	}
+	bool Empty() { return root == NULL; }
 private:
 	Node<T>* root;
-public:
-	Tree();
-	~Tree();
-	Node<T>* GetRoot() { return root; }
-	bool Empty() { return root == NULL; }
-	int Height(Node<T>*);
-	int BFactor(Node<T>*);
-	void FixHeight(Node<T>*);
-	Node<T>* RotateRight(Node<T>*);
-	Node<T>* RotateLeft(Node<T>*);
-	Node<T>* Balance(Node<T>*);
-	Node<T>* Insert(T);
-	void Show();
-	void Show(Node<T>*);
 };
-template<class T>
-Tree<T>::Tree()
-{
-	root = NULL;
-}
-template<class T>
-Tree<T>::~Tree()
-{
-
-}
 template<class T>
 int Tree<T>::Height(Node<T>* n)
 {
-	return n ? n->GetHeight() : 0;
-}
-template<class T>
-int Tree<T>::BFactor(Node<T>* n)
-{
-	return Height(n->GetRight()) - Height(n->GetLeft());
-}
-template<class T>
-void Tree<T>::FixHeight(Node<T>* n)
-{
-	int hl = Height(n->GetLeft());
-	int hr = Height(n->GetRight());
-	n->SetHeight((hl > hr ? hl : hr) + 1);
-}
-template<class T>
-Node<T>* Tree<T>::RotateRight(Node<T>* n)
-{
-	Node<T>* temp = n->GetLeft();
-	n->SetLeft(temp->GetRight());
-	temp->SetRight(n);
-	FixHeight(n);
-	FixHeight(temp);
-	return temp;
-}
-template<class T>
-Node<T>* Tree<T>::RotateLeft(Node<T>* n)
-{
-	Node<T>* temp = n->GetRight();
-	n->SetRight(temp->GetLeft());
-	temp->SetLeft(n);
-	FixHeight(n);
-	FixHeight(temp);
-	return temp;
-}
-template<class T>
-Node<T>* Tree<T>::Balance(Node<T>* n)
-{
-	FixHeight(n);
-	if (BFactor(n) == 2)
-	{
-		if (BFactor(n->GetRight()) < 0)
-		{
-			n->SetRight(RotateRight(n->GetRight()));
-		}
-		return RotateLeft(n);
-	}
-	if (BFactor(n) == -2)
-	{
-		if (BFactor(n->GetLeft()) < 0)
-		{
-			n->SetLeft(RotateLeft(n->GetLeft()));
-		}
-		return RotateRight(n);
-	}
-	return n;
-}
-template<class T>
-Node<T>* Tree<T>::Insert(T data)
-{
-	if (root == NULL)
-	{
-		root = new Node<T>(data);
-		return root;
-	}
-	Node<T>* current = root;
-	while (true)
-	{
-		if (data < current->GetData())
-		{
-			if (current->GetLeft() == NULL)
-			{
-				current->SetLeft(new Node<T>(data));
-				Balance(current);
-				return current->GetLeft();
-			}
-			current = current->GetLeft();
-		}
-		else if (data > current->GetData())
-		{
-			if (current->GetRight() == NULL)
-			{
-				current->SetRight(new Node<T>(data));
-				Balance(current);
-				return current->GetRight();
-			}
-			current = current->GetRight();
-		}
-		else return NULL;
-	}
-}
-template<class T>
-void Tree<T>::Show()
-{
-	Show(root);
-}
-template<class T>
-void Tree<T>::Show(Node<T>* n)
-{
-	if (n)
-	{
-		Show(n->GetLeft());
-		cout << n->GetData() << n->GetHeight() << endl;
-		Show(n->GetRight());
-	}
+	return n == NULL ? -1 : n->height;
 }
 class Data
 {
 private:
-	int fname; string lname, street, org;
+	int num; // значение узла
+	string side; // направление, которое принимает узел
 public:
-	Data() : fname(0), lname(""), street(""), org("") { }
-	Data(int fname, string lname, string street, string org)
+	Data() : num(0), side("") { }
+	Data(int num, string side)
 	{
-		this->fname = fname;
-		this->lname = lname;
-		this->street = street;
-		this->org = org;
+		this->num = num;
+		this->side = side;
 	}
-	friend bool operator<(const Data&, const Data&);
-	friend bool operator>(const Data&, const Data&);
-	friend ostream& operator<<(ostream&, const Data&);
+	friend bool operator<(const Data& arg1, const Data& arg2)
+	{
+		return (arg1.num < arg2.num);
+	}
+	friend bool operator>(const Data& arg1, const Data& arg2)
+	{
+		return (arg1.num > arg2.num);
+	}
+	friend bool operator==(const Data& arg1, const Data& arg2)
+	{
+		return (arg1.num == arg2.num);
+	}
+	friend ostream& operator<<(ostream& out, const Data& arg)
+	{
+		out << arg.num << " " << arg.side;
+		return out;
+	}
 };
-bool operator<(const Data& arg1, const Data& arg2)
-{
-	return (arg1.fname < arg2.fname);
-}
-bool operator>(const Data& arg1, const Data& arg2)
-{
-	return (arg1.fname > arg2.fname);
-}
-ostream& operator<<(ostream& out, const Data& arg)
-{
-	out << arg.fname << "\t" << arg.lname << "\t" << arg.street << "\t" << arg.org << endl;
-	return out;
-}
 int main()
 {
-	setlocale(0, "");
-	const int size = 6;
+	const int n = 5;
 	Data tab[] = {
-		{1006, "Иванов Алеша",    "2009-10-30", "Старшая"},
-		{1002, "Сидорова Наташа", "2008-02-27", "Старшая"},
-		{1001, "Петрова Катя",    "2009-09-17", "Старшая"},
-		{1003, "Петров Артем",    "2006-07-23", "Младшая"},
-		{1004, "Фролов Антон",    "2008-12-31", "Младшая"},
-		{1005, "Федорова Ирина",  "2009-09-12", "Подготовительная"}
+		{10, "left"},
+		{5, "middle"},
+		{3, "left"},
+		{11, "right"},
+		{12, "right"}
 	};
-	Data elem;
 	Tree<Data>* tree1 = new Tree<Data>();
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < n; i++)
 	{
 		tree1->Insert(tab[i]);
 	}
-	if (tree1->Empty()) cout << "Дерево пустое" << endl;
-	else tree1->Show();
+	if (tree1->Empty()) cout << "Дерево пустое." << endl;
+	else tree1->Show(); // обход дерева
 	return 0;
 }
