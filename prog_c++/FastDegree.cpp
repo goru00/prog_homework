@@ -7,14 +7,8 @@ int f(int x, int n)
 	while (n)
 	{
 		if (n == 0) return 1;
-		if (n != 0 && n % 2 == 0)
-		{
-			res *= x/2 * x;
-		}
-		if (n != 0 && n % 2 != 0)
-		{
-			res *= x;
-		}
+		if (n != 0 && n % 2 == 0) res *= x/2 * x;
+		if (n != 0 && n % 2 != 0) res *= x;
 		--n;
 	}
 	return res;
