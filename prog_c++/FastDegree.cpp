@@ -4,16 +4,10 @@ using namespace std;
 int f(int x, int n)
 {
 	int res = 1;
-	if (n == 0)
+	while (n)
 	{
-		return 1;
-	}
-	else {
-		while (n)
-		{
-			res *= x;
-			--n;
-		}
+		res *= x;
+		--n;
 	}
 	return res;
 }
