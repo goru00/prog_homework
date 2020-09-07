@@ -218,7 +218,7 @@ int main()
 	Data elem = { 3, "left" };
 	if (tree1->Search(elem)) cout << "Элемент найден" << endl;
 	else cout << "Элемент не найден" << endl;
-		cout << "Удалим элемент" << endl;
+	cout << "Удалим элемент" << endl;
 	if (tree1->Delete(elem)) cout << "Элемент удален" << endl;
 	else cout << "Элемент не найден" << endl;
 	if (tree1->Empty()) cout << "Дерево пустое." << endl;
@@ -228,14 +228,13 @@ int main()
 	else cout << "Элемент не найден" << endl;
 	if (tree1->Empty()) cout << "Дерево пустое." << endl;
 	else tree1->Show(); // обход дерева
-	//Data o_elem = { 10, "left" };
-	//Data n_elem = { 8, "left" };  
-	// не работает
-	/*if (tree1->Update(n_elem, o_elem))
+	Data o_elem = { 12, "middle" };
+	Data n_elem = { 8, "left" };  
+	if (tree1->Update(n_elem, o_elem))
 	{
 		cout << "Элемент обновлен\n";
 		tree1->Show();
 	}
-	else cout << "Элемент не найден\n";*/
+	else cout << "Элемент не найден\n";
 	return 0;
 }
