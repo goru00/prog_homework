@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Третьяков Д.А</title>
+    <style>
+        body
+        {
+            margin: 0 8px 8px 24px;
+        }
+        main
+        {
+            width: auto;
+        }
+        header
+        {
+            display: block;
+        }
+        h1
+        {
+            color: #454545;
+            font-size: 36px;
+            line-height: 45px;
+            font-weight: bold;
+        }
+        .paragraph__1
+        {
+            font: 12mm Serif;
+            color: blue;
+            background-color: lightgrey;
+            line-height: 18mm;
+            word-spacing: 6mm;
+            letter-spacing: 1mm;
+            text-shadow: -1mm -1mm 2mm yellow;
+        }
+        .paragraph__2
+        {
+            font: 18pt Arial;
+            color: green;
+            background-color: yellow;
+            font-weight: 700;
+            line-height: 22pt;
+            word-spacing: 4ex;
+            letter-spacing: 1ex;
+            text-shadow: 4px 5px 3px white;
+        }
+        .paragraph__1::first-letter
+        {
+            font: 16mm Sans-Serif;
+            font-style: italic;
+            color: red;
+        }
+        .paragraph__2::first-letter
+        {
+            font: 22pt Serif;
+            color: red;
+        }
+        .wrapper {
+            max-width: 1350px;
+            display: grid;
+            border: solid 1px #000;
+            grid-template-columns: 300px repeat(1, 1fr) 650px;
+        }
+        .one {
+            border: solid 1px #000;
+            grid-column: 1 / 1;
+            grid-row: 1;
+            height: 200px;
+            max-width: 300px;
+        }
+        .two {
+            border: solid 1px #000;
+            grid-column: 2 / 4;
+            grid-row: 1;
+        }
+        .three {
+            border: solid 1px #000;
+            grid-column: 3;
+            grid-row: 2 / 5;
+            max-width: 650px;
+        }
+        .four {
+            border: solid 1px #000;
+            height: 300px;
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .five {
+            border: solid 1px #000;
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .six {
+            border: solid 1px #000;
+            height: 250px;
+            grid-column: 1 / 3;
+            grid-row: 4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+        Третьяков Д.А
+        <br>
+        ИВТ-31 Вариант 17
+        </h1>
+    </header>
+    <main>
+        <h1>Задание 1</h1>
+        <ol type="a" start="4" reversed>
+            <li>Иванов П.С.</li>
+            <li>Сидоров А.Г.</li>
+            <li>Петрова М.В.</li>
+        </ol>
+        <h1>Задание 2</h1>
+        <table border="2" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td width="230px" height="375" rowspan="2" align="center">A</td>
+                    <td colspan="2" height="135px" align="center">B</td>
+                </tr>
+                <tr>
+                    <td width="340px" align="center">C</td>
+                    <td width="425px" align="center">D</td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center" height="145px">E</td>
+                </tr>
+            </tbody>
+        </table>
+        <h1>Задание 3</h1>
+        <map name="Map">
+            <area shape="poly" coords="0,0,350,0,0,500" href="A.html" alt="A">
+            <area shape="poly" coords="350,0,350,500,0,500" href="C.html" alt="C">
+            <area shape="circle" coords="568,348,150" href="D.html" alt="D">
+            <area shape="poly" coords="350,0,800,0,800,500,350,500" href="B.html" alt="B">
+        </map>
+        <img src="1.png" alt="Задание 3" usemap="#Map" width="800px" height="500px">
+        <br>
+        <h1>Задание 4</h1>
+        <div class="paragraph__1">
+            У Попа была собака.
+            <br>
+            Он ее любил.
+        </div>
+        <div class="paragraph__2">
+            Она съела кусок мяса.
+            <br>
+            Он ее убил.
+        </div>
+        <br>
+        <h1>Задание 5</h1>
+        <div class="wrapper">
+            <div class="one">One</div>
+            <div class="two">Two</div>
+            <div class="three">Three</div>
+            <div class="five">Five</div>
+            <div class="six">Six</div>
+            <div class="four">Four</div>
+        </div>
+    </main>
+</body>
+</html>

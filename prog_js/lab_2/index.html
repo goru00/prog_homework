@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Третьяков Д.А ИВТ-31</title>
+    <style>
+        body
+        {
+            margin: 0 8px 8px 24px;
+        }
+        main
+        {
+            width: auto;
+        }
+        header
+        {
+            display: block;
+        }
+        h1
+        {
+            color: #454545;
+            font-size: 36px;
+            line-height: 45px;
+            font-weight: bold;
+        }
+        table
+        {
+            margin: 0 auto;
+            padding: 0;
+        }
+        .field
+        {
+            font-size: 18px;
+            vertical-align: top;
+            width: 260px;
+            text-align: left;
+        }
+        span
+        {
+            margin: 4px 0px 0px 4px;
+            position: absolute;
+        }
+        input
+        {
+            padding: 4px 4px 4px 4px;
+        }
+        input:valid
+        {
+            border: solid 1px green;
+        }
+        input:invalid
+        {
+            border: solid 1px red
+        }
+        label
+        {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+        Третьяков Д.А
+        <br>
+        ИВТ-31 Вариант 17
+        </h1>
+    </header>
+    <main>
+        <form action>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="field">Шиф.специальности: </td>
+                        <td>
+                            <input name="num_proff" type="text" size="8" placeholder="99.99.99" pattern="\d\d+(\.\d{2}\.\d{2})?" onfocus="this.placeholder = ''" onblur="this.placeholder = '99.99.99'" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field">Направление подготовки: </td>
+                        <td>
+                            <input name="direction" type="text" size="60" required placeholder="Интернет-технологии" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Интернет-технологии'">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field">Форма обучения: </td>
+                        <td>
+                            <label><input type="radio" name="input__study" checked value="s1">«Очная»</label><br>
+                            <label><input type="radio" name="input__study" value="s2">«Заочная»</label><br>
+                            <label><input type="radio" name="input__study" value="s3">«Очно-заочное»</label><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field">Срок обучения: </td>
+                        <td>
+                            <input type="range"  style="cursor: pointer;padding: 0;" name="studytime" id="st1" min="3" max="6" value="0" step="0.5">
+                            <span name="studytime" for="st1" id="st1_o">0.5</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field">Стоимость обучения (за год): </td>
+                        <td>
+                            <select name="price_group" id="pg"  style="cursor: pointer;">
+                                <option value="pg1">80000</option>
+                                <option value="pg2">90000</option>
+                                <option value="pg3">120000</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field">Кол-во мест: </td>
+                        <td>
+                            <input type="range" style="cursor: pointer;padding: 0;" name="countstudy" id="cs1" min="10" max="50" value="1" step="1">
+                            <span name="countstudy" for="cs1" id="cs1_o">10</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Отправить" style="cursor: pointer;">
+                            <input type="reset" value="Сбросить" style="cursor: pointer;">
+                        </td>   
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </main>
+    <!-- можно было сделать внутри input аргумент onchange, но я решил вынести это отдельно в script, чтобы было нагляднее-->
+    <script>
+        var timestudy = document.getElementById("st1");
+        var countstudy = document.getElementById("cs1");
+        var result_st1 = document.getElementById("st1_o");
+        var result_cs1 = document.getElementById("cs1_o");
+        st1_o.innerHTML = timestudy.value;
+        cs1_o.innerHTML = countstudy.value;
+
+        countstudy.oninput = function() {
+            cs1_o.innerHTML = this.value;
+        }
+
+        timestudy.oninput = function() {
+            st1_o.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>
