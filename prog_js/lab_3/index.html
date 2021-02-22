@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
     <title>Третьяков</title>
-    <script src="script/index.js"></script>
+    <style>
+        header
+        {
+            display: block;
+        }
+        h1
+        {
+            color: #454545;
+            font-size: 36px;
+            line-height: 45px;
+            font-weight: bold;
+        }
+        table
+        {
+            text-align: center;
+        }
+        thead
+        {
+            font-weight: 700;
+        }
+        button
+        {
+            cursor: pointer;
+            padding: 2px 4px 2px 4px;
+        }
+        .buttons
+        {
+            position: absolute;
+            left: 35%;
+            padding: 10px 0px 0px 0px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -70,5 +100,25 @@
             <button onclick="window.location.reload();">Сбросить</button>
         </div>
     </main>
+    <script>
+        const Sort = () => {
+            let table = document.getElementsByTagName('table')[0];
+            let rows = table.rows;
+            for (let i = 1; i < rows.length; i++)
+            {
+                for (let j = i + 1; j < rows.length; j++)
+                {
+                    if (rows[i].cells[3].innerHTML > rows[j].cells[3].innerHTML) 
+                    {
+                        [rows[i].innerHTML, rows[j].innerHTML] = [rows[j].innerHTML, rows[i].innerHTML];
+                    }
+                    if (rows[i].cells[3].innerHTML == rows[j].cells[3].innerHTML && rows[i].cells[2].innerHTML > rows[j].cells[2].innerHTML)
+                    {
+                        [rows[i].innerHTML, rows[j].innerHTML] = [rows[j].innerHTML, rows[i].innerHTML];
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
