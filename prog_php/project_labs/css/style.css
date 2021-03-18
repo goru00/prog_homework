@@ -1,0 +1,50 @@
+thead
+{
+    font-weight: 700;
+}
+main
+{
+    margin: 0 auto;
+    width: 690px;
+    left: 0;
+    right: 0;
+    position: relative;
+}
+table
+{
+    line-height: 36px;
+    font-size: 24px;
+}
+.container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.input__form__added input
+{
+    font-size: 16px;
+    padding: 4px 2px 4px 2px;
+    margin: 0 auto;
+    position: relative;
+}
+.input__country
+{
+    padding: 0 14px 0 0;
+}
+.input__num__player
+{
+    padding: 0 16px 0 0;
+}
+.input__country input
+{
+    border: solid 1px silver;
+}
+.input__country input:active
+{
+    border: solid 1px red;
+}
+.left
+{
+    float: left;
+}
