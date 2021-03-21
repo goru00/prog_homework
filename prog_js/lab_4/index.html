@@ -44,6 +44,7 @@
             float: left;
         }
     </style>
+    <script src="table.js"></script>
 </head>
 <body>
     <header>
@@ -54,68 +55,21 @@
         </h1>
     </header>
     <main>
-        <table id="table" border="2" cellpadding="30" cellspacing="5" align="center">
-            <thead>
-                <tr>
-                    <td>Страна</td>
-                    <td>№ игрока</td>
-                    <td>ФИО игрока</td>
-                    <td>Амплуа</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Россия</td>
-                    <td>10</td>
-                    <td>Семен Варламов</td>
-                    <td>Вратарь</td>
-                </tr>
-                <tr>
-                    <td>Россия</td>
-                    <td>3</td>
-                    <td>Евгений Малкин</td>
-                    <td>Нападающий</td>
-                </tr>
-                <tr>
-                    <td>Россия</td>
-                    <td>4</td>
-                    <td>Вячеслав Войнов</td>
-                    <td>Защитник</td>
-                </tr>
-                <tr>
-                    <td>Чехия</td>
-                    <td>6</td>
-                    <td>Баринка Михаил</td>
-                    <td>Защитник</td>
-                </tr>
-                <tr>
-                    <td>Чехия</td>
-                    <td>2</td>
-                    <td>Хемски Алеш</td>
-                    <td>Нападающий</td>
-                </tr>
-                <tr>
-                    <td>Чехия</td>
-                    <td>1</td>
-                    <td>Павелец Оджий</td>
-                    <td>Вратарь</td>
-                </tr>
-            </tbody>
-        </table>
-            <div class="input__form">
-                <div class="input__country left">
-                    <label for="country">Страна: </label>
-                    <input type="text" size="24" id="country" name="country_form">
-                </div>
-                <div class="input__num__player left">
-                    <label for="num_player">№ игрока</label>
-                    <input type="number" id="num_player" value="1" name="num_player_form">
-                </div>
-                <div class="input__form__buttons left">
-                    <button onclick="Find();" style="cursor: pointer;">Удалить запись</button>
-                    <button onclick="window.location.reload();" style="cursor: pointer;">Сбросить</button>
-                </div>
+        <table id="table" cellpadding="30" border="2" cellspacing="5" align="center"></table>
+        <div class="input__form">
+            <div class="input__country left">
+                <label for="country">Страна: </label>
+                <input type="text" size="24" id="country" name="country_form">
             </div>
+            <div class="input__num__player left">
+                <label for="num_player">№ игрока</label>
+                <input type="number" id="num_player" value="1" min="1" max="99" name="num_player_form">
+            </div>
+            <div class="input__form__buttons left">
+                <button onclick="Find();" style="cursor: pointer;">Удалить запись</button>
+                <button onclick="window.location.reload();" style="cursor: pointer;">Сбросить</button>
+            </div>
+        </div>
     </main>
     <script>
         const Find = () => {
@@ -123,7 +77,7 @@
             let rows = table.getElementsByTagName('tr');
             let country = document.getElementById('country');
             let num_player = document.getElementById('num_player');
-            for (let i = 1; i < rows.length; i++)
+            for (let i = 0; i < rows.length; i++)
             {
                 let t = rows[i].getElementsByTagName('td');
                 if (country.value === t[0].innerHTML && num_player.value === t[1].innerHTML) {
@@ -134,6 +88,30 @@
             }
             alert('Запись была не найдена!');
         };
+
+        let table = document.getElementsByTagName('table')[0];
+        let mycaption = table.createCaption();
+        let myhead = table.createTHead();
+        let mybody = table.createTBody();
+        console.log(typeof(_tbody));
+        if (_tbody == null) {
+            mybody.textContent = "Таблица пуста";
+        } else {
+            mycaption.innerHTML = _caption;
+            let myhead_row = myhead.insertRow(0);
+            for (let c_cell = 0; c_cell < _thead.length; c_cell++)
+            {
+                myhead_row.insertCell(c_cell).innerHTML = _thead[c_cell];
+            }
+            for (let c_row = 0; c_row < _tbody.length; c_row++)
+            {
+                let mybody_row = mybody.insertRow(c_row);
+                for (let c_cell = 0; c_cell < _tbody[c_row].length; c_cell++)
+                {
+                mybody_row.insertCell(c_cell).innerHTML = _tbody[c_row][c_cell];
+                }
+            }
+        }
     </script>
 </body>
 </html>
