@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Третьяков</title>
+    <style>
+        thead
+        {
+            font-weight: 700;
+        }
+        table
+        {
+            line-height: 36px;
+            font-size: 24px;
+        }
+        .input__form
+        {
+            font-size: 16px;
+            padding: 10px 0 10px 0;
+            margin: 0 auto;
+            width: 730px;
+            height: 220px;
+        }
+        .input__country
+        {
+            padding: 0 14px 0 0;
+        }
+        .input__num__player
+        {
+            padding: 0 16px 0 0;
+        }
+        .left
+        {
+            float: left;
+        }
+    </style>
+    <script src="table.js"></script>
+</head>
+<body>
+    <header>
+        <h1>
+            Третьяков Дмитрий
+            <br>
+            Вариант 17 ИВТ-31
+        </h1>
+    </header>
+    <main>
+        <table id="table" cellpadding="30" border="2" cellspacing="5" align="center"></table>
+        <div class="input__form">
+            <div class="input__country left">
+                <label for="country">Страна: </label>
+                <input type="text" size="24" id="country" name="country_form">
+            </div>
+            <div class="input__num__player left">
+                <label for="num_player">№ игрока: </label>
+                <input type="number" id="num_player" value="1" min="1" max="99" name="num_player_form">
+            </div>
+            <div class="input__lf__name left">
+                <label for="lf_name">ФИО игрока: </label>
+                <input type="text" id="lf_name" name="lf_name_form">
+            </div>
+            <div class="input__amp left">
+                <label for="amp">Амплуа: </label>
+                <input type="text" id="amp" name="amp_form">
+            </div>
+            <div class="input__form__buttons left">
+                <button onclick="Find();" style="cursor: pointer;">Добавить запись</button>
+                <button onclick="window.location.reload();" style="cursor: pointer;">Сбросить</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        const Find = () => {
+            let table = document.getElementsByTagName('tbody')[0];
+            let rows = table.getElementsByTagName('tr');
+            let country = document.getElementById('country');
+            let num_player = document.getElementById('num_player');
+            let lf_name = document.getElementById('lf_name');
+            let amp = document.getElementById('amp');
+            for (let i = 0; i < rows.length; i++)
+            {
+                var t = rows[i].getElementsByTagName('td');
+                if (country.value === t[0].innerHTML && num_player.value === t[1].innerHTML) {
+                    alert('Запись с таким значениями полей "Страна" и "№ игрока" уже существует');
+                    return;
+                }
+            }
+            t = table.insertRow();
+            t.insertCell().innerHTML = country.value;
+            t.insertCell().innerHTML = num_player.value;
+            t.insertCell().innerHTML = lf_name.value;
+            t.insertCell().innerHTML = amp.value;
+        };
 
+        let table = document.getElementsByTagName('table')[0];
+        let mycaption = table.createCaption();
+        let myhead = table.createTHead();
+        let mybody = table.createTBody();
+        if (_tbody == null) {
+            mybody.textContent = "Таблица пуста";
+        } else {
+            mycaption.innerHTML = _caption;
+            let myhead_row = myhead.insertRow(0);
+            for (let c_cell = 0; c_cell < _thead.length; c_cell++)
+            {
+                myhead_row.insertCell(c_cell).innerHTML = _thead[c_cell];
+            }
+            for (let c_row = 0; c_row < _tbody.length; c_row++)
+            {
+                let mybody_row = mybody.insertRow(c_row);
+                for (let c_cell = 0; c_cell < _tbody[c_row].length; c_cell++)
+                {
+                mybody_row.insertCell(c_cell).innerHTML = _tbody[c_row][c_cell];
+                }
+            }
+        }
+    </script>
+</body>
+</html>
