@@ -1,5 +1,5 @@
 const Sort = () => {
-    let table = document.getElementsByTagName('table')[0];
+    let table = document.getElementsByTagName('tbody')[0];
     let rows = table.rows;
     for (let i = 0; i < rows.length; i++)
     {
