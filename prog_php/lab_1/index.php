@@ -18,7 +18,6 @@
 </header>
 <main>
 <?php
-    require_once 'src/create.php';
     require_once 'src/select.php';
 ?>
 <button onclick="Sort();" style="cursor: pointer;">Отсортировать</button>

@@ -6,7 +6,7 @@
     
     $query = "SELECT * FROM `Игроки`";
     $result = mysqli_query($link, $query)
-        or die("Ошибка: " . mysqli_error($link));
+        or require_once 'create.php';
     if ($result)
     {
         $rows = mysqli_num_rows($result);
