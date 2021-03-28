@@ -113,33 +113,37 @@
                 <input type="text" id="amp" name="amp_form">
             </div>
             <div class="input__form__buttons left">
-                <button onclick="Find();" style="cursor: pointer;">Добавить запись</button>
+                <button id="insert" style="cursor: pointer;">Добавить запись</button>
                 <button onclick="window.location.reload();" style="cursor: pointer;">Сбросить</button>
             </div>
         </div>
     </main>
     <script>
-        const Find = () => {
+        
+        document.getElementById('insert').addEventListener("click", function() {
             let table = document.getElementsByTagName('tbody')[0];
             let rows = table.getElementsByTagName('tr');
             let country = document.getElementById('country');
             let num_player = document.getElementById('num_player');
             let lf_name = document.getElementById('lf_name');
             let amp = document.getElementById('amp');
-            for (let i = 0; i < rows.length; i++)
-            {
-                var t = rows[i].getElementsByTagName('td');
-                if (country.value === t[0].innerHTML && num_player.value === t[1].innerHTML) {
-                    alert('Запись с таким значениями полей "Страна" и "№ игрока" уже существует');
-                    return;
+            if (country.value != ""){
+                for (let i = 0; i < rows.length; i++)
+                {
+                    var t = rows[i].getElementsByTagName('td');
+                    if (country.value === t[0].innerHTML && num_player.value === t[1].innerHTML) {
+                        alert('Запись с таким значениями полей "Страна" и "№ игрока" уже существует');
+                        return;
+                    }
                 }
-            }
-            t = table.insertRow();
-            t.insertCell().innerHTML = country.value;
-            t.insertCell().innerHTML = num_player.value;
-            t.insertCell().innerHTML = lf_name.value;
-            t.insertCell().innerHTML = amp.value;
-        };
+                t = table.insertRow();
+                t.insertCell().innerHTML = country.value;
+                t.insertCell().innerHTML = num_player.value;
+                t.insertCell().innerHTML = lf_name.value;
+                t.insertCell().innerHTML = amp.value;
+                console.log(true);
+            } else alert('Не все поля формы были заполнены!');
+        });
     </script>
 </body>
 </html>
