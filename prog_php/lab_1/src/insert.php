@@ -15,6 +15,6 @@
         $result = mysqli_query($link, $query)
             or die("Ошибка: " . mysqli_error($link));
         mysqli_close($link);
-        header('Location: ../index.php');
+        header('../index.php');
     }
 ?>
