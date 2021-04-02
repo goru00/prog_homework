@@ -69,9 +69,19 @@
     ((equal (car L) q) (cons (car L) (collect_append (cdr L) q)))
     (t (collect_append (cdr L) q))))
 
+(defun FORALL (L)
+  (cond
+    ((equal (P L) NIL) NIL)
+    (t)))
+(defun P (L)
+  (cond
+    ((null L) nil)
+    ((member L NIL) T)
+    (t nil)))
+
 (defun FORSOME (L)
   (cond
-    ((equal L NIL) NIL)
+    ((equal (P L) NIL) NIL)
     (t)))
 (defun P (L)
   (cond
