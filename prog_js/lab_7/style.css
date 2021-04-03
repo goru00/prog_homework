@@ -1,0 +1,29 @@
+thead
+        {
+            font-weight: 700;
+        }
+        table
+        {
+            line-height: 36px;
+            font-size: 24px;
+        }
+        tbody > tr 
+        {
+            cursor: pointer;
+        }
+        .form__command
+        {
+            font-size: 16px;
+            padding: 10px 0 10px 0;
+            margin: 0 auto;
+            width: 720px;
+            height: 220px;
+        }
+        input
+        {
+            padding: 0 22px 0 0;
+        }
+        .left
+        {
+            float: left;
+        }
