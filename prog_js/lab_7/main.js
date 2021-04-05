@@ -22,26 +22,21 @@ table.addEventListener("click", function(row_target){
 });
 
 document.getElementById('insert').addEventListener("click", function() {
-    let cell;
-    if (country.value != "" && num_player.value != "") {
-        for (counter = 0; counter < rows.length; counter++)
+    if (country.value != "" && num_player.value != ""){
+        for (let i = 0; i < rows.length; i++)
         {
-            cell = rows[counter].getElementsByTagName('td');
-            if ((cell[0].innerHTML == country.value && cell[1].innerHTML == num_player.value) && counter != row_counter)
-            {
-                alert('Запись с полем "Страна" и "№ игрока" уже существует');
+            var t = rows[i].getElementsByTagName('td');
+            if (country.value === t[0].innerHTML && num_player.value === t[1].innerHTML) {
+                alert('Запись с таким значениями полей "Страна" и "№ игрока" уже существует');
                 return;
             }
         }
-    } else {
-        alert('Не все поля формы были заполнены!');
-        return;
-    }
-    cell = table.insertRow();
-    cell.insertCell().innerHTML = country.value;
-    cell.insertCell().innerHTML = num_player.value;
-    cell.insertCell().innerHTML = lf_name.value;
-    cell.insertCell().innerHTML = amp.value;
+        t = table.insertRow();
+        t.insertCell().innerHTML = country.value;
+        t.insertCell().innerHTML = num_player.value;
+        t.insertCell().innerHTML = lf_name.value;
+        t.insertCell().innerHTML = amp.value;
+    } else alert('Не все поля формы были заполнены!');
 });
 
 document.getElementById('update').addEventListener("click", function() {
