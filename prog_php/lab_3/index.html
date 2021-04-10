@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Третьяков</title>
+    <script>
+        var XMLHttpRequestObject = false;
+        if (window.XMLHttpRequest)
+        {
+            XMLHttpRequestObject = new XMLHttpRequest();
+        } else if (window.ActiveXObject)
+        {
+            XMLHttpRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (window.history.replaceState)
+        {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+    <style>
+        thead
+        {
+            font-weight: bold;
+        }
+        button
+        {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            Третьяков Дмитрий
+            <br>
+            Вариант 17 ИВТ-31
+        </h1>
+    </header>
+    <main>
+        <div class="result"></div>
+        <button id="btnShowTable">Показать таблицу</button>
+        <button id="btnShowForm">Показать форму</button>
+        <div id="container">
+            Тут контент
+        </div>
+    </main>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

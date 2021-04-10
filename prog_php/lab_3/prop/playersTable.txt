@@ -1,0 +1,48 @@
+<table id="table" border="2" cellpadding="30" cellspacing="5">
+    <thead>
+        <tr>
+            <td>Страна</td>
+            <td>№ игрока</td>
+            <td>ФИО игрока</td>
+            <td>Амплуа</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Россия</td>
+            <td>10</td>
+            <td>Семен Варламов</td>
+            <td>Вратарь</td>
+        </tr>
+        <tr>
+            <td>Россия</td>
+            <td>3</td>
+            <td>Евгений Малкин</td>
+            <td>Нападающий</td>
+        </tr>
+        <tr>
+            <td>Россия</td>
+            <td>4</td>
+            <td>Вячеслав Войнов</td>
+            <td>Защитник</td>
+        </tr>
+        <tr>
+            <td>Чехия</td>
+            <td>6</td>
+            <td>Баринка Михаил</td>
+            <td>Защитник</td>
+        </tr>
+        <tr>
+            <td>Чехия</td>
+            <td>2</td>
+            <td>Хемски Алеш</td>
+            <td>Нападающий</td>
+        </tr>
+        <tr>
+            <td>Чехия</td>
+            <td>1</td>
+            <td>Павелец Оджий</td>
+            <td>Вратарь</td>
+        </tr>
+    </tbody>
+</table>

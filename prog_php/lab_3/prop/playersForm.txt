@@ -1,0 +1,26 @@
+<form action="" method="get" name="players">
+    <label for="num_player">№ игрока: </label>
+    <input type="range" name="num_player" min="1" max="25" step="1" value="1" onchange="document.getElementById('num_player_range').innerHTML = this.value">
+    <span id="num_player_range">1</span>
+    <br>
+    <label for="country">Страна: </label>
+    <label for="country">
+        <input type="radio" value="Р" name="country">Р
+    </label>
+    <label for="country">
+        <input type="radio" value="Ч" name="country" checked>Ч
+    </label>
+    <br>
+    <label for="">ФИО игрока: </label>
+    <input type="text" name="name_player" placeholder="Введите фамилию и имя хоккеиста" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите фамилию и имя хоккеиста'">
+    <br>
+    <label for="">Амплуа: </label>
+    <select name="amp[]" id="amp">
+        <option value="Нападающий">Нападающий</option>
+        <option value="Защитник">Защитник</option>
+        <option value="Вратарь">Вратарь</option>
+    </select>
+    <br>
+    <button type="button" onclick="ValidateForm();">Отправить данные</button>
+    <button type="reset">Сбросить</button>
+</form>
