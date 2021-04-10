@@ -57,10 +57,16 @@
                         $num_player_old = htmlentities(mysqli_real_escape_string($link, $_POST['num_player_old']));
                         $amp_old = htmlentities(mysqli_real_escape_string($link, $_POST['amp_old']));
                         $name_player_old = htmlentities(mysqli_real_escape_string($link, $_POST['name_player_old']));
-                        $query = "UPDATE `Игроки` SET `№ игрока`='$num_player', `Страна`='$country', `ФИО игрока`='$name_player', `Амплуа`='$amp' ";
-                        $query .= "WHERE `№ игрока`='$num_player_old' AND `Страна`='$country_old' AND `ФИО игрока`='$name_player_old' AND `Амплуа`='$amp_old'";
+                        $query = "select exists(select * from `Игроки` WHERE `№ игрока`='$num_player_old'  AND `Страна`='$country_old' AND `ФИО игрока`='$name_player_old' AND `Амплуа`='$amp_old')";
                         $result = mysqli_query($link, $query);
-                        if (!$result) echo "<h1>Невозможно обновить запись: </h1>" . mysqli_error($link);
+                        $row = mysqli_fetch_row($result);
+                        if ($row[0] > 0)
+                        {
+                            $query = "UPDATE `Игроки` SET `№ игрока`='$num_player', `Страна`='$country', `ФИО игрока`='$name_player', `Амплуа`='$amp' ";
+                            $query .= "WHERE `№ игрока`='$num_player_old' AND `Страна`='$country_old' AND `ФИО игрока`='$name_player_old' AND `Амплуа`='$amp_old'";
+                            $result = mysqli_query($link, $query);
+                            if (!$result) echo "<h1>Невозможно обновить запись: </h1>" . mysqli_error($link);
+                        } else echo "<p>Запись с такими полями № игрока = $num_player_old, Страна = $country_old, ФИО игрока = $name_player_old, Амплуа = $amp_old не существует!</p>";
                         break;
                     }
                 case "delete":
