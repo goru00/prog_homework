@@ -1,0 +1,44 @@
+thead > tr > td
+{
+    font-weight: bold;
+}
+.content
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.form_table
+{
+    border: solid 1px #000;
+    display: flex;
+    flex-direction: column;
+}
+.input_form label
+{
+    display: flex;
+    flex-direction: column;
+}
+.list_table 
+{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.list_table li 
+{
+    box-shadow: 1px 1px 3px grey;
+    padding: 4px 6px 4px 6px;
+    cursor: pointer;
+}
+.active
+{
+    background: red;
+}
+
+
+button
+{
+    cursor: pointer;
+}
