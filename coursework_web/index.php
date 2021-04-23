@@ -7,6 +7,8 @@
     <title>Третьяков</title>
     <link rel="stylesheet" href="style/style.css">
     <script src="scripts/ajax.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/bootstrap.css">
 </head>
 <body>
     <header>
@@ -16,20 +18,20 @@
         Вариант 17 ИВТ-31
         </h1>
     </header>
-    <nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <?php
             require_once 'src/login.php';
             $link = mysqli_connect($server, $user, $pass, $db) or die("Ошибка: " . mysqli_error($link));
             $query = "show tables";
             $result = mysqli_query($link, $query) or die("Ошибка: " . mysqli_error($link));
         ?>
-            <ul id="list" class="list_table">
+            <ul id="list" class="nav justify-content-center nav-tabs">
             <?php
                 $i = 0;
                 while($row = mysqli_fetch_array($result))
                 {
-                    if ($i == 0) echo "<li class='active'>" . $row[0] . "</li>";
-                    else echo "<li>" . $row[0] . "</li>";
+                    if ($i == 0) echo "<li class='active nav-item nav-link'>" . $row[0] . "</li>";
+                    else echo "<li class='nav-item nav-link'>" . $row[0] . "</li>";
                     $i++;
                 }
             ?>
@@ -37,15 +39,16 @@
             </nav>
             <main>
         <div class="result"></div>
-        <div class="content">
-            <div class="table"></div>
-            <div class="form_table">
+        <div class="container">
+            <div class="table col-md"></div>
+            <div class="form_table form-group">
                 <div class="input_form">
                     <form action="" name="taxi"></form>
                 </div>
-                <button>Добавить запись</button>
-                <button>Удалить запись</button>
-                <button>Изменить запись</button>
+                <button class="btn btn-primary" id="insert">Добавить запись</button>
+                <button class="btn btn-primary" id="delete">Удалить запись</button>
+                <button class="btn btn-primary" id="update">Изменить запись</button>
+                <button class="btn btn-danger" onclick="window.location.reload();">Сбросить</button>
             </div>
         </div>
     </main>

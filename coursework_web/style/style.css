@@ -1,18 +1,18 @@
+body
+{
+    background: #eaeaea;
+}
+tbody > tr
+{
+    cursor: pointer;
+}
+li
+{
+    cursor: pointer;
+}
 thead > tr > td
 {
     font-weight: bold;
-}
-.content
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-.form_table
-{
-    border: solid 1px #000;
-    display: flex;
-    flex-direction: column;
 }
 .input_form label
 {

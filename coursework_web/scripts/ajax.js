@@ -12,18 +12,17 @@ if (window.history.replaceState)
     window.history.replaceState(null, null, window.location.href);
 }
 
-function GetColumnType(val) {
+function XHRHttpRequestSend(operat, val)
+{
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "src/ajax.php");
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            SetTypeColumn(this.responseText);
-        }
+
     }
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.send("status=type&" + "tab=" + val);
+    xhr.getResponseHeader('Content-Type');
+    xhr.send("status=" + operat + + "tab=" + val)
 }
-
 
 function Selection(val)
 {
@@ -31,10 +30,10 @@ function Selection(val)
     xhr.open("POST", "src/ajax.php");
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            document.querySelector("div.table").innerHTML = this.responseText;
-            document.querySelector('form[name=taxi]').innerHTML = CreateForm().innerHTML;
+            CreateTable(JSON.parse(this.responseText));
         }
     }
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.getResponseHeader('Content-Type');
     xhr.send("status=select&" + "tab=" + val);
 }
