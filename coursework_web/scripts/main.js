@@ -1,6 +1,49 @@
 var ul = document.getElementById('list');
+var tar = document.querySelector('div.table');
 
-Selection(document.querySelector('li.active').innerHTML);
+// переписать эту строку
+Selection(document.querySelector('li.active').innerHTML, "select");
+
+let observer = new MutationObserver(mutationRecords => {
+    tar.getElementsByTagName('tbody')[0].addEventListener('click', function(row_target) {
+        var rows = tar.getElementsByTagName('tr');
+        let cell_target = row_target.target.parentElement;
+        let form = document.querySelector('form[name=taxi]');
+        let inputs = form.querySelectorAll('input');
+        for (let row_counter = 0; row_counter < rows.length; row_counter++)
+        {
+            if (rows[row_counter] == cell_target) 
+            {
+                for (let cell_counter = 0; cell_counter < inputs.length; cell_counter++)
+                {
+                    inputs[cell_counter].value = rows[row_counter].getElementsByTagName('td')[cell_counter].innerHTML;
+                }
+                break;
+            }
+        }
+    });
+});
+
+observer.observe(tar, {
+    // под вопросов subtree, надо проверять на пустоту таблицы
+    childList: true, 
+    subtree: true, 
+    characterDataOldValue: true 
+});
+
+
+document.getElementById('insert').addEventListener('click', function() {
+    let formArray;
+    Selection(document.querySelector('li.active').innerHTML, "insert", formArray);
+});
+
+document.getElementById('delete').addEventListener('click', function() {
+    alert('delete');
+});
+
+document.getElementById('update').addEventListener('click', function() {
+    alert('update');
+});
 
 function getEventTarget(e) {
     e = e || window.event;
@@ -100,21 +143,20 @@ function CreateTable(data)
     CreateForm(data);
 }
 
-document.getElementById('insert').addEventListener('click', function() {
-    alert('insert');
-});
-
-document.getElementById('delete').addEventListener('click', function() {
-    alert('delete');
-});
-
-document.getElementById('update').addEventListener('click', function() {
-    alert('update');
-});
-
 ul.onclick = function(event) {
     var target = getEventTarget(event);
-    Selection(target.innerHTML);
+    let list = document.getElementById('list');
+    let listLi = list.getElementsByTagName('li');
+    let select;
+    for (let num = 0; num < listLi.length; num++)
+    {
+        if (target.innerHTML == listLi[num].innerHTML)
+        {
+            listLi[num].setAttribute("class", "nav-item nav-link active");
+            select = listLi[num].innerHTML;
+        } else listLi[num].setAttribute("class", "nav-item nav-link");
+    }
+    Selection(select, "select");
 };
 
 var transliterate = function(text) {

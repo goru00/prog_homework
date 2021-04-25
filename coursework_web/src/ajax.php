@@ -1,23 +1,14 @@
 <?php
     require_once 'login.php';
     $link = mysqli_connect($server, $user, $pass, $db) or die("Ошибка: " . mysqli_error($link));
-    $result;
-    if (isset($_POST['tab']))
+    $link->set_charset('utf8');
+    header("Content-Type: application/json");
+    $postData = file_get_contents("php://input");
+    $dataPost = json_decode($postData);
+    if (isset($dataPost->tab))
     {
-        $val = htmlentities(mysqli_real_escape_string($link, $_POST['tab']));
-        if (isset($_POST['status']))
-        {
-            $status = htmlentities(mysqli_real_escape_string($link, $_POST['status']));
-            switch($status)
-            {
-                case 'insert':
-                    break;
-                case 'update':
-                    break;
-                case 'delete':
-                    break;
-            }
-        }
+        $msg;
+        $val = htmlentities(mysqli_real_escape_string($link, $dataPost->tab));
         $query = "select COLUMN_NAME from information_schema.columns where table_name='$val'";
         $result = mysqli_query($link, $query) or die("Ошибка: " . mysqli_error($link));
         $rows = array();
@@ -36,6 +27,27 @@
             array_push($rows, $row[0]);
         }
         $type = array($rows);
+        if (isset($dataPost->status))
+        {
+            $status = htmlentities(mysqli_real_escape_string($link, $dataPost->status));
+            switch($status)
+            {
+                case 'insert':
+                    $query = "INSERT INTO '$val' VALUES (";
+                    for ($num = 0; $num < $count; $num++) {
+                        if ($num + 1 == $count) $query .= "'$dataPost->data[$num]');";
+                        else $query .= "'$dataPost->data[$num]',";
+                    }
+                    $result = mysqli_query($link, $query);
+                    if ($result) $msg = "<div class='alert alert-success' role='alert'>Запись была успешно добавлена!</div>";
+                    else $msg = "<div class='alert alert-danger' role='alert'>Невозможно добавить запись! Такая запись уже существует!</div>";
+                    break;
+                case 'update':
+                    break;
+                case 'delete':
+                    break;
+            }
+        }
         $rows = array();
         $query = "select COLUMN_KEY from information_schema.columns where table_name='$val'";
         $result = mysqli_query($link, $query) or die("Ошибка: " . mysqli_error($link));

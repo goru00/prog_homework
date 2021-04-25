@@ -22,6 +22,7 @@
         <?php
             require_once 'src/login.php';
             $link = mysqli_connect($server, $user, $pass, $db) or die("Ошибка: " . mysqli_error($link));
+            $link->set_charset('utf8');
             $query = "show tables";
             $result = mysqli_query($link, $query) or die("Ошибка: " . mysqli_error($link));
         ?>

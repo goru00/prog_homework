@@ -12,19 +12,7 @@ if (window.history.replaceState)
     window.history.replaceState(null, null, window.location.href);
 }
 
-function XHRHttpRequestSend(operat, val)
-{
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "src/ajax.php");
-    xhr.onreadystatechange = function() {
-
-    }
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.getResponseHeader('Content-Type');
-    xhr.send("status=" + operat + + "tab=" + val)
-}
-
-function Selection(val)
+function Selection(val, status = '', data = '')
 {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "src/ajax.php");
@@ -33,7 +21,12 @@ function Selection(val)
             CreateTable(JSON.parse(this.responseText));
         }
     }
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.getResponseHeader('Content-Type');
-    xhr.send("status=select&" + "tab=" + val);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.getResponseHeader('Content-type', 'application/json');
+    let json = JSON.stringify({
+        status: status,
+        tab: val,
+        data: data
+    });
+    xhr.send(json);
 }
