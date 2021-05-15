@@ -1,7 +1,4 @@
-var xhr = new XMLHttpRequest();
-
 var XMLHttpRequestObject = false;
-
 if (window.XMLHttpRequest)
 {
     XMLHttpRequestObject = new XMLHttpRequest();
@@ -10,27 +7,29 @@ if (window.XMLHttpRequest)
     XMLHttpRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
 }
 
-/* на просмотр select после вып.запроса */
-function XMLHTTPRequestShow()
+if (window.history.replaceState)
 {
-    xhr.open('GET', "http://localhost/src/select.php");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            document.querySelector('div.content').innerHTML = this.responseText;
-        }
-    }
-    xhr.send();
+    window.history.replaceState(null, null, window.location.href);
 }
-/* на вып.операции */
-function XMLHTTPRequestSend(operation)
+
+function Selection(val, status = '', data, dataOld = '')
 {
-    let formData = new FormData(document.forms.players);
-    xhr.open('POST', "http://localhost/src/" + operation + ".php");
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "src/ajax.php");
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            XMLHTTPRequestShow();
-            console.log("OK");
+            json = JSON.parse(this.responseText);
+            CreateTable(json);
+            if (json.msg[0] != '') document.querySelector('div.result').innerHTML = json.msg[0][0];
         }
     }
-    xhr.send(formData);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.getResponseHeader('Content-type', 'application/json');
+    let json = JSON.stringify({
+        status: status,
+        tab: val,
+        data: data,
+        dataOld: dataOld
+    });
+    xhr.send(json);
 }
