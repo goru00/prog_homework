@@ -1,0 +1,83 @@
+tbody > tr
+{
+    cursor: pointer;
+}
+li
+{
+    cursor: pointer;
+}
+thead > tr > td
+{
+    font-weight: bold;
+}
+.input_form label
+{
+    display: flex;
+    flex-direction: column;
+}
+.add_info
+{
+    text-align: right;
+}
+.select_sort_table
+{
+    display: block;
+}
+.filter_sort_table
+{
+    display: flex;
+    flex-direction: column;
+}
+.filter_sort_table input
+{
+    width: 100%;
+}
+.select_filter_table input
+{
+    width: 100%;
+}
+.data_hidden
+{
+    display: none;
+}
+.alertText
+{
+    color: red;
+}
+.data_report_hidden
+{
+    display: none;
+}
+.list_table 
+{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.list_table li 
+{
+    box-shadow: 1px 1px 3px grey;
+    padding: 4px 6px 4px 6px;
+    cursor: pointer;
+}
+.active
+{
+    background: red;
+}
+
+.button_confirm
+{
+    position: relative;
+    width: auto;
+}
+
+button
+{
+    cursor: pointer;
+}
+
+sub
+{
+    color: red;
+}
