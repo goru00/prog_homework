@@ -46,7 +46,7 @@ public:
     {
         map<char, int> symb;
         map<char, int>::iterator it;
-        for (int i = 0; i < word.length(); i++)
+        for (unsigned int i = 0; i < word.length(); i++)
         {
             char c = word[i];
             symb[c]++;
@@ -61,10 +61,11 @@ public:
         while (Built()) // когда мы не дойдем до самой первой вершины
         {
             Sort();
-            Node* sLeft, * sRight;
+            Node * sLeft;
+            Node * sRight;
             sLeft = PopFront();
             sRight = PopFront();
-            Node * tNode = new Node(sRight, sLeft);
+            Node* tNode = new Node(sRight, sLeft);
             PushBack(tNode);
         }
     }
@@ -78,6 +79,7 @@ public:
             while (current)
             {
                 if (prev->weight > current->weight) {
+                    Replace(temp, current, prev);
                     temp->weight = prev->weight;
                     temp->symb = prev->symb;
                     prev->weight = current->weight;
@@ -86,6 +88,7 @@ public:
                     current->symb = temp->symb;
                 }
                 else if (prev->weight == current->weight) {
+                    Replace(temp, current, prev);
                     temp->weight = current->weight;
                     temp->symb = current->symb;
                     current->weight = prev->weight;
@@ -99,11 +102,24 @@ public:
             current = prev->next;
         }
     }
+    void Replace(Node * temp, Node * current, Node * prev)
+    {
+        if (prev->left || current->left) {
+            temp->left = prev->left;
+            prev->left = current->left;
+            current->left = temp->left;
+        }
+        if (prev->right || current->right) {
+            temp->right = prev->right;
+            prev->right = current->right;
+            current->right = temp->right;
+        }
+    }
     void PushFront()
     {
         head = new Node(head);
     }
-    Node * PopFront()
+    Node* PopFront()
     {
         Node* current = head;
         head = head->next;
@@ -132,31 +148,17 @@ public:
     }
     void ShowTree(Node* curr, int koef)
     {
-        cout << curr->right->right->right << endl;
-        /*if (curr != NULL) {
-            cout.width(koef);
-            ShowTree(curr->left, koef * 2);
+        cout.width(koef);
+        if (curr != NULL) {
+            ShowTree(curr->left, koef);
             if (curr->symb) cout << curr->weight << "  (" << curr->symb << ")" << endl;
             else cout << curr->weight << endl;
             cout.width(koef);
-            ShowTree(curr->right, koef * 2);
-        }*/
-    }
-    void ShowList()
-    {
-        ShowList(head, 4);
-    }
-    void ShowList(Node* curr, int koef)
-    {
-        if (curr) {
-            cout.width(koef);
-            cout << curr->symb << "  (" << curr->weight << ")";
-            ShowList(curr->next, koef + 4);
+            ShowTree(curr->right, koef);
         }
-        cout << endl;
     }
 private:
-    Node * head;
+    Node* head;
 };
 int main()
 {
