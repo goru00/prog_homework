@@ -7,6 +7,31 @@
 
 using namespace std;
 
+class Data
+{
+private:
+    char *symb;
+    int *weight;
+    int size;
+public:
+    Data() : symb(NULL), weight(NULL), size(0) { }
+    Data(int size)
+    {
+        symb = new char[size];
+        weight = new int[size];
+        this->size = size;
+    }
+    int& operator[](const char index)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (symb[i] == index) {
+                return weight[i];
+            }
+        }
+    }
+};
+
 class Haffman
 {
 public:
@@ -46,6 +71,7 @@ public:
     {
         map<char, int> symb;
         map<char, int>::iterator it;
+        Data obj1(word.length());
         for (unsigned int i = 0; i < word.length(); i++)
         {
             char c = word[i];
@@ -151,8 +177,8 @@ public:
         cout.width(koef);
         if (curr != NULL) {
             ShowTree(curr->left, koef);
-            if (curr->symb) cout << curr->weight << "  (" << curr->symb << ")" << endl;
-            else cout << curr->weight << endl;
+            if (curr->symb) cout << "Символ: " << curr->symb << " . Вес: " << curr->weight << endl;
+            else cout << "Символ: отсутствует . Вес: " << curr->weight << endl;
             cout.width(koef);
             ShowTree(curr->right, koef);
         }
@@ -163,7 +189,7 @@ private:
 int main()
 {
     setlocale(0, "");
-    string word = "AABBBCDDDDD";
+    string word = "АААААБББВГГГГГГГГДДЕЕЕЕЕ";
     Haffman* list1 = new Haffman();
     list1->Coding(word);
     list1->ShowTree();
