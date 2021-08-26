@@ -1,36 +1,7 @@
 ﻿#include<iostream>
 #include<string>
-#include<vector>
-#include<list>
-#include<algorithm>
-#include<map>
 
 using namespace std;
-
-class Data
-{
-private:
-    char *symb;
-    int *weight;
-    int size;
-public:
-    Data() : symb(NULL), weight(NULL), size(0) { }
-    Data(int size)
-    {
-        symb = new char[size];
-        weight = new int[size];
-        this->size = size;
-    }
-    int& operator[](const char index)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            if (symb[i] == index) {
-                return weight[i];
-            }
-        }
-    }
-};
 
 class Haffman
 {
@@ -69,26 +40,24 @@ public:
     }
     void Coding(string word)
     {
-        map<char, int> symb;
-        map<char, int>::iterator it;
-        Data obj1(word.length());
         for (unsigned int i = 0; i < word.length(); i++)
         {
             char c = word[i];
-            symb[c]++;
-        }
-        for (it = symb.begin(); it != symb.end(); it++)
-        {
-            Node* curr = new Node;
-            curr->symb = it->first;
-            curr->weight = it->second;
-            PushBack(curr);
+            if (FindSymb(c)) {
+                continue;
+            }
+            else {
+                Node* curr = new Node;
+                curr->symb = c;
+                curr->weight++;
+                PushBack(curr);
+            }
         }
         while (Built()) // когда мы не дойдем до самой первой вершины
         {
             Sort();
-            Node * sLeft;
-            Node * sRight;
+            Node* sLeft;
+            Node* sRight;
             sLeft = PopFront();
             sRight = PopFront();
             Node* tNode = new Node(sRight, sLeft);
@@ -126,19 +95,6 @@ public:
             }
             prev = prev->next;
             current = prev->next;
-        }
-    }
-    void Replace(Node * temp, Node * current, Node * prev)
-    {
-        if (prev->left || current->left) {
-            temp->left = prev->left;
-            prev->left = current->left;
-            current->left = temp->left;
-        }
-        if (prev->right || current->right) {
-            temp->right = prev->right;
-            prev->right = current->right;
-            current->right = temp->right;
         }
     }
     void PushFront()
@@ -184,12 +140,39 @@ public:
         }
     }
 private:
+    void Replace(Node* temp, Node* current, Node* prev)
+    {
+        if (prev->left || current->left) {
+            temp->left = prev->left;
+            prev->left = current->left;
+            current->left = temp->left;
+        }
+        if (prev->right || current->right) {
+            temp->right = prev->right;
+            prev->right = current->right;
+            current->right = temp->right;
+        }
+    }
+    bool FindSymb(char s)
+    {
+        Node* curr = head;
+        while (curr)
+        {
+            if (curr->symb == s)
+            {
+                curr->weight++;
+                return true;
+            }
+            curr = curr->next;
+        }
+        return false;
+    }
     Node* head;
 };
 int main()
 {
     setlocale(0, "");
-    string word = "АААААБББВГГГГГГГГДДЕЕЕЕЕ";
+    string word = "AABBBCDDDDD";
     Haffman* list1 = new Haffman();
     list1->Coding(word);
     list1->ShowTree();
