@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 #include<string>
 
 using namespace std;
@@ -37,6 +37,7 @@ public:
     Haffman()
     {
         head = NULL;
+		 size = 0;
     }
     void Coding(string word)
     {
@@ -51,6 +52,7 @@ public:
                 curr->symb = c;
                 curr->weight++;
                 PushBack(curr);
+				  size++;
             }
         }
         while (Built()) // когда мы не дойдем до самой первой вершины
@@ -62,7 +64,21 @@ public:
             sRight = PopFront();
             Node* tNode = new Node(sRight, sLeft);
             PushBack(tNode);
+	    size++;
         }
+    }
+    void BuildCodeTable()
+    {
+	BuildCodeTable(head); 
+    }
+    void BuildCodeTable(Node * curr)
+    {
+	if (curr->left != NULL) {
+		BuildCodeTable(curr->left);
+	}
+	if (curr->right != NULL) {
+		BuildCodeTable(curr->right);
+	}
     }
     void Sort()
     {
@@ -168,6 +184,7 @@ private:
         return false;
     }
     Node* head;
+	int size;
 };
 int main()
 {
