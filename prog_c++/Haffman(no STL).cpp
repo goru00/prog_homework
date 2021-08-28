@@ -12,6 +12,7 @@ public:
         Node* right, * left, * next;
         char symb;
         int weight;
+        bool code;
         Node(Node* next)
         {
             symb = 0;
@@ -37,7 +38,7 @@ public:
     Haffman()
     {
         head = NULL;
-		 size = 0;
+        size = 0;
     }
     void Coding(string word)
     {
@@ -52,7 +53,7 @@ public:
                 curr->symb = c;
                 curr->weight++;
                 PushBack(curr);
-				  size++;
+                size++;
             }
         }
         while (Built()) // когда мы не дойдем до самой первой вершины
@@ -64,21 +65,23 @@ public:
             sRight = PopFront();
             Node* tNode = new Node(sRight, sLeft);
             PushBack(tNode);
-	    size++;
+            size++;
         }
     }
     void BuildCodeTable()
     {
-	BuildCodeTable(head); 
+        BuildCodeTable(head, "0");
     }
-    void BuildCodeTable(Node * curr)
+    void BuildCodeTable(Node* curr, string code)
     {
-	if (curr->left != NULL) {
-		BuildCodeTable(curr->left);
-	}
-	if (curr->right != NULL) {
-		BuildCodeTable(curr->right);
-	}
+        if (curr->left != NULL) {
+            BuildCodeTable(curr->left, code + '0');
+        }
+        if (curr->right != NULL) {
+            cout << 1;
+            BuildCodeTable(curr->right, code + '1');
+        }
+        if (curr->symb) cout << code;
     }
     void Sort()
     {
@@ -124,6 +127,16 @@ public:
         current->next = NULL;
         return current;
     }
+    void PopBack()
+    {
+        if (head == NULL) return;
+        Node* curr = head;
+        while (curr->next != NULL)
+        {
+            curr = curr->next;
+        }
+        delete curr;
+    }
     void PushBack(Node* p)
     {
         if (head == NULL) head = p;
@@ -154,6 +167,7 @@ public:
             cout.width(koef);
             ShowTree(curr->right, koef);
         }
+        BuildCodeTable();
     }
 private:
     void Replace(Node* temp, Node* current, Node* prev)
@@ -184,7 +198,7 @@ private:
         return false;
     }
     Node* head;
-	int size;
+    int size;
 };
 int main()
 {
