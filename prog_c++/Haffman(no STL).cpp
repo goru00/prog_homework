@@ -38,6 +38,7 @@ public:
     Haffman()
     {
         head = NULL;
+        sizeNode = 0;
         size = 0;
     }
     void Coding(string word)
@@ -53,9 +54,10 @@ public:
                 curr->symb = c;
                 curr->weight++;
                 PushBack(curr);
-                size++;
+                sizeNode++;
             }
         }
+        size = sizeNode;
         while (Built()) // когда мы не дойдем до самой первой вершины
         {
             Sort();
@@ -70,18 +72,20 @@ public:
     }
     void BuildCodeTable()
     {
-        BuildCodeTable(head, "0");
+        **code = new bool* [size];
+        BuildCodeTable(head, 0, 0, 0);
     }
-    void BuildCodeTable(Node* curr, string code)
+    void BuildCodeTable(Node* curr, int i, int j, int pos)
     {
         if (curr->left != NULL) {
-            BuildCodeTable(curr->left, code + '0');
+            code[i] = new bool [j];
+            BuildCodeTable(curr->left, i, j++, pos++);
         }
         if (curr->right != NULL) {
-            cout << 1;
-            BuildCodeTable(curr->right, code + '1');
+            code[i] = new bool [j];
+            BuildCodeTable(curr->right, i, j++, pos++);
         }
-        if (curr->symb) cout << code;
+        if (curr->symb) curr->code = code[i];
     }
     void Sort()
     {
@@ -161,6 +165,7 @@ public:
     {
         cout.width(koef);
         if (curr != NULL) {
+            cout << curr->code;
             ShowTree(curr->left, koef);
             if (curr->symb) cout << "Символ: " << curr->symb << " . Вес: " << curr->weight << endl;
             else cout << "Символ: отсутствует . Вес: " << curr->weight << endl;
@@ -198,7 +203,9 @@ private:
         return false;
     }
     Node* head;
+    bool** code;
     int size;
+    int sizeNode;
 };
 int main()
 {
