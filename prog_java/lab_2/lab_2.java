@@ -1,9 +1,9 @@
 package com.company;
 class Groups
 {
-    char symb;
-    String name_group;
-    static String title;
+    private char symb;
+    private String name_group;
+    private static String title;
     Groups(String s)
     {
         String r[] = s.split(", ");
@@ -31,9 +31,9 @@ class Groups
 }
 class Children
 {
-    int id;
-    String name_baby;
-    char symb;
+    private int id;
+    private String name_baby;
+    private char symb;
     static String title;
     Children(String s)
     {
