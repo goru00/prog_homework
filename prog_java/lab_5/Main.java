@@ -107,17 +107,17 @@ public class Main {
                 new Disciplines(103, "Экономика предприятий", 3, 16, 12, "Зачет")
         };
         Personal TabPers[] = {
-               new Personal(1001, "Иванов Сергей Степанович", "доцент"),
+                new Personal(1001, "Иванов Сергей Степанович", "доцент"),
                 new Personal(1002, "Степанов Василий Ильич", "доцент"),
-               new Personal(1003, "Петрова Ирина Олеговна", "профессор")
+                new Personal(1003, "Петрова Ирина Олеговна", "профессор")
         };
         TableTime TabTableTime[] = {
-               new TableTime("ГМУ-101", "23.11.2013", 1, TabPers[2], TabDisc[0]),
-               new TableTime("ГМУ-101", "23.11.2013", 2, TabPers[0], TabDisc[3]),
-               new TableTime("ИВТ-204", "24.11.2013", 3, TabPers[0], TabDisc[3]),
-               new TableTime("ИВТ-204", "23.11.2013", 1, TabPers[0], TabDisc[1]),
-               new TableTime("ГМУ-201", "24.11.2013", 2, TabPers[2], TabDisc[1]),
-               new TableTime("ГМУ-201", "24.11.2013", 3, TabPers[1], TabDisc[2])
+                new TableTime("ГМУ-101", "23.11.2013", 1, TabPers[2], TabDisc[0]),
+                new TableTime("ГМУ-101", "23.11.2013", 2, TabPers[0], TabDisc[3]),
+                new TableTime("ИВТ-204", "24.11.2013", 3, TabPers[0], TabDisc[3]),
+                new TableTime("ИВТ-204", "23.11.2013", 1, TabPers[0], TabDisc[1]),
+                new TableTime("ГМУ-201", "24.11.2013", 2, TabPers[2], TabDisc[1]),
+                new TableTime("ГМУ-201", "24.11.2013", 3, TabPers[1], TabDisc[2])
         };
 
         ArrayList<Disciplines> arrDisc = new ArrayList<Disciplines>();
@@ -134,6 +134,16 @@ public class Main {
         {
             SetPersonal.add(TabPers[i]);
             System.out.println(TabPers[i].toString());
+        }
+        Map<Integer, TableTime> MapTableTime = new HashMap<Integer, TableTime>();
+        for (int i = 0; i < 6; i++)
+        {
+            MapTableTime.put(i, TabTableTime[i]);
+        }
+        System.out.println("\n«Расписание занятий»");
+        for(Map.Entry<Integer, TableTime> item : MapTableTime.entrySet()){
+
+            System.out.printf("Ключ: %s - Значение: %s \n", item.getKey(), item.getValue());
         }
     }
 }
