@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.*;
 
-class Disciplines extends ArrayList<Disciplines>
+class Disciplines
 {
     private int idDisc;
     private String nameDisc;
@@ -45,7 +45,7 @@ class Disciplines extends ArrayList<Disciplines>
     }
 }
 
-class Personal implements Comparable<Personal>
+class Personal extends TreeSet<Personal> implements Comparable<Personal>
 {
     private int idPers;
     private String namePers;
@@ -57,6 +57,10 @@ class Personal implements Comparable<Personal>
         this.namePers = "NULL";
         this.post = "NULL";
     }
+    Personal(int idPers)
+    {
+        this.idPers = idPers;
+    }
     Personal(int idPers, String namePers, String post)
     {
         this.idPers = idPers;
@@ -64,15 +68,21 @@ class Personal implements Comparable<Personal>
         this.post = post;
     }
     @Override
+    public boolean add(Personal arg)
+    {
+        if (this.contains(arg)) return false;
+        return super.add(arg);
+    }
+    @Override
     public int compareTo(Personal arg1)
     {
         return idPers - arg1.GetidPers();
     }
-    @Override
     public String toString()
     {
-        return idPers + " " + namePers + " " + post;
+        return idPers + " | " + namePers + " | " + post;
     }
+
 }
 
 class TableTime
@@ -98,23 +108,14 @@ class TableTime
         this.idPers = idPers;
         this.idDisc = idDisc;
     }
-
+    @Override
+    public String toString()
+    {
+        return num_group + " | " + date + " | " + num_par + " | " + idPers.GetidPers() + " | " + idDisc;
+    }
 }
 
 public class Main {
-
-    static void Show(ArrayList<Disciplines> arg)
-    {
-        Object[] arr = arg.toArray();
-        Show(arr);
-    }
-    static void Show(Object[] arg)
-    {
-        for (Object item : arg)
-        {
-            System.out.println(item);
-        }
-    }
 
     public static void main(String[] args) {
         Disciplines TabDisc[] = {
@@ -137,46 +138,18 @@ public class Main {
                 new TableTime("ГМУ-201", "24.11.2013", 2, TabPers[2], TabDisc[1]),
                 new TableTime("ГМУ-201", "24.11.2013", 3, TabPers[1], TabDisc[2])
         };
-
-        ArrayList<Disciplines> arrDisc = new ArrayList<Disciplines>();
-        System.out.println("«Дисциплины»");
+        SortedSet<Personal> SetPers = new TreeSet<Personal>();
         for (int i = 0; i < 4; i++)
         {
-            arrDisc.add(TabDisc[i]);
+            if (!SetPers.add(TabPers[i])) System.out.println(TabPers[i].GetidPers() + " = Запись с таким ключом уже существует");
         }
-        Show(arrDisc);
-        Disciplines find = new Disciplines(100); // поиск по ключу
-        if (arrDisc.contains(find)) System.out.println("Запись найдена");
-        else {
-            System.out.println("Такой записи не существует");
-        }
-        if (arrDisc.remove(find)) System.out.println("Запись была успешна удалена");
-        else System.out.println("Запись не существует");
-        System.out.println("Список после удаления записи: ");
-        Show(arrDisc);
-        find = TabDisc[2];
-        Disciplines up = new Disciplines(102, "Иностранный язык", 5, 0, 40, "Экзамен");
-        arrDisc.set(2, up);
-        System.out.println("Список после изменения записи: ");
-        Show(arrDisc);
-
-        System.out.println();
-        SortedSet<Personal> SetPersonal = new TreeSet<Personal>();
-        System.out.println("«Преподаватели»");
-        for (int i = 0; i < 3; i++)
+        for (Personal item : SetPers)
         {
-            SetPersonal.add(TabPers[i]);
-            System.out.println(TabPers[i].toString());
+            System.out.println(item);
         }
-        Map<Integer, TableTime> MapTableTime = new HashMap<Integer, TableTime>();
-        for (int i = 0; i < 6; i++)
+        for (Personal item : SetPers)
         {
-            MapTableTime.put(i, TabTableTime[i]);
-        }
-        System.out.println("\n«Расписание занятий»");
-        for(Map.Entry<Integer, TableTime> item : MapTableTime.entrySet()){
-
-            System.out.printf("Ключ: %s - Значение: %s \n", item.getKey(), item.getValue());
+            System.out.println("0 : " + item);
         }
     }
 }
