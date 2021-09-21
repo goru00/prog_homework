@@ -1,9 +1,8 @@
 package com.company;
 
-import java.security.KeyPair;
 import java.util.*;
 
-class Disciplines
+class Disciplines extends ArrayList<Disciplines>
 {
     private int idDisc;
     private String nameDisc;
@@ -15,6 +14,15 @@ class Disciplines
     Disciplines()
     {
         this.idDisc = 0;
+        this.nameDisc = "NULL";
+        this.num_sem = 0;
+        this.hLection = 0;
+        this.hSeminar = 0;
+        this.LC = "NULL";
+    }
+    Disciplines(int idDisc)
+    {
+        this.idDisc = idDisc;
         this.nameDisc = "NULL";
         this.num_sem = 0;
         this.hLection = 0;
@@ -90,20 +98,30 @@ class TableTime
         this.idPers = idPers;
         this.idDisc = idDisc;
     }
-    @Override
-    public String toString()
-    {
-        return num_group + " " + date + " " + num_par + " " + idPers.GetidPers() + " " + idDisc.GetIdDisc();
-    }
+
 }
 
 public class Main {
+
+    static void Show(ArrayList<Disciplines> arg)
+    {
+        Object[] arr = arg.toArray();
+        Show(arr);
+    }
+    static void Show(Object[] arg)
+    {
+        for (Object item : arg)
+        {
+            System.out.println(item);
+        }
+    }
 
     public static void main(String[] args) {
         Disciplines TabDisc[] = {
                 new Disciplines(100, "Информатика", 1, 12, 12, "Экзамен"),
                 new Disciplines(101, "Математика", 1, 16, 8, "Зачет"),
                 new Disciplines(102, "Иностранный язык", 2, 0, 32, "Экзамен"),
+                new Disciplines(103, "Экономика предприятий", 3, 16, 12, "Зачет"),
                 new Disciplines(103, "Экономика предприятий", 3, 16, 12, "Зачет")
         };
         Personal TabPers[] = {
@@ -125,8 +143,23 @@ public class Main {
         for (int i = 0; i < 4; i++)
         {
             arrDisc.add(TabDisc[i]);
-            System.out.println(TabDisc[i].toString());
         }
+        Show(arrDisc);
+        Disciplines find = new Disciplines(100); // поиск по ключу
+        if (arrDisc.contains(find)) System.out.println("Запись найдена");
+        else {
+            System.out.println("Такой записи не существует");
+        }
+        if (arrDisc.remove(find)) System.out.println("Запись была успешна удалена");
+        else System.out.println("Запись не существует");
+        System.out.println("Список после удаления записи: ");
+        Show(arrDisc);
+        find = TabDisc[2];
+        Disciplines up = new Disciplines(102, "Иностранный язык", 5, 0, 40, "Экзамен");
+        arrDisc.set(2, up);
+        System.out.println("Список после изменения записи: ");
+        Show(arrDisc);
+
         System.out.println();
         SortedSet<Personal> SetPersonal = new TreeSet<Personal>();
         System.out.println("«Преподаватели»");
