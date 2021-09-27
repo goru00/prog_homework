@@ -68,21 +68,15 @@ class Personal extends TreeSet<Personal> implements Comparable<Personal>
         this.post = post;
     }
     @Override
-    public boolean add(Personal arg)
-    {
-        if (this.contains(arg)) return false;
-        return super.add(arg);
-    }
-    @Override
     public int compareTo(Personal arg1)
     {
         return idPers - arg1.GetidPers();
     }
+    @Override
     public String toString()
     {
         return idPers + " | " + namePers + " | " + post;
     }
-
 }
 
 class TableTime
@@ -138,18 +132,51 @@ public class Main {
                 new TableTime("ГМУ-201", "24.11.2013", 2, TabPers[2], TabDisc[1]),
                 new TableTime("ГМУ-201", "24.11.2013", 3, TabPers[1], TabDisc[2])
         };
-        SortedSet<Personal> SetPers = new TreeSet<Personal>();
-        for (int i = 0; i < 4; i++)
+        List<Disciplines> Disc = new ArrayList<>();
+        for (int i = 0; i < TabDisc.length; i++)
         {
-            if (!SetPers.add(TabPers[i])) System.out.println(TabPers[i].GetidPers() + " = Запись с таким ключом уже существует");
+            Disc.add(i, TabDisc[i]);
         }
-        for (Personal item : SetPers)
+        System.out.println("«Дисциплины»");
+        for (Disciplines item : Disc)
         {
             System.out.println(item);
         }
-        for (Personal item : SetPers)
+        Disciplines setDisc = new Disciplines(102, "Иностранный язык", 2, 0, 40, "Экзамен");
+        System.out.println("Меняем элемент: " + Disc.get(2));
+        System.out.println("Обновляем");
+        Disc.set(2, setDisc);
+        System.out.println("Измененный элемент: " + Disc.get(2));
+        System.out.println("Удаляем элементы из списка");
+        while (!Disc.isEmpty())
         {
-            System.out.println("0 : " + item);
+            Disc.remove(0);
         }
+        if (Disc.isEmpty()) System.out.println("Список пустой");
+
+        System.out.println("\n«Персонал»");
+        SortedSet<Personal> Pers = new TreeSet<Personal>();
+        for (int i = 0; i < TabPers.length; i++)
+        {
+            Pers.add(TabPers[i]);
+        }
+        for (Personal item : Pers)
+        {
+            System.out.println(item);
+        }
+        /*Personal setPers = new Personal(1001, "Иванов Сергей Степанович", "профессор");
+        System.out.println("Меняем элемент: " + Pers.contains(1001));
+        if (Pers.contains(new Personal(1001))) {
+            Pers.remove(new Personal(1001));
+            Pers.add(setPers);
+        }*/
+        System.out.println("Удаляем элементы из множества");
+        Iterator<Personal> itPers = Pers.iterator();
+        while (itPers.hasNext())
+        {
+            itPers.remove();
+            itPers.next();
+        }
+        if (Pers.isEmpty()) System.out.println("Множество пустое");
     }
 }
