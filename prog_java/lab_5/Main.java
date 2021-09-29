@@ -105,7 +105,7 @@ class TableTime
     @Override
     public String toString()
     {
-        return num_group + " | " + date + " | " + num_par + " | " + idPers.GetidPers() + " | " + idDisc;
+        return num_group + " | " + date + " | " + num_par + " | " + idPers.GetidPers() + " | " + idDisc.GetIdDisc();
     }
 }
 
@@ -171,12 +171,31 @@ public class Main {
             Pers.add(setPers);
         }*/
         System.out.println("Удаляем элементы из множества");
-        Iterator<Personal> itPers = Pers.iterator();
+        /*Iterator<Personal> itPers = Pers.iterator();
         while (itPers.hasNext())
         {
             itPers.remove();
             itPers.next();
-        }
+        }*/
         if (Pers.isEmpty()) System.out.println("Множество пустое");
+        Map<Integer, TableTime> tb1 = new HashMap<Integer, TableTime>();
+        for (int i = 0; i < TabTableTime.length; i++)
+        {
+            tb1.put(i, TabTableTime[i]);
+        }
+        System.out.println("\n«Расписание занятий»");
+        for (Map.Entry<Integer, TableTime> item : tb1.entrySet())
+        {
+            System.out.println("Ключ: " + item.getKey() + " : Значение: " + item.getValue());
+        }
+        TableTime changeSet = new TableTime("ИВТ-204", "23.11.2013", 5, TabPers[0], TabDisc[1]);
+        System.out.println("Произведем обновление записи с ключом 3: ");
+        tb1.replace(3, changeSet);
+        for (Map.Entry<Integer, TableTime> item : tb1.entrySet())
+        {
+            System.out.println("Ключ: " + item.getKey() + " : Значение: " + item.getValue());
+        }
+        System.out.println("Удаляем все записи из словаря: ");
+        if (tb1.isEmpty()) System.out.println("Словарь пуст");
     }
 }
