@@ -109,6 +109,8 @@ class TableTime
     }
 }
 
+
+
 public class Main {
 
     public static void main(String[] args) {
@@ -164,19 +166,19 @@ public class Main {
         {
             System.out.println(item);
         }
-        /*Personal setPers = new Personal(1001, "Иванов Сергей Степанович", "профессор");
-        System.out.println("Меняем элемент: " + Pers.contains(1001));
-        if (Pers.contains(new Personal(1001))) {
-            Pers.remove(new Personal(1001));
+        Personal setPers = new Personal(1001, "Иванов Сергей Степанович", "профессор");
+        if (Pers.contains(TabPers[0]) && Pers.contains(setPers)) {
+            System.out.println("Меняем элемент: " + TabPers[0]);
+            Pers.remove(TabPers[0]);
             Pers.add(setPers);
-        }*/
+        } else System.out.println("Элемент не найден");
         System.out.println("Удаляем элементы из множества");
-        /*Iterator<Personal> itPers = Pers.iterator();
+        Iterator<Personal> itPers = Pers.iterator();
         while (itPers.hasNext())
         {
-            itPers.remove();
             itPers.next();
-        }*/
+            itPers.remove();
+        }
         if (Pers.isEmpty()) System.out.println("Множество пустое");
         Map<Integer, TableTime> tb1 = new HashMap<Integer, TableTime>();
         for (int i = 0; i < TabTableTime.length; i++)
@@ -196,6 +198,12 @@ public class Main {
             System.out.println("Ключ: " + item.getKey() + " : Значение: " + item.getValue());
         }
         System.out.println("Удаляем все записи из словаря: ");
+        Iterator<Map.Entry<Integer, TableTime>> tb1Map = tb1.entrySet().iterator();
+        while (tb1Map.hasNext())
+        {
+            tb1Map.next();
+            tb1Map.remove();
+        }
         if (tb1.isEmpty()) System.out.println("Словарь пуст");
     }
 }
