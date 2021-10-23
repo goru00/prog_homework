@@ -1,0 +1,126 @@
+package com.company;
+
+class Point
+{
+    private double x;
+    private double y;
+
+    Point()
+    {
+        this.x = 0;
+        this.y = 0;
+    }
+    Point(double x, double y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class SoldierMission<T>
+{
+    private String state;
+    private String nameMission;
+    private Rect<T> place;
+
+    public class Rect<T>
+    {
+        public T data;
+        public double w;
+        public double h;
+        public String nameTarget;
+        Rect(T data)
+        {
+            this.data = data;
+            this.w = 0;
+            this.h = 0;
+        }
+        Rect(T data, double w, double h)
+        {
+            this.data = data;
+            this.w = w;
+            this.h = h;
+        }
+    }
+    SoldierMission()
+    {
+        state = "";
+        nameMission = "";
+    }
+    SoldierMission(String nameMission)
+    {
+        this.nameMission = nameMission;
+    }
+    SoldierMission(String nameMission, T p, double w, double h)
+    {
+        this.nameMission = nameMission;
+        place = new Rect<>(p, w, h);
+    }
+    @Override
+    public String toString()
+    {
+        return "Название миссии: " + nameMission;
+    }
+}
+
+class ParatrooperMission<T>
+{
+    private String state;
+    private String nameMission;
+    private Circle<T> place;
+
+    public String GetState() { return state; }
+
+    public class Circle<T>
+    {
+        public T data;
+        public double r;
+        public String nameTarget;
+        Circle(T data)
+        {
+            this.data = data;
+            this.r = r;
+        }
+        Circle(T data, double r)
+        {
+            this.data = data;
+            this.r = r;
+        }
+    }
+    ParatrooperMission()
+    {
+        state = "";
+        nameMission = "";
+    }
+    ParatrooperMission(String nameMission)
+    {
+        this.nameMission = nameMission;
+    }
+    ParatrooperMission(String nameMission, T p, double radius)
+    {
+        this.nameMission = nameMission;
+        place = new Circle<T>(p, radius);
+    }
+    @Override
+    public String toString()
+    {
+        return "Название миссии: " + nameMission;
+    }
+}
+
+public class Main {
+    public static <T> void IsInside(T arg)
+    {
+        System.out.println(arg);
+    }
+
+    public static void main(String[] args) {
+        Point cirle = new Point(2, 5);
+        Point rect = new Point(5, 6);
+
+        ParatrooperMission<Point> paratrooperPlace = new ParatrooperMission<>("Приземлиться во внутрь окружности", cirle, 2);
+        SoldierMission<Point> soldierPlace = new SoldierMission<>("Захватить прямоугольник", rect, 4, 6);
+        IsInside(paratrooperPlace);
+        IsInside(soldierPlace);
+    }
+}
