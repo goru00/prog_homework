@@ -1,194 +1,153 @@
-import java.util.Random;
+package com.company;
 
-class Program
+import java.util.HashMap;
+import java.util.Map;
+
+class BattleShip
 {
+    private String shipName;
+    private int size;
+    private boolean state[];
+
+    BattleShip()
+    {
+        this.shipName = null;
+        this.size = 0;
+        this.state = null;
+    }
+    BattleShip(String Ship, int size)
+    {
+        this.shipName = Ship;
+        this.size = size;
+        this.state = new boolean[size];
+        for (int i = 0; i < size; i++) {
+            this.state[i] = true;
+        }
+    }
+    @Override
+    public String toString()
+    {
+        int count = 0;
+        String str = "Название корабля: " + shipName + "\n" + "Размер корабля: " + size + "\n" + "Состояние корабля: ";
+        for (int i = 0; i < size; i++) {
+            if (state[i] == true) count++;
+        }
+        str += String.valueOf(count) + "/" + String.valueOf(size) + "\n";
+        return str;
+    }
+}
+
+class Chess
+{
+    private String nameFigures;
+    private String colorFigures;
+
+    public String GetNameFigures() { return nameFigures; }
+    public String GetColorFigures() { return colorFigures; }
+
+    Chess()
+    {
+        this.nameFigures = null;
+        this.colorFigures = null;
+    }
+    Chess(String nameFigures, String colorFigures)
+    {
+        this.nameFigures = nameFigures;
+        this.colorFigures = colorFigures;
+    }
+    @Override
+    public String toString()
+    {
+        return "Название фигуры: " + nameFigures + "\n" + "Цвет фигуры: " + colorFigures + "\n";
+    }
+}
+
+class Matrix<T>
+{
+    private Map<String, T> ptr;
+    private int nSize;
+    private int mSize;
+    private String key;
+
+    public int GetNSize() { return nSize; }
+    public int GetMSize() { return mSize; }
+
+    Matrix()
+    {
+        ptr = null;
+        nSize = 0;
+        mSize = 0;
+    }
+    Matrix(int nSize, int mSize)
+    {
+        this.nSize = nSize;
+        this.mSize = mSize;
+        ptr = new HashMap<>();
+    }
+    public void Add(T item) {
+        if (nSize * mSize < ptr.size()) {
+            System.out.println("Поле уже заполнено!");
+            return;
+        }
+        char keyAF = (char)((ptr.size() / 10 + 65) & 0x00FF);
+        ptr.put(String.valueOf(keyAF) + String.valueOf(ptr.size() % 10 + 1), item);
+    }
+    public T GetIndex(int posI, int posJ)
+    {
+        try {
+            int count = 0;
+            if (posI > nSize || posJ > mSize) throw new Exception("Индексы не могут быть больше размеров поля!");
+            for (Map.Entry<String, T> item : ptr.entrySet())
+            {
+                if (count == (posI * 10 + posJ)) return item.getValue();
+                count++;
+            }
+            throw new Exception("Объект с таким индексом не был найден!");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    public T GetKey(String key)
+    {
+        try {
+            if (ptr.get(key) == null) {
+                throw new Exception("Объект с таким ключом не был найден!");
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return ptr.get(key);
+    }
+}
+
+public class Main {
+
     public static void main(String[] args) {
+        Chess figures[] = {
+                new Chess("Король", "Белая"),
+                new Chess("Ферзь", "Белая"),
+                new Chess("Ладья", "Белая"),
+                new Chess("Ладья", "Белая")
+        };
+        Matrix<Chess> tableChess = new Matrix<>(8,8);
+        tableChess.Add(figures[0]);
+        tableChess.Add(figures[1]);
+        System.out.println(tableChess.GetKey("A1"));
+        System.out.println(tableChess.GetIndex(0, 1));
+        BattleShip ships[] = {
+                new BattleShip("Крейсер", 3),
+                new BattleShip("Лодка", 1)
+        };
 
-        Mission<ParatrooperMission> pm = new Mission("ParatrooperMission", new Point(2,4));
-        pm.aim = new ParatrooperMission();
-        System.out.println(pm);
-        System.out.println("===============");
-        Mission<SoldieMission> sm = new Mission("SoldieMission", new Point(2,4));
-        sm.aim = new SoldieMission();
-        System.out.println(sm);
-
+        Matrix<BattleShip> tableBattleShip = new Matrix<>(10, 10);
+        tableBattleShip.Add(ships[0]);
+        tableBattleShip.Add(ships[1]);
+        System.out.println(tableBattleShip.GetKey("A1"));
     }
+
 }
 
-class Point
-{
-    public float x;
-    public float y;
 
-    public Point()
-    {
-        x = new Random().nextFloat() * 10f;
-        y = new Random().nextFloat() * 10f;
-    }
 
-    public Point(float x, float y)
-    {
-        this.x = x;
-        this.y = y;
-    }
 
-    public Point(Point a)
-    {
-        this.x = a.x;
-        this.y = a.y;
-    }
-
-    @Override
-    public String toString() {
-        return "Point: " + x + ", " + y + " ";
-    }
-}
-
-class Circle
-{
-    Point center;
-    float R;
-
-    public Circle()
-    {
-        center = new Point();
-        R = new Random().nextFloat() * 3f;
-    }
-
-    public Circle(float x, float y, float R)
-    {
-        center = new Point(x, y);
-        this.R = R;
-    }
-
-    public Circle(Point a, float R)
-    {
-        center = a;
-        this.R = R;
-    }
-
-    public Circle(Circle a)
-    {
-        center = a.center;
-        R = a.R;
-    }
-
-    @Override
-    public String toString() {
-        return center + "\nR: " + R;
-    }
-}
-
-class Rect
-{
-    Point A;
-    Point B;
-    Point C;
-    Point D;
-
-    public Rect()
-    {
-        A = new Point();
-        B = new Point();
-        C = new Point();
-        D = new Point();
-    }
-
-    public Rect(float Ax, float Ay, float Bx, float By, float Cx, float Cy, float Dx, float Dy)
-    {
-        A = new Point(Ax, Ay);
-        B = new Point(Bx, By);
-        C = new Point(Cx, Cy);
-        D = new Point(Dx, Dy);
-    }
-
-    public Rect(Point A, Point B, Point C, Point D)
-    {
-        this.A = A;
-        this.B = B;
-        this.C = C;
-        this.D = D;
-    }
-
-    public Rect(Rect a)
-    {
-        this.A = a.A;
-        this.B = a.B;
-        this.C = a.C;
-        this.D = a.D;
-    }
-
-    @Override
-    public String toString() {
-        return "Rect points\n" + A + B + C + D;
-    }
-}
-
-class Mission<T>
-{
-    String missionName;
-    boolean successful;
-    Point unitPosition;
-    T aim;
-
-    public Mission(String name, Point pos)
-    {
-        missionName = name;
-        successful = false;
-        unitPosition = pos;
-    }
-
-    @Override
-    public String toString() {
-        return "Mission name: " + missionName + "\nSuccessful: " + successful +
-        "\nUnitPosition: " + unitPosition + "\nAim: " + aim;
-    }
-}
-
-class ParatrooperMission
-{
-    Circle aim;
-
-    public ParatrooperMission()
-    {
-        aim = new Circle();
-    }
-
-    public ParatrooperMission(Circle aim)
-    {
-        this.aim = aim;
-    }
-
-    public Circle getAim() {
-        return aim;
-    }
-
-    @Override
-    public String toString() {
-        return aim.toString();
-    }
-}
-
-class SoldieMission
-{
-    Rect aim;
-
-    public SoldieMission()
-    {
-        aim = new Rect();
-    }
-
-    public SoldieMission(Rect aim)
-    {
-        this.aim = aim;
-    }
-
-    public Rect getAim() {
-        return aim;
-    }
-
-    @Override
-    public String toString() {
-        return aim.toString();
-    }
-}
