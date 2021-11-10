@@ -83,14 +83,21 @@ class Matrix<T>
         this.nSize = nSize;
         this.mSize = mSize;
         ptr = new HashMap<>();
+        char keyAF = 'A';
+        for (int i = 0; i < nSize; i++, keyAF++) {
+            for (int j = 0; j < mSize; j++) {
+                ptr.put(String.valueOf(keyAF) + String.valueOf(j), null);
+            }
+        }
     }
     public void Add(T item) {
         if (nSize * mSize < ptr.size()) {
             System.out.println("Поле уже заполнено!");
             return;
         }
-        char keyAF = (char)((ptr.size() / 10 + 65) & 0x00FF);
-        ptr.put(String.valueOf(keyAF) + String.valueOf(ptr.size() % 10 + 1), item);
+        for (Map.Entry<String, T> arg : this.ptr.entrySet()) {
+            if (arg.getValue() == null) ptr.put(arg.getKey(), item);
+        }
     }
     public T GetIndex(int posI, int posJ)
     {
@@ -147,7 +154,6 @@ public class Main {
     }
 
 }
-
 
 
 
