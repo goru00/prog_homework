@@ -2,6 +2,8 @@ package com.company;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 class BattleShip
 {
@@ -64,7 +66,7 @@ class Chess
 
 class Matrix<T>
 {
-    private Map<String, T> ptr;
+    private SortedMap<String, T> ptr;
     private int nSize;
     private int mSize;
     private String key;
@@ -82,11 +84,11 @@ class Matrix<T>
     {
         this.nSize = nSize;
         this.mSize = mSize;
-        ptr = new HashMap<>();
+        ptr = new TreeMap<>();
         char keyAF = 'A';
         for (int i = 0; i < nSize; i++, keyAF++) {
             for (int j = 0; j < mSize; j++) {
-                ptr.put(String.valueOf(keyAF) + String.valueOf(j), null);
+                ptr.put(String.valueOf(keyAF) + String.valueOf(j + 1), null);
             }
         }
     }
@@ -95,8 +97,11 @@ class Matrix<T>
             System.out.println("Поле уже заполнено!");
             return;
         }
-        for (Map.Entry<String, T> arg : this.ptr.entrySet()) {
-            if (arg.getValue() == null) ptr.put(arg.getKey(), item);
+        for (SortedMap.Entry<String, T> arg : this.ptr.entrySet()) {
+            if (arg.getValue() == null) {
+                ptr.put(arg.getKey(), item);
+                return;
+            }
         }
     }
     public T GetIndex(int posI, int posJ)
@@ -104,9 +109,9 @@ class Matrix<T>
         try {
             int count = 0;
             if (posI > nSize || posJ > mSize) throw new Exception("Индексы не могут быть больше размеров поля!");
-            for (Map.Entry<String, T> item : ptr.entrySet())
+            for (SortedMap.Entry<String, T> item : ptr.entrySet())
             {
-                if (count == (posI * 10 + posJ)) return item.getValue();
+                if (count == (posI * 10 + posJ) && item.getValue() != null) return item.getValue();
                 count++;
             }
             throw new Exception("Объект с таким индексом не был найден!");
@@ -140,8 +145,8 @@ public class Main {
         Matrix<Chess> tableChess = new Matrix<>(8,8);
         tableChess.Add(figures[0]);
         tableChess.Add(figures[1]);
-        System.out.println(tableChess.GetKey("A1"));
-        System.out.println(tableChess.GetIndex(0, 1));
+        System.out.println(tableChess.GetKey("A2"));
+        System.out.println(tableChess.GetIndex(0, 0));
         BattleShip ships[] = {
                 new BattleShip("Крейсер", 3),
                 new BattleShip("Лодка", 1)
@@ -150,10 +155,7 @@ public class Main {
         Matrix<BattleShip> tableBattleShip = new Matrix<>(10, 10);
         tableBattleShip.Add(ships[0]);
         tableBattleShip.Add(ships[1]);
-        System.out.println(tableBattleShip.GetKey("A1"));
+        System.out.println(tableBattleShip.GetKey("A2"));
     }
 
 }
-
-
-
