@@ -84,7 +84,7 @@ class Matrix<T>
     {
         this.nSize = nSize;
         this.mSize = mSize;
-        ptr = new TreeMap<>();
+        ptr = new LinkedHashMap<>();
         char keyAF = 'A';
         for (int i = 0; i < nSize; i++, keyAF++) {
             for (int j = 0; j < mSize; j++) {
