@@ -224,9 +224,6 @@ h2 {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
-.bg-light {
-	background-color: #f8f9fa !important;
-}
 .overflow-hidden {
 	overflow: hidden !important;
 }
@@ -266,11 +263,6 @@ h2 {
 		min-width: 992px !important;
 	}
 }
-/*! CSS Used from: https://nodlik.github.io/StPageFlip/static/style.css */
-.demo-block {
-	border-top: solid 1px #dcdcdc;
-	border-bottom: solid 1px #dcdcdc;
-}
 .flip-book {
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
 	margin: 0 auto;
@@ -296,6 +288,10 @@ h2 {
 	font-size: 100%;
 	text-transform: uppercase;
 	text-align: center;
+	font-weight: bold;
+}
+.page-header i {
+	text-decoration: underline;
 }
 .page .page-content .page-image {
 	height: 100%;
@@ -312,6 +308,9 @@ h2 {
 	padding-top: 10px;
 	box-sizing: border-box;
 	border-top: solid 1px #f4e8d7;
+}
+.page-text p {
+	text-indent: 3em;
 }
 .page .page-content .page-footer {
 	height: 30px;

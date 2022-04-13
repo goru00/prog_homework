@@ -8,8 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="demo-block bg-light pt-3 pb-3 overflow-hidden">
-        <div class="container mb-3 text-center" id="buttonDemoSelection">
+    <div class="demo-block pt-3 pb-3 overflow-hidden">
+        <div class="container mb-3 text-center" id="buttonDemoSelection" style="display: none;">
             <div class="btn-group" role="group" aria-label="">
                 <button type="button" class="btn btn-primary" data-dest="html">HTML</button>
                 <button type="button" class="btn btn-secondary" data-dest="canvas">CANVAS</button>
@@ -21,82 +21,155 @@
                 <div class="flip-book html-book stf__wrapper --landscape" id="htmlBookExample" style="min-width: 350px; min-height: 467px; width: 100%; max-width: 1400px; display: block; padding-bottom: 66.6364%;">
                     <div class="stf__block">
                         <div class="page stf__item" style="display: none; z-index: 1;">
-                            <div class="page-content">
-                                <h2 class="page-header">Page header - 1</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2013/04/03/21/25/cereals-100263__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
-                                <div class="page-footer">1</div>
+                            <div class="page-content" style="justify-content: center;">
+                                <div class="page-image" style="background-image: url(https://download.librebook.me/download/illustrations/23/07/49/i_001.jpg); height: 440px; margin: 0 0 48px 0;"></div>
+                                <h2 class="page-header">КОРОЛЕВСТВО КРИВЫХ ЗЕРКАЛ</h2>
                             </div>
                         </div>
                         <div class="page stf__item" style="display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 2</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2016/01/08/17/06/poppy-1128683__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <h2 class="page-header">ГЛАВА ПЕРВАЯ</h2>
+                                <h3 class="page-header"><i>в которой Оля ссориться с бабушкой и слышит голос волшебного зеркала</i></h3>
+                                <div class="page-image" style="background-image: url(https://download.librebook.me/download/illustrations/23/07/49/i_003.jpg)"></div>
+                                <div class="page-text">
+                                    <p>Хочу вам рассказать о девочке Оле, которая вдруг увидела себя со стороны. Увидела так, как можно видеть не себя, а совсем другую девочку - скажем, сестру или подругу. Таким образом она довольно долго наблюдала самое себя, и это помогло ей избавиться от недостатков, которых раньше она в себе не замечала.</p>
+                                    <p>И знаете, что самое главное в этой истории? Оля убедилась, что даже, казалось бы, маленькие недостатки характера могут стать серьезным препятствием на пути к цели. Она попала в одну сказочную страну, где ей пришлось пережить много опасных приключений, подобных тем, о которых она читала в старых сказках. Может быть, Вы тоже читали эти старые сказки, где короли, разные принцы и придворные дамы так добры, справедливы, прекрасны и вообще так приторно сладки, как будто вымазаны медом. И вот однажды девочка Оля совершила путешествие в сказочную страну и увидела там... Впрочем, я лучше расскажу Вам все по порядку. </p>
+                                    <p>...В то утро Оля вела себя из рук вон плохо. Она встала позже, чем следовало, а когда бабушка будила её, брыкалась и, не открывая глаз, говорила противным, скрипучим голосом: </p>
+                                    <p>- Отстань! Ну что ты ко мне пристала?</p> 
+                                    <p>- Оля, - настойчиво говорила бабушка, - ты можешь опоздать в школу.</p>
+                                    <p>Голос у бабушки был спокойный и ласковый, потому что все бабушки очень ласковы. Они так любят своих внучек, что не сердятся даже тогда, когда маленькие девочки говорят им дерзости.</p>
+                                </div>
                                 <div class="page-footer">2</div>
                             </div>
                         </div>
                         <div class="page stf__item --left --simple" style="display: none;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 3</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2013/01/27/18/41/meadow-76358__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <div class="page-image" style="background-image: url(https://download.librebook.me/download/illustrations/23/07/49/i_004.jpg)"></div>
+                                <div class="page-text">
+                                    <p>– Опять читала в постели допоздна, – вздохнула бабушка, поднимая упавшую на пол книгу, на обложке которой крупно было написано: «Сказки». – А теперь вот подняться не можешь.</p>
+                                    <p>Оля села на кровати, свесив босые ноги, и сердито посмотрела на бабушку одним глазом, так как другой всё ещё был закрыт.</p>
+                                    <p>– Какая ты… недобрая… Никогда поспать не даёшь!</p>
+                                    <p>Олино платье оказалось под кроватью. Одну туфлю она долго не могла отыскать и наконец обнаружила её под книжным шкафом.</p>
+                                    <p>Потом, когда бабушка заплетала ей косы, она дёргалась и говорила: «Больно!» – хотя на самом деле больно ничуточки не было.</p>
+                                    <p>А после завтрака Оля никак не могла найти свои учебники.</p>
+                                    <p>– Вчера я положила их на этот стол. Куда ты задевала их? – ворчала она на бабушку, топая ногой.</p>
+                                    <p>– Я никогда не теряю своих вещей, – спокойно отвечала бабушка. – Будь любезна и ты класть вещи на своё место.</p>
+                                    <p>– Нет, – кричала Оля, – я всегда кладу всё на место! Это ты нарочно спрятала мои книги.</p>
+                                </div>
                                 <div class="page-footer">3</div>
                             </div>
                         </div>
                         <div class="page stf__item --right --simple" style="display: none;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 4</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2018/05/04/15/23/poppies-3374193__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <div class="page-image" style="background-image: url(https://download.librebook.me/download/illustrations/23/07/49/i_005.jpg)"></div>
+                                <div class="page-text">
+                                    <p>Тут даже бабушкиному терпению пришёл конец, и она, немного повысив голос, проговорила:</p>
+                                    <p>– У, бесстыдница! Как только папа и мама вернутся с работы, я им всё расскажу.</p>
+                                    <p>Угроза подействовала: Оля побаивалась папы и мамы. Она негромко проворчала: «Подумаешь!..» – и, надув губы, полезла под кровать. Конечно, под кроватью книг не оказалось; не оказалось их в ванной и в кухне. Неизвестно, сколько времени продолжались бы поиски, если бы бабушка не заглянула в Олин портфель.</p>
+                                    <p>– Видишь, какая ты рассеянная, Оля! Ведь ты же сама вчера положила все свои учебники себе в портфель. О, как бы я хотела, чтобы ты посмотрела на себя со стороны! Вот стыдно тебе стало бы…</p>
+                                    <p>Оля, которой уже и так было стыдно, что она понапрасну обидела бабушку, чмокнула старушку в щёку, взяла портфель и пошла в переднюю одеваться. В передней стояло большое зеркало, перед которым она так любила вертеться.</p>
+                                    <p>– Одевайся поскорее, Оля! – крикнула ей вслед бабушка. – До звонка осталось десять минут.</p>
+                                </div>
                                 <div class="page-footer">4</div>
                             </div>
                         </div>
                         <div class="page stf__item" style="position: absolute; left: 0px; top: 0px; box-sizing: border-box; display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 5</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2018/06/01/16/45/red-3446714__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <div class="page-text">
+                                    <p>Но Оля и не думала одеваться. Из зеркала на неё смотрела девочка в чёрном переднике, с красным галстуком на шее. Девочка как девочка – две русые косы с бантом и два больших голубых глаза. Но Оля считала себя очень красивой и поэтому, очутившись перед зеркалом, долго не могла оторваться от него. Так было всегда.</p>
+                                    <p>– Как, ты ещё не ушла? – вскрикнула бабушка, появляясь в передней. – Нет уж, сегодня я непременно расскажу всё папе и маме!</p>
+                                    <p>– Подумаешь!.. – ответила Оля и начала одеваться.</p>
+                                    <p>– Учишься в пятом классе, а ведёшь себя, как маленькая. Ох, если бы ты могла посмотреть на себя со стороны!</p>
+                                    <p>– Подумаешь!.. – повторила Оля, помахала бабушке рукой и, ещё раз украдкой взглянув на себя в зеркало, скрылась за дверью…</p>
+                                    <p>В этот день Оля вернулась из школы злая-презлая: она поссорилась с подругами. Вообще она часто ссорилась с подругами и почти всегда была виновата во всём.</p>
+                                    <p>– Какая ты капризная! – сказали ей подруги. – Больше мы не будем с тобой дружить!</p>
+                                    <p>– Подумаешь!.. – выпятила Оля нижнюю губу и сделала вид, что нисколько не огорчена. Но на самом деле на душе у неё было прескверно.</p>
+                                    <p>Кончался декабрь, на улице темнело рано. А так как после школы Оля не могла удержаться от соблазна заглянуть в кино, где шла новая картина, то, когда она пришла домой, в морозном небе уже светились звёзды. И тут, к своему ужасу, Оля увидела, что на лестнице не горят лампы. А темноты она боялась больше всего на свете.</p>
+                                    <p>Пугаясь шума собственных шагов, Оля стремительно взбежала на свой этаж и подняла такой звон, что у бабушки тряслись руки, когда она открывала дверь.</p>
+                                    <p>– Что случилось? – испуганно спросила старушка. – А где твой ключ?</p>
+                                    <p>– Бабунечка, я потеряла свой ключ, – тяжело дыша, сказала Оля.</p>
+                                    <p>Бабушка всплеснула руками.</p>
+                                    <p>– Это уже в третий раз! Ну что теперь делать? Свой ключ я отдала слесарю домоуправления. Ах, Оля, Оля, какая ты растеряшка! Беги к слесарю, он, наверное, уже сделал новый ключ.</p>
+                                    <p>– Бабунечка… на лестнице так темно… Наверно, перегорели пробки.</p>
+                                </div>
                                 <div class="page-footer">5</div>
                             </div>
                         </div>
                         <div class="page stf__item" style="position: absolute; left: 0px; top: 0px; box-sizing: border-box; display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 6</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2018/08/03/11/40/poppy-3581709__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <div class="page-image" style="background-image: url(https://download.librebook.me/download/illustrations/23/07/49/i_006.jpg)"></div>
+                                <div class="page-text">
+                                    <p>– Боишься?</p>
+                                    <p>– Я просто… не люблю темноты…</p>
+                                    <p>– Аx ты, трусишка! Ну ладно уж, схожу сама. – Бабушка оделась, погрозила Оле пальцем. – Шоколадку в буфете до обеда не трогай! – и скрылась за дверью.</p>
+                                    <p>Оля стала раздеваться на ходу. В одном месте она оставила калоши, в другом – шапочку, в третьем – пальто. Затем, после небольших колебаний, она достала из буфета шоколадку и съела её. Ей было скучно. Она взяла книгу, на обложке которой было написано «Сказки», и начала листать её. Одна картинка привлекла внимание Оли. С высокого холма открывался вид на удивительный город со множеством разноцветных зданий с высокими шпилями. Нарядные люди гуляли по площади вокруг фонтана. «Вот бы и мне погулять там!» – подумала Оля и вдруг услышала какой-то странный звон в передней.</p>
+                                    <p>Она побежала в переднюю. Но всё было тихо.</p>
+                                    <p>«Наверно, послышалось», – подумала Оля и, бросив взгляд на зеркало, как обычно стала вертеться перед ним.</p>
+                                    <p>Она оглядела себя с головы до ног, несколько раз повернулась кругом, потом сощурила глаза и высунула язык. Потом Оля рассмеялась и начала выбивать ногами дробь.</p>
+                                    <p>И тут ей показалось…</p>
+                                </div>
                                 <div class="page-footer">6</div>
                             </div>
                         </div>
                         <div class="page stf__item" style="position: absolute; left: 0px; top: 0px; box-sizing: border-box; display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 7</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2019/06/02/11/22/poppy-flower-4246241__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <div class="page-text">
+                                    <p>Нет, этого не может быть! Чутко прислушиваясь, Оля снова стукнула каблуками об пол и теперь уже вполне отчётливо разобрала, как в глубине зеркала стеклянным мелодичным звуком отозвалось эхо. Да, эхо отозвалось в зеркале, в той самой передней, которая в нём отражалась, а не в той, настоящей, в которой стояла Оля.</p>
+                                    <p>Это было так странно, что Оля онемела, широко открыв свои голубые глаза. И в тишине она ясно услышала, как кто-то вздохнул длинно и печально. Оле стало страшно… Она выждала минуту и негромко спросила:</p>
+                                    <p>– Кто это вздыхает?</p>
+                                    <p>– Я, – негромко ответил красивый звенящий голос, словно ударились друг о дружку хрустальные стёклышки.</p>
+                                    <p>– Кто ты? – перевела дыхание Оля. – Здесь никого нет.</p>
+                                    <p>– Это я, зеркало, – снова зазвенел голос.</p>
+                                    <p>Оля отскочила в сторону и, помедлив, сказала:</p>
+                                    <p>– Но ведь вещи не умеют разговаривать…</p>
+                                    <p>– А ты представь, что находишься в сказке, – ответил голос.</p>
+                                    <p>– Всё равно это очень странно… Я боюсь тебя, зеркало.</p>
+                                    <p>– Напрасно, девочка… Я доброе волшебное зеркало. Я не причиню тебе никакого зла. Не правда ли, я тебе нравлюсь? Ты так любишь смотреть в моё стекло!</p>
+                                    <p>– Это правда, – сказала Оля, осмелев и делая шаг к зеркалу.</p>
+                                    <p>А голос звучал:</p>
+                                    <p>– Бабушка часто говорит, что хотела бы, чтобы ты увидела себя со стороны…</p>
+                                    <p>– Но разве это возможно? – удивилась Оля.</p>
+                                    <p>– Ну, конечно, возможно. Только для этого тебе надо побывать по ту сторону зеркала.</p>
+                                    <p>– Ах, как интересно! – воскликнула Оля. – Разреши мне, пожалуйста, побывать по ту сторону зеркала!</p>
+                                    <p>Голос ответил не сразу, как будто зеркало погрузилось в задумчивость.</p>
+                                </div>
                                 <div class="page-footer">7</div>
                             </div>
                         </div>
                         <div class="page stf__item" style="position: absolute; left: 0px; top: 0px; box-sizing: border-box; display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 8</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2019/06/02/21/18/red-poppy-4247574__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <div class="page-image" style="background-image: url(https://download.librebook.me/download/illustrations/23/07/49/i_007.jpg)"></div>
+                                <div class="page-text">
+                                    <p>– С твоим характером, – произнёс наконец звенящий голос, – опасно очутиться по ту сторону зеркала.</p>
+                                    <p>– Разве у меня плохой характер?</p>
+                                    <p>Снова раздался вздох:</p>
+                                    <p>– Видишь ли, ты, конечно, хорошая девочка… Я вижу добрые глаза – значит, и сердечко у тебя доброе. Но у тебя есть недостатки, которые могут помешать тебе в трудную минуту!</p>
+                                    <p>– Я ничего не боюсь! – решительно махнула косичками Оля.</p>
+                                    <p>– Что ж, пусть будет по-твоему, – произнёс голос.</p>
+                                    <p>И передняя наполнилась вдруг звоном, словно разбились тысячи хрустальных стекляшек. Оля вздрогнула, и книга, которую она держала под мышкой, полетела на пол.</p>
+                                </div>
                                 <div class="page-footer">8</div>
                             </div>
                         </div>
-                        <div class="page stf__item --left" style="position: absolute; display: block; height: 739.664px; left: 0px; top: 0.168182px; width: 555px; z-index: 1;">
+                        <div class="page stf__item" style="position: absolute; left: 0px; top: 0px; box-sizing: border-box; display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 9</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2017/03/15/18/41/poppies-2147082__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <h1 class="page-header" style="display: flex;justify-content: center;flex-direction: column;margin-top: 50%;">
+                                    КОНЕЦ
+                                </h1>
                                 <div class="page-footer">9</div>
                             </div>
                         </div>
-                        <div class="page stf__item --right" style="position: absolute; display: block; height: 739.664px; left: 555px; top: 0.168182px; width: 555px; z-index: 1;">
+                        <div class="page stf__item" style="position: absolute; left: 0px; top: 0px; box-sizing: border-box; display: none; z-index: 1;">
                             <div class="page-content">
-                                <h2 class="page-header">Page header - 10</h2>
-                                <div class="page-image" style="background-image: url(https://cdn.pixabay.com/photo/2017/08/03/22/16/poppy-2578514__340.jpg)"></div>
-                                <div class="page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna. Aliquam ac nulla rhoncus, accumsan eros sed, viverra enim. Pellentesque non justo vel nibh sollicitudin pharetra suscipit ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus mollis nibh, non convallis ex convallis eu. Suspendisse potenti. Aenean vitae pellentesque erat. Integer non tristique quam. Suspendisse rutrum, augue ac sollicitudin mollis, eros velit viverra metus, a venenatis tellus tellus id magna.</div>
+                                <h2 class="page-header" style="display: flex;justify-content: space-between;flex-direction: column;margin-top: 50%;">
+                                    Конец ознакомительного фрагмента.
+
+Текст предоставлен ООО «ЛитРес».
+
+Прочитайте эту книгу целиком, купив полную легальную версию на ЛитРес.
+
+Безопасно оплатить книгу можно банковской картой Visa, MasterCard, Maestro, со счета мобильного телефона, с платежного терминала, в салоне МТС или Связной, через PayPal, WebMoney, Яндекс.Деньги, QIWI Кошелек, бонусными картами или другим удобным Вам способом.
+                                </h2>
                                 <div class="page-footer">10</div>
                             </div>
                         </div>
@@ -110,7 +183,7 @@
             </div>
         </div>
     
-        <div class="container">
+        <div class="container" style="display: none;">
             <div class="text-center mt-3 mb-2">
                 <button type="button" class="btn btn-info btn-sm btn-book-prev">Previous page</button>
                 [<span class="page-count">10</span> of <span class="page-total">10</span>]

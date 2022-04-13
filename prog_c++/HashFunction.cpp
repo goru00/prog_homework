@@ -5,7 +5,7 @@ template<class T>
 class List
 {
 private:
-    template<class T>
+    template<class U>
     class Node
     {
     public:
