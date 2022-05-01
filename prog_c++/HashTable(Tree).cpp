@@ -124,6 +124,10 @@ public:
 		}
 		return a.id % b;
 	}
+	friend bool operator==(const Data& a, const Data& b)
+	{
+		return (a.id == b.id) && (a.id == b.id);
+	}
 	friend std::ostream& operator<<(std::ostream& out, const Data& arg)
 	{
 		out << arg.id << " " << arg.name << " " << arg.direction << " " << arg.price;
